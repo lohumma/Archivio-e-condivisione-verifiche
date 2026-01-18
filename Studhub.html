@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudHub</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #0b1a2c;
+      --card: #10243f;
+      --accent: #2dd4bf;
+      --accent-strong: #0ea5e9;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: radial-gradient(120% 120% at 20% 20%, #163355, #0f172a 45%);
+      min-height: 100vh;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 36px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: 0.4px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+    .panel {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.2fr 1.2fr 0.8fr 0.8fr 1.2fr 1.4fr;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    select {
+      width: 100%;
+      padding: 12px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0f2038;
+      color: var(--text);
+      font-size: 14px;
+    }
+    .status {
+      margin: 12px 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .link-action {
+      color: var(--accent);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background: #0f1e34;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    tr:last-child td { border-bottom: none; }
+    .open-btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: linear-gradient(120deg, rgba(45, 212, 191, 0.18), rgba(14, 165, 233, 0.18));
+      color: #fff;
+      border: 1px solid rgba(45, 212, 191, 0.4);
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .modal.active { display: flex; }
+    .modal-card {
+      background: #0b1a2c;
+      border-radius: 12px;
+      padding: 18px;
+      width: 320px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .modal-card h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+    .modal-card input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #0f2038;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .btn {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0f2038;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .btn.primary {
+      border-color: transparent;
+      background: var(--accent);
+      color: #0b1220;
+      font-weight: 700;
+    }
+    @media (max-width: 900px) {
+      .toolbar {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>StudHub</h1>
+    <div class="subtitle">Filtro rapido e apertura quiz per studente.</div>
+    <div class="panel">
+      <div class="toolbar">
+        <div>
+          <label>Anno</label>
+          <select id="filter-year"></select>
+        </div>
+        <div>
+          <label>Materia</label>
+          <select id="filter-subject"></select>
+        </div>
+        <div>
+          <label>Classe</label>
+          <select id="filter-class"></select>
+        </div>
+        <div>
+          <label>Sezione</label>
+          <select id="filter-section"></select>
+        </div>
+        <div>
+          <label>Studente</label>
+          <select id="filter-student"></select>
+        </div>
+        <div>
+          <label>Argomento</label>
+          <select id="filter-topic"></select>
+        </div>
+      </div>
+
+      <div class="status" id="status">
+        Seleziona l'archivio per iniziare. <span class="link-action" id="pick-archive">Seleziona archivio</span>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>N. Registro</th>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Azione</th>
+          </tr>
+        </thead>
+        <tbody id="students-body">
+          <tr><td colspan="4">Nessun dato.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal" id="password-modal">
+    <div class="modal-card">
+      <h2>Inserisci password</h2>
+      <input id="password-input" type="password" placeholder="Password">
+      <div class="modal-actions">
+        <button class="btn" id="cancel-password">Annulla</button>
+        <button class="btn primary" id="confirm-password">Apri</button>
+      </div>
+      <div class="hint" id="password-status"></div>
+    </div>
+  </div>
+
+  <script>
+    const yearSel = document.getElementById("filter-year");
+    const subjectSel = document.getElementById("filter-subject");
+    const classSel = document.getElementById("filter-class");
+    const sectionSel = document.getElementById("filter-section");
+    const studentSel = document.getElementById("filter-student");
+    const topicSel = document.getElementById("filter-topic");
+    const statusEl = document.getElementById("status");
+    const studentsBody = document.getElementById("students-body");
+    const pickArchiveBtn = document.getElementById("pick-archive");
+    const modal = document.getElementById("password-modal");
+    const passwordInput = document.getElementById("password-input");
+    const passwordStatus = document.getElementById("password-status");
+    const cancelPassword = document.getElementById("cancel-password");
+    const confirmPassword = document.getElementById("confirm-password");
+
+    let archiveHandle = null;
+    let records = [];
+    let pendingGroup = null;
+
+    function setOptions(select, values) {
+      select.innerHTML = "";
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "Seleziona";
+      select.appendChild(opt);
+      values.forEach(v => {
+        const o = document.createElement("option");
+        const value = typeof v === "string" ? v : v.value;
+        const label = typeof v === "string" ? v : v.label;
+        o.value = value;
+        o.textContent = label;
+        select.appendChild(o);
+      });
+    }
+
+    function parseStudentFolder(name) {
+      const parts = String(name || "").split("_").filter(Boolean);
+      let reg = "";
+      if (parts[0] && /^\d+$/.test(parts[0])) reg = parts.shift();
+      const surname = parts.shift() || "";
+      const given = parts.join(" ") || "";
+      return { reg, surname, name: given };
+    }
+
+    async function buildIndex(root) {
+      const out = [];
+      for await (const yearEntry of root.values()) {
+        if (yearEntry.kind !== "directory") continue;
+        for await (const subjectEntry of yearEntry.values()) {
+          if (subjectEntry.kind !== "directory") continue;
+          for await (const classEntry of subjectEntry.values()) {
+            if (classEntry.kind !== "directory") continue;
+            for await (const sectionEntry of classEntry.values()) {
+              if (sectionEntry.kind !== "directory") continue;
+              for await (const studentEntry of sectionEntry.values()) {
+                if (studentEntry.kind !== "directory") continue;
+                const stud = parseStudentFolder(studentEntry.name);
+                for await (const topicEntry of studentEntry.values()) {
+                  if (topicEntry.kind !== "directory") continue;
+                  for await (const fileEntry of topicEntry.values()) {
+                    if (fileEntry.kind !== "file") continue;
+                    const fileName = fileEntry.name || "";
+                    if (!fileName.startsWith("Quiz_") || !fileName.toLowerCase().endsWith(".html")) continue;
+                    out.push({
+                      year: yearEntry.name,
+                      subject: subjectEntry.name,
+                      className: classEntry.name,
+                      section: sectionEntry.name,
+                      topic: topicEntry.name,
+                      studentFolder: studentEntry.name,
+                      reg: stud.reg,
+                      surname: stud.surname,
+                      name: stud.name,
+                      fileHandle: fileEntry,
+                      fileName
+                    });
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      return out;
+    }
+
+    function updateStudentOptions() {
+      const year = yearSel.value;
+      const subject = subjectSel.value;
+      const className = classSel.value;
+      const section = sectionSel.value;
+      if (!year || !subject || !className || !section) {
+        setOptions(studentSel, []);
+        setOptions(topicSel, []);
+        return;
+      }
+      const filtered = records.filter(r =>
+        r.year === year &&
+        r.subject === subject &&
+        r.className === className &&
+        r.section === section
+      );
+      const map = new Map();
+      filtered.forEach(r => {
+        if (!map.has(r.studentFolder)) {
+          const label = [r.reg, r.surname, r.name].filter(Boolean).join(" ").trim() || r.studentFolder;
+          map.set(r.studentFolder, label);
+        }
+      });
+      const values = Array.from(map.entries())
+        .map(([value, label]) => ({ value, label }))
+        .sort((a, b) => a.label.localeCompare(b.label, "it"));
+      setOptions(studentSel, values);
+      setOptions(topicSel, []);
+    }
+
+    function updateTopicOptions() {
+      const year = yearSel.value;
+      const subject = subjectSel.value;
+      const className = classSel.value;
+      const section = sectionSel.value;
+      const student = studentSel.value;
+      if (!year || !subject || !className || !section || !student) {
+        setOptions(topicSel, []);
+        return;
+      }
+      const topics = [...new Set(records
+        .filter(r =>
+          r.year === year &&
+          r.subject === subject &&
+          r.className === className &&
+          r.section === section &&
+          r.studentFolder === student
+        )
+        .map(r => r.topic))].sort();
+      setOptions(topicSel, topics);
+    }
+
+    function applyFilters() {
+      const year = yearSel.value;
+      const subject = subjectSel.value;
+      const className = classSel.value;
+      const section = sectionSel.value;
+      const student = studentSel.value;
+      const topic = topicSel.value;
+      if (!year || !subject || !className || !section || !student || !topic) {
+        studentsBody.innerHTML = '<tr><td colspan="4">Completa tutti i filtri.</td></tr>';
+        return;
+      }
+      const filtered = records.filter(r =>
+        r.year === year &&
+        r.subject === subject &&
+        r.className === className &&
+        r.section === section &&
+        r.studentFolder === student &&
+        r.topic === topic
+      );
+      const map = new Map();
+      filtered.forEach(r => {
+        const key = [r.studentFolder, r.topic].join("|");
+        if (!map.has(key)) {
+          map.set(key, { reg: r.reg, surname: r.surname, name: r.name, topic: r.topic, files: [] });
+        }
+        map.get(key).files.push(r.fileHandle);
+      });
+      const rows = Array.from(map.values()).map((g, idx) => {
+        const btnId = "open-btn-" + idx;
+        return `<tr>
+          <td>${g.reg || ""}</td>
+          <td>${g.surname || ""}</td>
+          <td>${g.name || ""}</td>
+          <td><button class="open-btn" data-open="${btnId}">Apri quiz</button></td>
+        </tr>`;
+      }).join("");
+      studentsBody.innerHTML = rows || '<tr><td colspan="4">Nessun quiz trovato.</td></tr>';
+      const buttons = studentsBody.querySelectorAll("[data-open]");
+      const groups = Array.from(map.values());
+      buttons.forEach((btn, i) => {
+        btn.addEventListener("click", () => {
+          pendingGroup = groups[i];
+          passwordInput.value = "";
+          passwordStatus.textContent = "";
+          modal.classList.add("active");
+          passwordInput.focus();
+        });
+      });
+    }
+
+    async function openGroupFiles(group) {
+      if (!group || !group.files?.length) return;
+      for (const handle of group.files) {
+        const file = await handle.getFile();
+        const url = URL.createObjectURL(file);
+        const link = document.createElement("a");
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+    }
+
+    async function loadArchive() {
+      if (!("showDirectoryPicker" in window)) {
+        statusEl.textContent = "Browser non supporta l'accesso alle cartelle locali.";
+        return;
+      }
+      try {
+        archiveHandle = await window.showDirectoryPicker();
+        statusEl.textContent = "Scansione archivio in corso...";
+        records = await buildIndex(archiveHandle);
+        const years = [...new Set(records.map(r => r.year))].sort();
+        const subjects = [...new Set(records.map(r => r.subject))].sort();
+        const classes = [...new Set(records.map(r => r.className))].sort();
+        const sections = [...new Set(records.map(r => r.section))].sort();
+        setOptions(yearSel, years);
+        setOptions(subjectSel, subjects);
+        setOptions(classSel, classes);
+        setOptions(sectionSel, sections);
+        setOptions(studentSel, []);
+        setOptions(topicSel, []);
+        statusEl.textContent = `Archivio caricato. Quiz trovati: ${records.length}.`;
+        applyFilters();
+      } catch (err) {
+        statusEl.textContent = "Selezione archivio annullata.";
+      }
+    }
+
+    [yearSel, subjectSel, classSel, sectionSel].forEach(sel => {
+      sel.addEventListener("change", () => {
+        updateStudentOptions();
+        applyFilters();
+      });
+    });
+    studentSel.addEventListener("change", () => {
+      updateTopicOptions();
+      applyFilters();
+    });
+    topicSel.addEventListener("change", applyFilters);
+    pickArchiveBtn.addEventListener("click", loadArchive);
+
+    cancelPassword.addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+    confirmPassword.addEventListener("click", async () => {
+      if (passwordInput.value !== "ciao") {
+        passwordStatus.textContent = "Password errata.";
+        return;
+      }
+      modal.classList.remove("active");
+      await openGroupFiles(pendingGroup);
+    });
+    passwordInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") confirmPassword.click();
+    });
+  </script>
+</body>
+</html>
