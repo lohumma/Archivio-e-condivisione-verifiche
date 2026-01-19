@@ -398,7 +398,7 @@
       for (const item of group.items) {
         if (item.fileUrl) {
           const link = document.createElement("a");
-          link.href = item.fileUrl;
+          link.href = "https://htmlpreview.github.io/?" + encodeURIComponent(item.fileUrl);
           link.target = "_blank";
           link.rel = "noopener";
           link.click();
