@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz | 22 TOSI DANIELE</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; }
+    .hidden { display: none !important; }
+    .question { font-weight: bold; margin-top: 20px; }
+    .option { display: block; margin: 6px 0; }
+    .indicators button { width: 30px; margin: 2px; }
+    .green { background: palegreen; }
+    .red { background: lightcoral; }
+    .noselect, .noselect *:not(input):not(textarea):not(select) { user-select: none; }
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 999; }
+    .modal { background: #fff; padding: 20px; border-radius: 8px; max-width: 480px; width: 90%; box-shadow: 0 8px 24px rgba(0,0,0,0.2); text-align: center; }
+    .modal button { margin: 8px; padding: 10px 16px; }
+    .btn-success { background: palegreen; }
+    .status { margin-top: 10px; font-weight: bold; }
+  </style>
+</head>
+<body class="noselect">
+  <h2 id="pageTitle">Compito di Tecnologie dei processi di produzione</h2>
+  <div id="intro">
+    <p><strong>Studente:</strong> 22 TOSI DANIELE</p>
+    <p><strong>Classe:</strong> 4 BGC</p>
+    <p><label><input type="checkbox" id="riduzioneTempo"  disabled> Riduzione o tempo aggiuntivo</label></p>
+    <div style="margin:12px 0; padding:12px; border:1px solid #cbd5e1; border-radius:6px; background:#f1f5f9; color:#0f172a;">
+      <strong>Regole del test:</strong>
+      <ul style="margin:8px 0 0 18px; padding:0;">
+        <li>Una volta avviato il test, entrerai in modalit? fullscreen, non uscire MAI dalla modalit? fullscreen o riceverai un ammonimento. Al secondo ammonimento il test si concluder? automaticamente e dovrai consegnere il documento.</li>
+        <li>Se aprirai un'altra scheda, aggiorni la pagina o riduci a icona il test, riceverai un ammonimento; al secondo ammonimento il test si concluder? automaticamente e dovrai consegnere il documento.</li>
+        <li>Una volta concluso il test, dovrai scaricare due file: un .pdf e un .json. Cercali negli ultimi download e caricali entrambi sul cloud del docente.</li>
+        <li>Non serve scaricare il file "Template" a fine test, poich? risulter? vuoto.</li>
+        <li>Quando hai finito il test, avverti il docente alzando la mano.</li>
+      </ul>
+    </div>
+    <button onclick="startQuiz()">Inizia quiz</button>
+  </div>
+
+  <div id="quiz" class="hidden">
+    <div class="question" id="questionText"></div>
+    <div id="options"></div>
+    <div style="height:12px;"></div>
+    <div style="display:flex; gap:10px; margin:12px 0;">
+      <button onclick="prev()">&lt;&lt; Precedente</button>
+      <button onclick="next()">Successiva &gt;&gt;</button>
+    </div>
+    <div style="height:12px;"></div>
+    <div class="indicators" id="indicators" style="margin-bottom:14px;"></div>
+    <div style="display:flex; justify-content:center; gap:12px; margin:16px 0;">
+      <button onclick="finishQuiz()" style="padding:12px 18px; font-size:16px;">Completa e chiudi il test</button>
+    </div>
+  </div>
+  <div id="downloadOverlay" class="hidden overlay">
+    <div class="modal">
+      <p>Scarica i file PDF e JSON e consegnali al docente.</p>
+      <div>
+        <button id="downloadPdfBtn" onclick="downloadPdf()">Scarica PDF</button>
+        <button id="downloadJsonBtn" onclick="downloadJson()">Scarica JSON</button>
+      </div>
+      <div id="downloadStatus" class="status"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script>
+    const allQuestions = [{"qid":"q1","qhash":"17d87mf","question":"Le normali lampadine a incandescenza hanno come limite principale:","options":[{"id":"o11","hash":"1ycdc4k","t":"La temperatura colore troppo alta"},{"id":"o12","hash":"5838d","t":"La bassa potenza (limitata a 150 watt) con conseguente estensione dei tempi di posa"},{"id":"o13","hash":"1ywcjii","t":"L’impossibilità di usarle in interni"},{"id":"o14","hash":"1xiej1n","t":"Il costo elevato e la scarsa reperibilità"}],"correctHash":"eajksm"},{"qid":"q2","qhash":"17n7tbe","question":"Nelle riprese a colori con lampade photoflood, con il digitale è sufficiente impostare il bilanciamento del bianco (WB) su:","options":[{"id":"o21","hash":"1twa8j3","t":"3400 K"},{"id":"o22","hash":"1u69u82","t":"5500-5800 K"},{"id":"o23","hash":"1ug9fx1","t":"1500 K"},{"id":"o24","hash":"1sic828","t":"8000 K"}],"correctHash":"1ai7oqh"},{"qid":"q3","qhash":"17x7f0d","question":"Un vantaggio pratico del mirino elettronico rispetto a quello ottico può essere:","options":[{"id":"o31","hash":"1v0bssy","t":"Mostrare un’anteprima dell’immagine (esposizione/effetti) sul mirino"},{"id":"o32","hash":"1uqc73z","t":"Aumentare automaticamente la potenza del flash"},{"id":"o33","hash":"1ugclf0","t":"Eliminare il bisogno di obiettivi"},{"id":"o34","hash":"1u6czq1","t":"Ridurre sempre il contrasto della scena"}],"correctHash":"1vw5adj"},{"qid":"q4","qhash":"15za75k","question":"Secondo il testo, “L” “M” e “S” nella dimensione dell’immagine indicano:","options":[{"id":"o41","hash":"zxaum5","t":"L’uso di tutti i pixel o di un numero ridotto, variando dimensione e peso del file"},{"id":"o42","hash":"z3c1j8","t":"La modalità di scatto con flash o senza flash"},{"id":"o43","hash":"zdbn87","t":"Il tipo di lampada (LED, quarzo, fluorescenti)"},{"id":"o44","hash":"yjcu5a","t":"Il valore del numero guida"}],"correctHash":"u4dxa1"},{"qid":"q5","qhash":"1699suj","question":"In modalità Manuale (M), un “vantaggio notevole” è che:","options":[{"id":"o51","hash":"s5p4ow","t":"La coppia tempo/diaframma non cambia finché non la cambiamo noi"},{"id":"o52","hash":"sznxrt","t":"La fotocamera imposta sempre automaticamente il diaframma"},{"id":"o53","hash":"spoc2u","t":"Il flash non può essere usato"},{"id":"o54","hash":"tjn55r","t":"Il WB non è più necessario"}],"correctHash":"1s6thnv"},{"qid":"q6","qhash":"16j9eji","question":"Nella misurazione spot, la lettura copre circa:","options":[{"id":"o61","hash":"1w3s8h7","t":"Il 2% dell’immagine"},{"id":"o62","hash":"1wdru66","t":"L’8-10% dell’immagine"},{"id":"o63","hash":"1wnrfv5","t":"Il 50% dell’immagine"},{"id":"o64","hash":"1wxr1k4","t":"Il 100% dell’immagine"}],"correctHash":"dsoxah"},{"qid":"q7","qhash":"16t908h","question":"Nelle fotocamere reflex, il mirino ottico permette di vedere la scena grazie a:","options":[{"id":"o71","hash":"xpavke","t":"Uno specchio che devia la luce verso un pentaprisma/pentaspecchio"},{"id":"o72","hash":"xfb9vf","t":"Un sensore che proietta sempre l’immagine sul display"},{"id":"o73","hash":"x5bo6g","t":"Un flash che illumina l’interno del mirino"},{"id":"o74","hash":"z38w19","t":"Un filtro ND integrato nel mirino"}],"correctHash":"1lod42v"},{"qid":"q8","qhash":"14vbsdo","question":"Il controllo dell’esposizione richiede la gestione coordinata di:","options":[{"id":"o81","hash":"1srqp5l","t":"WB e ISO"},{"id":"o82","hash":"1rxrw2o","t":"Tempo e diaframma"},{"id":"o83","hash":"1s7rhrn","t":"Flash e numero guida"},{"id":"o84","hash":"1tlpi8i","t":"Formato e risoluzione"}],"correctHash":"1wwkdgg"},{"qid":"q9","qhash":"155be2n","question":"Le lampade al quarzo, rispetto alle photoflood, hanno tra i vantaggi principali:","options":[{"id":"o91","hash":"1tvs9fg","t":"Una durata da dieci a venti volte superiore"},{"id":"o92","hash":"1upr2id","t":"Una potenza sempre superiore a 2000 watt"},{"id":"o93","hash":"1ufrgte","t":"Nessuna emissione di calore"},{"id":"o94","hash":"1t1tgcj","t":"L’assenza di ventilazione necessaria"}],"correctHash":"10jf8gj"},{"qid":"q10","qhash":"1dtc5wl","question":"Quando si imposta l’esposizione in M, l’esposimetro integrato mostra l’esposizione come:","options":[{"id":"o101","hash":"1dlpshe","t":"Una scala che va da -3 a +3 (con 0 al centro)"},{"id":"o102","hash":"1dbq6sf","t":"Una scala in Kelvin"},{"id":"o103","hash":"1d1ql3g","t":"Una tabella del numero guida"},{"id":"o104","hash":"1crqzeh","t":"Una lista di fondali disponibili"}],"correctHash":"1yuiwod"},{"qid":"q11","qhash":"1djck7m","question":"La misurazione media sull’area centrale (center-weighted) è descritta come:","options":[{"id":"o111","hash":"1cho87j","t":"Una media con maggiore importanza alla zona centrale dell’immagine"},{"id":"o112","hash":"1crntwi","t":"Una media che ignora completamente il centro"},{"id":"o113","hash":"1d1nflh","t":"Una misurazione limitata al 2% dell’immagine"},{"id":"o114","hash":"1b3q7qo","t":"Una misurazione fatta solo con esposimetro esterno"}],"correctHash":"bx8cxl"},{"qid":"q12","qhash":"1d9cyin","question":"Il WB personalizzato viene utilizzato quando:","options":[{"id":"o121","hash":"hf8emc","t":"La luce è standard e costante"},{"id":"o122","hash":"i977p9","t":"La luce è mista o difficile da interpretare automaticamente"},{"id":"o123","hash":"hz7m0a","t":"Si fotografa solo in esterni"},{"id":"o124","hash":"gl9ljf","t":"Si utilizza esclusivamente il flash"}],"correctHash":"pg07g4"},{"qid":"q13","qhash":"1czdcto","question":"Se la fotocamera “non accetta il bilanciamento del bianco”, nel testo si suggerisce di:","options":[{"id":"o131","hash":"gb6uch","t":"Assicurarsi che il foglio sia in zona omogeneamente illuminata e che l’inquadratura sia a fuoco"},{"id":"o132","hash":"fh819k","t":"Aumentare gli ISO a 6400"},{"id":"o133","hash":"fr7myj","t":"Usare sempre il flash anulare"},{"id":"o134","hash":"h55nfe","t":"Ridurre la focale al minimo"}],"correctHash":"zyhbkx"},{"qid":"q14","qhash":"1cpdr4p","question":"Il corpo macchina di una fotocamera comprende tipicamente comandi e componenti dedicati a:","options":[{"id":"o141","hash":"gaov8u","t":"Impostazioni e controllo dello scatto (esposizione, messa a fuoco, ecc.)"},{"id":"o142","hash":"g0p9jv","t":"Emissione della luce (come un soft box)"},{"id":"o143","hash":"fqpnuw","t":"Misura della luce incidente senza sensore"},{"id":"o144","hash":"homvpp","t":"Proiezione di fondali illuminati"}],"correctHash":"7j0np9"},{"qid":"q15","qhash":"1cfe5fq","question":"Nelle fotocamere analogiche, il supporto fotosensibile è:","options":[{"id":"o151","hash":"f6nayz","t":"La pellicola"},{"id":"o152","hash":"fgmwny","t":"Il sensore CMOS"},{"id":"o153","hash":"fqmicx","t":"Il sensore CCD"},{"id":"o154","hash":"g0m41w","t":"Il display LCD"}],"correctHash":"1ox7sht"},{"qid":"q16","qhash":"1c5ejqr","question":"Il mirino serve principalmente a:","options":[{"id":"o161","hash":"1a9o95s","t":"Inquadrare la scena prima dello scatto"},{"id":"o162","hash":"1b3n28p","t":"Aumentare gli ISO"},{"id":"o163","hash":"1atngjq","t":"Registrare l’audio"},{"id":"o164","hash":"1bnm9mn","t":"Misurare il numero guida"}],"correctHash":"i5e3tp"},{"qid":"q17","qhash":"1bvey1s","question":"Il difetto maggiore delle photoflood,  riguarda soprattutto:","options":[{"id":"o171","hash":"iioual","t":"La bassa resa cromatica"},{"id":"o172","hash":"hoq17o","t":"La notevole temperatura emessa"},{"id":"o173","hash":"hypmwn","t":"La difficoltà di reperibilità"},{"id":"o174","hash":"h4qttq","t":"La luce troppo fredda"}],"correctHash":"1d59400"},{"qid":"q18","qhash":"1g18zgd","question":"Il mirino elettronico (EVF) è tipicamente associato a:","options":[{"id":"o181","hash":"1i0rzze","t":"Fotocamere mirrorless"},{"id":"o182","hash":"1hqseaf","t":"Fotocamere a banco ottico"},{"id":"o183","hash":"1hgsslg","t":"Fotocamere solo a pellicola"},{"id":"o184","hash":"1h6t6wh","t":"Fotocamere senza alcun display"}],"correctHash":"1ylchlp"},{"qid":"q19","qhash":"1fr9dre","question":"Gli illuminatori a LED si caratterizzano per:","options":[{"id":"o191","hash":"1gwqfpj","t":"Elevata luminosità con potenza molto contenuta"},{"id":"o192","hash":"1h6q1ei","t":"Bassa luminosità e potenza elevata"},{"id":"o193","hash":"1hgpn3h","t":"Solo luce flash senza luce continua"},{"id":"o194","hash":"1fisf8o","t":"Uso esclusivo su banco ottico"}],"correctHash":"163tq3d"},{"qid":"q20","qhash":"1fhcxke","question":"Nella misurazione semi-spot, secondo il testo, la lettura copre circa:","options":[{"id":"o201","hash":"xkn3rr","t":"Il 2% dell’immagine"},{"id":"o202","hash":"xumpgq","t":"L’8-10% dell’immagine"},{"id":"o203","hash":"y4mb5p","t":"Il 50% dell’immagine"},{"id":"o204","hash":"w6p3aw","t":"Il 100% dell’immagine"}],"correctHash":"6x415c"}];
+    const safeName = (str) => String(str || "").trim().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "");
+    const hashId = (value) => {
+      const str = String(value || "");
+      let hash = 2166136261;
+      for (let i = 0; i < str.length; i++) {
+        hash ^= str.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      return (hash >>> 0).toString(36);
+    };
+    const hashJoin = (qid, oid) => hashId(qid + "+" + oid);
+    const studentLabel = "22 TOSI DANIELE";
+    const materiaLabel = "Tecnologie dei processi di produzione";
+    const classeLabel = "4 BGC";
+    const topicLabel = "Fotocamera e illuminazione";
+    const generatedDate = new Date().toLocaleDateString("it-IT");
+    let current = 0;
+    const answers = {};
+    const questionText = document.getElementById('questionText');
+    const optionsEl = document.getElementById('options');
+    const indicators = document.getElementById('indicators');
+    const quizEl = document.getElementById('quiz');
+    const introEl = document.getElementById('intro');
+    const overlay = document.getElementById('downloadOverlay');
+    const downloadStatus = document.getElementById('downloadStatus');
+
+    let finishAsked = false;
+    let downloadedPdf = false;
+    let downloadedJson = false;
+
+    function requestFull() {
+      const el = document.documentElement;
+      const fn = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+      if (fn) {
+        fn.call(el).catch(() => {});
+      }
+    }
+
+    function renderQuestion() {
+      const q = allQuestions[current];
+      questionText.textContent = (current + 1) + '. ' + q.question;
+      optionsEl.innerHTML = '';
+      if (q.open) {
+        const ta = document.createElement('textarea');
+        ta.rows = 4;
+        ta.style.width = '100%';
+        ta.value = answers[q.qid] || '';
+        ta.addEventListener('input', () => answers[q.qid] = ta.value);
+        optionsEl.appendChild(ta);
+      } else {
+        const letter = (i) => String.fromCharCode(65 + i);
+        q.options.forEach((opt, idx) => {
+          const lbl = document.createElement('label');
+          lbl.className = 'option';
+          const inp = document.createElement('input');
+          inp.type = 'radio';
+          inp.name = 'opt';
+          inp.value = opt.id;
+          inp.checked = answers[q.qid] === opt.id;
+          inp.addEventListener('change', () => answers[q.qid] = opt.id);
+          lbl.appendChild(inp);
+          lbl.append(' ' + letter(idx) + '. ' + opt.t);
+          optionsEl.appendChild(lbl);
+        });
+      }
+      renderIndicators();
+    }
+
+    function renderIndicators() {
+      indicators.innerHTML = '';
+      allQuestions.forEach((q, idx) => {
+        const b = document.createElement('button');
+        b.textContent = idx + 1;
+        b.className = answers[q.qid] ? 'green' : '';
+        b.onclick = () => { current = idx; renderQuestion(); };
+        indicators.appendChild(b);
+      });
+    }
+
+    function startQuiz() {
+      introEl.classList.add('hidden');
+      quizEl.classList.remove('hidden');
+      requestFull();
+      renderQuestion();
+    }
+    function next() { if (current < allQuestions.length - 1) { current++; renderQuestion(); } }
+    function prev() { if (current > 0) { current--; renderQuestion(); } }
+
+    function finishQuiz() {
+      finishAsked = true;
+      quizEl.classList.add('hidden');
+      overlay.classList.remove('hidden');
+    }
+
+    function downloadPdf() {
+      const jsPdfFactory = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF || null;
+      if (!jsPdfFactory) {
+        alert("Libreria jsPDF non caricata. Impossibile generare il PDF.");
+        return;
+      }
+      const doc = new jsPdfFactory();
+      const margin = 20; // 2 cm
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const maxWidth = pageWidth - margin * 2;
+      const bottomLimit = () => pageHeight - margin;
+      const lineH = 6;
+      const letter = (i) => String.fromCharCode(65 + i);
+      const colors = {
+        primary: [18, 91, 190],
+        section: [205, 221, 248],
+        text: [15, 30, 60],
+        muted: [90, 110, 140]
+      };
+      let y = margin;
+      const ensurePage = (extra = 0) => {
+        if (y + extra > bottomLimit()) {
+          doc.addPage();
+          y = margin;
+        }
+      };
+      const writeLines = (text, opts = {}) => {
+        const { indent = 0, font = "normal", size = 11, color = [0,0,0] } = opts;
+        doc.setFont("helvetica", font);
+        doc.setFontSize(size);
+        doc.setTextColor(...color);
+        const lines = doc.splitTextToSize(text, maxWidth - indent);
+        lines.forEach(txt => {
+          ensurePage(lineH);
+          doc.text(txt, margin + indent, y);
+          y += lineH;
+        });
+      };
+      // Header sezione dati
+      doc.setFillColor(...colors.section);
+      doc.rect(margin, y, maxWidth, 36, "F");
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      doc.text("Test su " + topicLabel, margin + 2, y + 8);
+      doc.setFontSize(11);
+      doc.text("Studente: " + studentLabel, margin + 2, y + 15);
+      doc.text("Materia: " + materiaLabel, margin + 2, y + 21);
+      doc.text("Classe: " + classeLabel, margin + 2, y + 27);
+      doc.text("Data: " + generatedDate, margin + 2, y + 33);
+      y += 44;
+
+      doc.setFontSize(11);
+      allQuestions.forEach((q, idx) => {
+        const questionText = (idx + 1) + ". " + q.question;
+        const optionsLines = q.open ? [] : (q.options || []).map((opt, i) => {
+          const text = (typeof opt === "string") ? opt : (opt.t || opt.text || opt.testo || opt.label || "");
+          return letter(i) + ". " + text;
+        });
+        const userIdx = answers[q.qid];
+        const userLetter = q.open ? "" : (userIdx != null ? letter((q.options || []).findIndex(o => o.id === userIdx)) : "-");
+        const correctIdx = q.open ? null : (q.options || []).findIndex(o => hashJoin(q.qid, o.id) === q.correctHash);
+        const correctLetter = q.open ? "" : (Number.isInteger(correctIdx) ? letter(correctIdx) : "-");
+        const correctOpt = (!q.open && Number.isInteger(correctIdx)) ? (q.options || [])[correctIdx] : null;
+        const correctText = correctOpt ? (correctOpt.t || correctOpt.text || correctOpt.testo || correctOpt.label || "") : "";
+        const correctLine = q.open ? "" : (correctText ? (correctLetter + ". " + correctText) : correctLetter);
+
+        let blockHeight = doc.splitTextToSize(questionText, maxWidth).length * lineH;
+        blockHeight += optionsLines.length * lineH;
+        if (!q.open) blockHeight += lineH * 2; // hai risposto + corretta
+        if (q.open) blockHeight += doc.splitTextToSize("Risposta: " + (answers[q.qid] || ""), maxWidth).length * lineH;
+        blockHeight += lineH * 2;
+        ensurePage(blockHeight);
+
+        writeLines(questionText, { font: "bold" });
+        if (q.open) {
+          const ans = answers[q.qid] || '';
+          writeLines("Risposta: " + ans, { indent: 2 });
+          writeLines("Domanda aperta - da correggere manualmente.", { indent: 2, color: [90,90,90] });
+        } else {
+          optionsLines.forEach(line => writeLines(line, { indent: 2 }));
+          writeLines("Hai risposto: " + userLetter, { indent: 2 });
+          const isCorrect = userIdx != null && Number.isInteger(correctIdx) && (q.options || [])[correctIdx]?.id === userIdx;
+          writeLines("Risposta corretta: " + correctLine, { indent: 2, color: isCorrect ? [0,128,0] : [200,0,0] });
+        }
+        ensurePage(8);
+        doc.setDrawColor(...colors.section);
+        doc.line(margin, y, margin + maxWidth, y);
+        y += 6;
+      });
+
+      const closedQuestions = allQuestions.filter(q => !q.open);
+      const totalClosed = closedQuestions.length;
+      const correctClosed = closedQuestions.reduce((acc, q) => {
+        const correctIdx = (q.options || []).findIndex(o => hashJoin(q.qid, o.id) === q.correctHash);
+        return acc + ((answers[q.qid] != null && Number.isInteger(correctIdx) && (q.options || [])[correctIdx]?.id === answers[q.qid]) ? 1 : 0);
+      }, 0);
+      ensurePage(14);
+      doc.setFillColor(...colors.section);
+      doc.rect(margin, y, maxWidth, 16, "F");
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("Totale risposte corrette: " + correctClosed + "/" + totalClosed, margin + 2, y + 7);
+      if (totalClosed > 0) {
+        const voto = (correctClosed / totalClosed * 10).toFixed(1);
+        doc.text("Voto: " + voto, margin + 2, y + 13);
+      }
+
+      doc.save('quiz_' + safeName(studentLabel) + '_' + safeName(topicLabel) + '.pdf');
+      downloadStatus.textContent = 'PDF generato.';
+      downloadedPdf = true;
+      if (downloadedPdf && downloadedJson) setTimeout(() => window.close(), 300);
+    }
+
+    function downloadJson() {
+      const letter = (i) => String.fromCharCode(65 + i);
+      const payloadDomande = allQuestions.map((q, idx) => {
+        if (q.open) {
+          return {
+            tipo: "aperta",
+            domanda: q.question,
+            risposta: answers[q.qid] || ""
+          };
+        }
+        const opts = (q.options || []).map((o, i) => ({
+          id: o.id,
+          testo: o.t,
+          lettera: letter(i)
+        }));
+        const correctHash = q.correctHash;
+        const userId = answers[q.qid];
+        const correctOpt = opts.find(o => hashJoin(q.qid, o.id) === correctHash);
+        const userOpt = opts.find(o => o.id === userId);
+        return {
+          tipo: "chiusa",
+          domanda: q.question,
+          opzioni: opts,
+          risposta_corretta: correctOpt ? (correctOpt.lettera + ". " + correctOpt.testo) : "",
+          risposta_data: userOpt ? (userOpt.lettera + ". " + userOpt.testo) : ""
+        };
+      });
+      const out = {
+        studente: studentLabel,
+        classe: classeLabel,
+        materia: materiaLabel,
+        argomento: topicLabel,
+        data: generatedDate,
+        domande: payloadDomande
+      };
+      const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'quiz_' + safeName(studentLabel) + '_' + safeName(topicLabel) + '.json';
+      link.click();
+      URL.revokeObjectURL(link.href);
+      downloadStatus.textContent = 'JSON generato.';
+      downloadedJson = true;
+      if (downloadedPdf && downloadedJson) setTimeout(() => window.close(), 300);
+    }
+
+    let fullscreenWarned = false;
+    document.addEventListener('fullscreenchange', () => {
+      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+      if (!isFs) {
+        setTimeout(requestFull, 0);
+        if (!fullscreenWarned) {
+          fullscreenWarned = true;
+          alert("Non rimuovere la modalit? Fullscreen, alla prossima consegnerai il compito.");
+        } else {
+          finishQuiz();
+        }
+      }
+    });
+
+    window.addEventListener('load', () => {
+      requestFull();
+    });
+  </script>
+</body>
+</html>
