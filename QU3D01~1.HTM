@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Quiz | 1 ANGIOLI YEIMY CAROLINA</title>
+  <title>Quiz | 15 NIERI NOEMI</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; }
     .hidden { display: none !important; }
@@ -22,15 +22,15 @@
 <body class="noselect">
   <h2 id="pageTitle">Compito di Tecnologie dei processi di produzione</h2>
   <div id="intro">
-    <p><strong>Studente:</strong> 1 ANGIOLI YEIMY CAROLINA</p>
-    <p><strong>Classe:</strong> 4 AGC</p>
+    <p><strong>Studente:</strong> 15 NIERI NOEMI</p>
+    <p><strong>Classe:</strong> 4 BGC</p>
     <p><label><input type="checkbox" id="riduzioneTempo"  disabled> Riduzione o tempo aggiuntivo</label></p>
     <div style="margin:12px 0; padding:12px; border:1px solid #cbd5e1; border-radius:6px; background:#f1f5f9; color:#0f172a;">
       <strong>Regole del test:</strong>
       <ul style="margin:8px 0 0 18px; padding:0;">
         <li>Una volta avviato il test, entrerai in modalit? fullscreen, non uscire MAI dalla modalit? fullscreen o riceverai un ammonimento. Al secondo ammonimento il test si concluder? automaticamente e dovrai consegnere il documento.</li>
         <li>Se aprirai un'altra scheda, aggiorni la pagina o riduci a icona il test, riceverai un ammonimento; al secondo ammonimento il test si concluder? automaticamente e dovrai consegnere il documento.</li>
-        <li>Una volta concluso il test, dovrai salvare una cartella con due file: PDF e JSON. Cerca la cartella appena creata e caricala sul cloud del docente.</li>
+        <li>Una volta concluso il test, dovrai scaricare due file: un .pdf e un .json. Cercali negli ultimi download e caricali entrambi sul cloud del docente.</li>
         <li>Non serve scaricare il file "Template" a fine test, poich? risulter? vuoto.</li>
         <li>Quando hai finito il test, avverti il docente alzando la mano.</li>
       </ul>
@@ -54,19 +54,20 @@
   </div>
   <div id="downloadOverlay" class="hidden overlay">
     <div class="modal">
-      <p>Salva una cartella con PDF e JSON e consegnala al docente.</p>
+      <p>Scarica i file PDF e JSON e consegnali al docente.</p>
       <div>
-        <button id="downloadZipBtn" onclick="saveResultsFolder()">Salva cartella risultati</button>
+        <button id="downloadPdfBtn" onclick="downloadPdf()">Scarica PDF</button>
+        <button id="downloadJsonBtn" onclick="downloadJson()">Scarica JSON</button>
       </div>
       <div id="downloadStatus" class="status"></div>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script>
-    const allQuestions = [{"qid":"q1","qhash":"17d87mf","question":"Le camere Mirrorless si distinguono dalle reflex tradizionali per:","options":[{"id":"o11","hash":"1ycdc4k","t":"La presenza dello specchio"},{"id":"o12","hash":"5838d","t":"L’assenza dello specchio e del mirino ottico tradizionale"},{"id":"o13","hash":"1ywcjii","t":"L’utilizzo esclusivo della pellicola fotografica"},{"id":"o14","hash":"1xiej1n","t":"Un corpo macchina più grande e pesante"}],"correctHash":"e0jz3n"},{"qid":"q2","qhash":"17n7tbe","question":"Quante modalità di scatto esistono?","options":[{"id":"o21","hash":"1twa8j3","t":"3"},{"id":"o22","hash":"1u69u82","t":"6"},{"id":"o23","hash":"1ug9fx1","t":"5"},{"id":"o24","hash":"1sic828","t":"10"}],"correctHash":"1ai7oqh"},{"qid":"q3","qhash":"17x7f0d","question":"Lo scatto continuo è ideale per:","options":[{"id":"o31","hash":"1v0bssy","t":"fotografie statiche"},{"id":"o32","hash":"1uqc73z","t":"fotografie in cui il fotografo si deve inserire nell’inquadratura"},{"id":"o33","hash":"1ugclf0","t":"per soggetti in movimento o per cogliere  espressioni nei volti"},{"id":"o34","hash":"1u6czq1","t":"Tutte le precedenti"}],"correctHash":"1wg4hrh"},{"qid":"q4","qhash":"15za75k","question":"Le immagini scattate con una reflex digitale possono essere salvate in formato:","options":[{"id":"o41","hash":"zxaum5","t":"RAW"},{"id":"o42","hash":"z3c1j8","t":"JPEG"},{"id":"o43","hash":"zdbn87","t":"TIFF"},{"id":"o44","hash":"yjcu5a","t":"Tutte le precedenti"}],"correctHash":"uycqcy"},{"qid":"q5","qhash":"1699suj","question":"Il flash elettronico","options":[{"id":"o51","hash":"s5p4ow","t":"È usato sia in interni che in esterni, anche come luce di riempimento per attenuare contrasti eccessivi"},{"id":"o52","hash":"sznxrt","t":"Elimina le ombre e garantisce una luce uniforme sul soggetto"},{"id":"o53","hash":"spoc2u","t":"È pensato per macro e riprese ravvicinate"},{"id":"o54","hash":"tjn55r","t":"E’  pensato solo per riprese a lunga esposizione notturna"}],"correctHash":"1s6thnv"},{"qid":"q6","qhash":"16j9eji","question":"Per impostare l’autofocus singolo, nell’Area autofocus devo selezionare","options":[{"id":"o61","hash":"1w3s8h7","t":"Priorità AF-S"},{"id":"o62","hash":"1wdru66","t":"Priorità AF-C"},{"id":"o63","hash":"1wnrfv5","t":"Selezione area AF"},{"id":"o64","hash":"1wxr1k4","t":"Sia la A che la C"}],"correctHash":"emnqde"},{"qid":"q7","qhash":"16t908h","question":"Per bilanciare il bianco in una reflex digitale","options":[{"id":"o71","hash":"xpavke","t":"Bisogna sempre scattare solo in bianco e nero"},{"id":"o72","hash":"xfb9vf","t":"Si ottiene modificando la lunghezza focale dell’obiettivo"},{"id":"o73","hash":"x5bo6g","t":"E’ necessario applicare dei filtri davanti all’obiettivo"},{"id":"o74","hash":"z38w19","t":"E’ sufficiente impostare il valore più opportuno dal menù"}],"correctHash":"1kaf3m0"},{"qid":"q8","qhash":"14vbsdo","question":"In merito alla dimensione della foto è conveniente impiegare:","options":[{"id":"o81","hash":"1srqp5l","t":"il massimo numero di Pixel che la DSLR permette"},{"id":"o82","hash":"1rxrw2o","t":"il minimo numero di  Pixel che la DSLR permette"},{"id":"o83","hash":"1s7rhrn","t":"Sempre la stessa dimensione indipendentemente dall’uso"},{"id":"o84","hash":"1tlpi8i","t":"Una dimensione scelta a caso senza considerare la stampa o l’uso digitale"}],"correctHash":"1xqj6jd"},{"qid":"q9","qhash":"155be2n","question":"Se voglio riprodurre a monitor le immagini salvate nella scheda quale menu utilizzo?","options":[{"id":"o91","hash":"1tvs9fg","t":"Menu play"},{"id":"o92","hash":"1upr2id","t":"Menu ripresa"},{"id":"o93","hash":"1ufrgte","t":"Menu impostazioni"},{"id":"o94","hash":"1t1tgcj","t":"Menu impostazioni personalizzate"}],"correctHash":"113efuh"},{"qid":"q10","qhash":"1dtc5wl","question":"Come può avvenire la regolazione della sensibilità?","options":[{"id":"o101","hash":"1dlpshe","t":"Menù ripresa – bilanciamento del bianco – scegliere il valore – ok"},{"id":"o102","hash":"1dbq6sf","t":"Menù ripresa – sensibilità iso – scegliere il valore – ok"},{"id":"o103","hash":"1d1ql3g","t":"Menù ripresa – dimensione foto – scegliere il valore  - ok"},{"id":"o104","hash":"1crqzeh","t":"Nessuna delle precedenti"}],"correctHash":"1y0k3lg"},{"qid":"q11","qhash":"1djck7m","question":"Durante lo scatto fotografico, il sollevamento dello specchio:","options":[{"id":"o111","hash":"1cho87j","t":"Impedisce alla luce di entrare nell’obiettivo"},{"id":"o112","hash":"1crntwi","t":"Migliora la visione nel mirino"},{"id":"o113","hash":"1d1nflh","t":"Mantiene l’immagine visibile durante lo scatto"},{"id":"o114","hash":"1b3q7qo","t":"Consente alla luce di raggiungere il sensore o la pellicola"}],"correctHash":"cr760i"},{"qid":"q12","qhash":"1d9cyin","question":"Nelle Reflex tradizionali lo specchio:","options":[{"id":"o121","hash":"hf8emc","t":"Convoglia la luce direttamente sul sensore in modo continuo"},{"id":"o122","hash":"i977p9","t":"Riflette la luce che entra attraverso l’obiettivo"},{"id":"o123","hash":"hz7m0a","t":"Ha solo una funzione estetica e decorativa"},{"id":"o124","hash":"gl9ljf","t":"Non è presente nelle Reflex tradizionali."}],"correctHash":"pg07g4"},{"qid":"q13","qhash":"1czdcto","question":"Quale tipo di misurazione tiene conto principalmente del soggetto centrale attribuendo importanza decrescente ai soggetti marginali?","options":[{"id":"o131","hash":"gb6uch","t":"Spot"},{"id":"o132","hash":"fh819k","t":"Semispot"},{"id":"o133","hash":"fr7myj","t":"Media ponderata"},{"id":"o134","hash":"h55nfe","t":"Sia Spot che Semispot"}],"correctHash":"zei46z"}];
+    const allQuestions = [{"qid":"q1","qhash":"17d87mf","question":"Il controllo dell’esposizione richiede la gestione coordinata di:","options":[{"id":"o11","hash":"1ycdc4k","t":"WB e ISO"},{"id":"o12","hash":"5838d","t":"Tempo e diaframma"},{"id":"o13","hash":"1ywcjii","t":"Flash e numero guida"},{"id":"o14","hash":"1xiej1n","t":"Formato e risoluzione"}],"correctHash":"eajksm"},{"qid":"q2","qhash":"17n7tbe","question":"Nel testo sull’illuminazione si dice che nelle fotocamere compatte il flash è spesso:","options":[{"id":"o21","hash":"1twa8j3","t":"Parte integrante della macchina"},{"id":"o22","hash":"1u69u82","t":"Sempre esterno e su stativo"},{"id":"o23","hash":"1ug9fx1","t":"Utilizzabile solo in studio"},{"id":"o24","hash":"1sic828","t":"Inutile perché non sincronizzabile"}],"correctHash":"1ai7oqh"},{"qid":"q3","qhash":"17x7f0d","question":"Se la fotocamera “non accetta il bilanciamento del bianco”, nel testo si suggerisce di:","options":[{"id":"o31","hash":"1v0bssy","t":"Assicurarsi che il foglio sia in zona omogeneamente illuminata e che l’inquadratura sia a fuoco"},{"id":"o32","hash":"1uqc73z","t":"Aumentare gli ISO a 6400"},{"id":"o33","hash":"1ugclf0","t":"Usare sempre il flash anulare"},{"id":"o34","hash":"1u6czq1","t":"Ridurre la focale al minimo"}],"correctHash":"1vw5adj"},{"qid":"q4","qhash":"15za75k","question":"Riguardo all’illuminazione si afferma che, per lavorare in studio, oltre ai fondali serve un parco luci che comprenda:","options":[{"id":"o41","hash":"zxaum5","t":"Solo lampade a luce continua"},{"id":"o42","hash":"z3c1j8","t":"Solo flash elettronici"},{"id":"o43","hash":"zdbn87","t":"Sia illuminazione continua sia flash"},{"id":"o44","hash":"yjcu5a","t":"Solo lampade a incandescenza"}],"correctHash":"tkepw3"},{"qid":"q5","qhash":"1699suj","question":"Il bilanciamento del bianco automatico (AWB) serve principalmente a:","options":[{"id":"o51","hash":"s5p4ow","t":"Compensare automaticamente le dominanti cromatiche della luce"},{"id":"o52","hash":"sznxrt","t":"Aumentare la profondità di campo"},{"id":"o53","hash":"spoc2u","t":"Regolare il numero guida del flash"},{"id":"o54","hash":"tjn55r","t":"Modificare la lunghezza focale"}],"correctHash":"1s6thnv"},{"qid":"q6","qhash":"16j9eji","question":"Il corpo macchina di una fotocamera comprende tipicamente comandi e componenti dedicati a:","options":[{"id":"o61","hash":"1w3s8h7","t":"Impostazioni e controllo dello scatto (esposizione, messa a fuoco, ecc.)"},{"id":"o62","hash":"1wdru66","t":"Emissione della luce (come un soft box)"},{"id":"o63","hash":"1wnrfv5","t":"Misura della luce incidente senza sensore"},{"id":"o64","hash":"1wxr1k4","t":"Proiezione di fondali illuminati"}],"correctHash":"dsoxah"},{"qid":"q7","qhash":"16t908h","question":"Quando si parla di “obiettivo intercambiabile” ci si riferisce tipicamente a:","options":[{"id":"o71","hash":"xpavke","t":"Reflex e mirrorless"},{"id":"o72","hash":"xfb9vf","t":"Tutte le compatte base"},{"id":"o73","hash":"x5bo6g","t":"Solo alle lampade photoflood"},{"id":"o74","hash":"z38w19","t":"Solo ai pannelli riflettenti"}],"correctHash":"1lod42v"},{"qid":"q8","qhash":"14vbsdo","question":"Una caratteristica comune delle mirrorless è:","options":[{"id":"o81","hash":"1srqp5l","t":"L’assenza dello specchio e l’uso di mirino elettronico o display"},{"id":"o82","hash":"1rxrw2o","t":"La necessità di usare sempre un flash anulare"},{"id":"o83","hash":"1s7rhrn","t":"L’impossibilità di cambiare obiettivo"},{"id":"o84","hash":"1tlpi8i","t":"L’uso obbligatorio di pellicole T"}],"correctHash":"1xqj6jd"},{"qid":"q9","qhash":"155be2n","question":"Con i tubi fluorescenti si costruiscono pannelli di grande dimensione apprezzati per il Chroma key perché:","options":[{"id":"o91","hash":"1tvs9fg","t":"Riduce la necessità di stativi"},{"id":"o92","hash":"1upr2id","t":"Contrastano le dominanti verdi o blu del fondale"},{"id":"o93","hash":"1ufrgte","t":"Producono sempre luce calda e rossastra"},{"id":"o94","hash":"1t1tgcj","t":"Sono l’unica luce utilizzabile in esterni"}],"correctHash":"10teu5i"},{"qid":"q10","qhash":"1dtc5wl","question":"Quando si imposta l’esposizione in M, l’esposimetro integrato mostra l’esposizione come:","options":[{"id":"o101","hash":"1dlpshe","t":"Una scala che va da -3 a +3 (con 0 al centro)"},{"id":"o102","hash":"1dbq6sf","t":"Una scala in Kelvin"},{"id":"o103","hash":"1d1ql3g","t":"Una tabella del numero guida"},{"id":"o104","hash":"1crqzeh","t":"Una lista di fondali disponibili"}],"correctHash":"1yuiwod"},{"qid":"q11","qhash":"1djck7m","question":"La visualizzazione su display durante la ripresa (anteprima in tempo reale) viene comunemente chiamata:","options":[{"id":"o111","hash":"1cho87j","t":"Live view"},{"id":"o112","hash":"1crntwi","t":"Chroma key"},{"id":"o113","hash":"1d1nflh","t":"Fill-in"},{"id":"o114","hash":"1b3q7qo","t":"Numero guida"}],"correctHash":"bx8cxl"},{"qid":"q12","qhash":"1d9cyin","question":"Il mirino elettronico (EVF) è tipicamente associato a:","options":[{"id":"o121","hash":"hf8emc","t":"Fotocamere mirrorless"},{"id":"o122","hash":"i977p9","t":"Fotocamere a banco ottico"},{"id":"o123","hash":"hz7m0a","t":"Fotocamere solo a pellicola"},{"id":"o124","hash":"gl9ljf","t":"Fotocamere senza alcun display"}],"correctHash":"q9z0j1"},{"qid":"q13","qhash":"1czdcto","question":"Il WB personalizzato viene utilizzato quando:","options":[{"id":"o131","hash":"gb6uch","t":"La luce è standard e costante"},{"id":"o132","hash":"fh819k","t":"La luce è mista o difficile da interpretare automaticamente"},{"id":"o133","hash":"fr7myj","t":"Si fotografa solo in esterni"},{"id":"o134","hash":"h55nfe","t":"Si utilizza esclusivamente il flash"}],"correctHash":"z4iii0"},{"qid":"q14","qhash":"1cpdr4p","question":"La misurazione esposimetrica spot è consigliata quando:","options":[{"id":"o141","hash":"gaov8u","t":"La scena ha illuminazione uniforme"},{"id":"o142","hash":"g0p9jv","t":"Il soggetto principale è molto più chiaro o scuro dello sfondo"},{"id":"o143","hash":"fqpnuw","t":"Si utilizza il flash"},{"id":"o144","hash":"homvpp","t":"Si fotografa in controluce con WB automatico"}],"correctHash":"6p1umc"},{"qid":"q15","qhash":"1cfe5fq","question":"Nella misurazione semi-spot, secondo il testo, la lettura copre circa:","options":[{"id":"o151","hash":"f6nayz","t":"Il 2% dell’immagine"},{"id":"o152","hash":"fgmwny","t":"L’8-10% dell’immagine"},{"id":"o153","hash":"fqmicx","t":"Il 50% dell’immagine"},{"id":"o154","hash":"g0m41w","t":"Il 100% dell’immagine"}],"correctHash":"1o38zew"},{"qid":"q16","qhash":"1c5ejqr","question":"Nelle fotocamere reflex, il mirino ottico permette di vedere la scena grazie a:","options":[{"id":"o161","hash":"1a9o95s","t":"Uno specchio che devia la luce verso un pentaprisma/pentaspecchio"},{"id":"o162","hash":"1b3n28p","t":"Un sensore che proietta sempre l’immagine sul display"},{"id":"o163","hash":"1atngjq","t":"Un flash che illumina l’interno del mirino"},{"id":"o164","hash":"1bnm9mn","t":"Un filtro ND integrato nel mirino"}],"correctHash":"i5e3tp"},{"qid":"q17","qhash":"1bvey1s","question":"Secondo il testo, “L” “M” e “S” nella dimensione dell’immagine indicano:","options":[{"id":"o171","hash":"iioual","t":"L’uso di tutti i pixel o di un numero ridotto, variando dimensione e peso del file"},{"id":"o172","hash":"hoq17o","t":"La modalità di scatto con flash o senza flash"},{"id":"o173","hash":"hypmwn","t":"Il tipo di lampada (LED, quarzo, fluorescenti)"},{"id":"o174","hash":"h4qttq","t":"Il valore del numero guida"}],"correctHash":"1dz7x2x"},{"qid":"q18","qhash":"1g18zgd","question":"Tra gli elementi che distinguono i diversi formati di fotocamera rientra:","options":[{"id":"o181","hash":"1i0rzze","t":"La dimensione del supporto/sensore (formato)"},{"id":"o182","hash":"1hqseaf","t":"Il colore del corpo macchina"},{"id":"o183","hash":"1hgsslg","t":"Il tipo di cavo USB incluso"},{"id":"o184","hash":"1h6t6wh","t":"La marca della scheda di memoria"}],"correctHash":"1ylchlp"},{"qid":"q19","qhash":"1fr9dre","question":"Nel contesto delle fotocamere, “zoom” indica:","options":[{"id":"o191","hash":"1gwqfpj","t":"La possibilità di variare la lunghezza focale"},{"id":"o192","hash":"1h6q1ei","t":"La possibilità di variare gli ISO"},{"id":"o193","hash":"1hgpn3h","t":"La possibilità di cambiare la temperatura colore"},{"id":"o194","hash":"1fisf8o","t":"La possibilità di cambiare il numero guida"}],"correctHash":"163tq3d"},{"qid":"q20","qhash":"1fhcxke","question":"La potenza delle lampade photoflood è compresa tra:","options":[{"id":"o201","hash":"xkn3rr","t":"25 e 100 watt"},{"id":"o202","hash":"xumpgq","t":"250 e 1000 watt"},{"id":"o203","hash":"y4mb5p","t":"1000 e 2000 watt"},{"id":"o204","hash":"w6p3aw","t":"150 e 250 watt"}],"correctHash":"6x415c"}];
     const safeName = (str) => String(str || "").trim().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "");
-    const hashToken = (str) => String(str || "").trim().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "");
     const hashId = (value) => {
       const str = String(value || "");
       let hash = 2166136261;
@@ -77,12 +78,9 @@
       return (hash >>> 0).toString(36);
     };
     const hashJoin = (qid, oid) => hashId(qid + "+" + oid);
-    const studentLabel = "1 ANGIOLI YEIMY CAROLINA";
-    const studentReg = "15";
-    const studentSurname = "ANGIOLI";
-    const studentName = "YEIMI CAROLINA";
+    const studentLabel = "15 NIERI NOEMI";
     const materiaLabel = "Tecnologie dei processi di produzione";
-    const classeLabel = "4 AGC";
+    const classeLabel = "4 BGC";
     const topicLabel = "Fotocamera e illuminazione";
     const generatedDate = new Date().toLocaleDateString("it-IT");
     let current = 0;
@@ -96,7 +94,8 @@
     const downloadStatus = document.getElementById('downloadStatus');
 
     let finishAsked = false;
-    let downloadedFiles = false;
+    let downloadedPdf = false;
+    let downloadedJson = false;
 
     function requestFull() {
       const el = document.documentElement;
@@ -162,11 +161,11 @@
       overlay.classList.remove('hidden');
     }
 
-    function buildPdfBlob() {
+    function downloadPdf() {
       const jsPdfFactory = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF || null;
       if (!jsPdfFactory) {
         alert("Libreria jsPDF non caricata. Impossibile generare il PDF.");
-        return null;
+        return;
       }
       const doc = new jsPdfFactory();
       const margin = 20; // 2 cm
@@ -270,10 +269,13 @@
         doc.text("Voto: " + voto, margin + 2, y + 13);
       }
 
-      return doc.output("blob");
+      doc.save('quiz_' + safeName(studentLabel) + '_' + safeName(topicLabel) + '.pdf');
+      downloadStatus.textContent = 'PDF generato.';
+      downloadedPdf = true;
+      if (downloadedPdf && downloadedJson) setTimeout(() => window.close(), 300);
     }
 
-    function buildJsonBlob() {
+    function downloadJson() {
       const letter = (i) => String.fromCharCode(65 + i);
       const payloadDomande = allQuestions.map((q, idx) => {
         if (q.open) {
@@ -308,62 +310,15 @@
         data: generatedDate,
         domande: payloadDomande
       };
-      return new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
-    }
-
-    function buildBaseName() {
-      const parts = ["quiz", studentReg, studentSurname, studentName, topicLabel]
-        .map(safeName)
-        .filter(Boolean);
-      return parts.join("_");
-    }
-
-    async function writeFileToDir(dirHandle, fileName, blob) {
-      const fileHandle = await dirHandle.getFileHandle(fileName, { create: true });
-      const writable = await fileHandle.createWritable();
-      await writable.write(blob);
-      await writable.close();
-    }
-
-    function triggerDownload(blob, name) {
+      const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = name;
+      link.download = 'quiz_' + safeName(studentLabel) + '_' + safeName(topicLabel) + '.json';
       link.click();
       URL.revokeObjectURL(link.href);
-    }
-
-    function downloadFilesFallback(baseName, pdfBlob, jsonBlob) {
-      triggerDownload(pdfBlob, baseName + ".pdf");
-      triggerDownload(jsonBlob, baseName + ".json");
-      downloadStatus.textContent = "File salvati nei download.";
-      downloadedFiles = true;
-      if (downloadedFiles) setTimeout(() => window.close(), 300);
-    }
-
-    async function saveResultsFolder() {
-      const pdfBlob = buildPdfBlob();
-      if (!pdfBlob) return;
-      const jsonBlob = buildJsonBlob();
-      const baseName = buildBaseName();
-      if ("showDirectoryPicker" in window) {
-        try {
-          const root = await window.showDirectoryPicker();
-          const folderHandle = await root.getDirectoryHandle(baseName, { create: true });
-          await writeFileToDir(folderHandle, baseName + ".pdf", pdfBlob);
-          await writeFileToDir(folderHandle, baseName + ".json", jsonBlob);
-          downloadStatus.textContent = "Cartella salvata.";
-          downloadedFiles = true;
-          if (downloadedFiles) setTimeout(() => window.close(), 300);
-          return;
-        } catch (err) {
-          if (err && err.name === "AbortError") {
-            downloadStatus.textContent = "Salvataggio annullato.";
-            return;
-          }
-        }
-      }
-      downloadFilesFallback(baseName, pdfBlob, jsonBlob);
+      downloadStatus.textContent = 'JSON generato.';
+      downloadedJson = true;
+      if (downloadedPdf && downloadedJson) setTimeout(() => window.close(), 300);
     }
 
     let fullscreenWarned = false;
