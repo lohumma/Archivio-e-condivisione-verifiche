@@ -147,7 +147,7 @@
       </div>
 
       <div class="status" id="status">
-        Caricamento elenco quiz da GitHub...
+        Caricamento elenco quiz da GitHub... <span class="link-action" id="pick-archive">Collega cartella locale</span>
       </div>
 
       <table>
@@ -174,6 +174,7 @@
     const topicSel = document.getElementById("filter-topic");
     const statusEl = document.getElementById("status");
     const studentsBody = document.getElementById("students-body");
+    const pickArchiveBtn = document.getElementById("pick-archive");
     let records = [];
 
     function setOptions(select, values) {
@@ -214,6 +215,26 @@
       return m ? m[1] : "";
     }
 
+    function parseQuizFromHtml(text) {
+      const materia = readConstValue(text, "materiaLabel");
+      const classeLabel = readConstValue(text, "classeLabel");
+      const topic = readConstValue(text, "topicLabel");
+      const studLabel = readConstValue(text, "studentLabel");
+      if (!materia || !classeLabel || !topic || !studLabel) return null;
+      const stud = parseStudentLabel(studLabel);
+      const cls = parseClassLabel(classeLabel);
+      return {
+        subject: materia,
+        className: cls.classe,
+        section: cls.sezione,
+        topic,
+        studentKey: studLabel.trim(),
+        reg: stud.reg,
+        surname: stud.surname,
+        name: stud.name
+      };
+    }
+
     async function buildIndexFromGithub() {
       const owner = "lohumma";
       const repo = "Archivio-e-condivisione-verifiche";
@@ -237,24 +258,43 @@
         const fileResp = await fetch(url);
         if (!fileResp.ok) continue;
         const text = await fileResp.text();
-        const materia = readConstValue(text, "materiaLabel");
-        const classeLabel = readConstValue(text, "classeLabel");
-        const topic = readConstValue(text, "topicLabel");
-        const studLabel = readConstValue(text, "studentLabel");
-        if (!materia || !classeLabel || !topic || !studLabel) continue;
-        const stud = parseStudentLabel(studLabel);
-        const cls = parseClassLabel(classeLabel);
+        const base = parseQuizFromHtml(text);
+        if (!base) continue;
         out.push({
-          subject: materia,
-          className: cls.classe,
-          section: cls.sezione,
-          topic,
-          studentKey: studLabel.trim(),
-          reg: stud.reg,
-          surname: stud.surname,
-          name: stud.name,
+          ...base,
           fileUrl: url,
           fileName: item.path.split("/").pop()
+        });
+      }
+      return out;
+    }
+
+    async function walkLocal(dirHandle, list) {
+      for await (const entry of dirHandle.values()) {
+        if (entry.kind === "file") {
+          if (!entry.name.toLowerCase().endsWith(".html")) continue;
+          if (!entry.name.toLowerCase().startsWith("quiz_")) continue;
+          list.push(entry);
+        } else if (entry.kind === "directory") {
+          const sub = await dirHandle.getDirectoryHandle(entry.name);
+          await walkLocal(sub, list);
+        }
+      }
+    }
+
+    async function buildIndexFromLocal(root) {
+      const out = [];
+      const list = [];
+      await walkLocal(root, list);
+      for (const handle of list) {
+        const file = await handle.getFile();
+        const text = await file.text();
+        const base = parseQuizFromHtml(text);
+        if (!base) continue;
+        out.push({
+          ...base,
+          fileHandle: handle,
+          fileName: handle.name
         });
       }
       return out;
@@ -329,9 +369,9 @@
       filtered.forEach(r => {
         const key = [r.studentKey, r.topic].join("|");
         if (!map.has(key)) {
-          map.set(key, { reg: r.reg, surname: r.surname, name: r.name, topic: r.topic, urls: [] });
+          map.set(key, { reg: r.reg, surname: r.surname, name: r.name, topic: r.topic, items: [] });
         }
-        map.get(key).urls.push(r.fileUrl);
+        map.get(key).items.push(r);
       });
       const rows = Array.from(map.values()).map((g, idx) => {
         const btnId = "open-btn-" + idx;
@@ -353,15 +393,28 @@
       });
     }
 
-    function openGroupFiles(group) {
-      if (!group || !group.urls?.length) return;
-      group.urls.forEach((url) => {
-        const link = document.createElement("a");
-        link.href = url;
-        link.target = "_blank";
-        link.rel = "noopener";
-        link.click();
-      });
+    async function openGroupFiles(group) {
+      if (!group || !group.items?.length) return;
+      for (const item of group.items) {
+        if (item.fileUrl) {
+          const link = document.createElement("a");
+          link.href = item.fileUrl;
+          link.target = "_blank";
+          link.rel = "noopener";
+          link.click();
+          continue;
+        }
+        if (item.fileHandle) {
+          const file = await item.fileHandle.getFile();
+          const url = URL.createObjectURL(file);
+          const link = document.createElement("a");
+          link.href = url;
+          link.target = "_blank";
+          link.rel = "noopener";
+          link.click();
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+      }
     }
 
     async function loadArchive() {
@@ -376,7 +429,7 @@
         setOptions(sectionSel, sections);
         setOptions(studentSel, []);
         setOptions(topicSel, []);
-        statusEl.textContent = `Quiz trovati: ${records.length}.`;
+        statusEl.textContent = `Quiz trovati: ${records.length}. Puoi anche collegare una cartella locale.`;
         applyFilters();
       } catch (err) {
         statusEl.textContent = "Errore nel caricamento da GitHub.";
@@ -394,6 +447,35 @@
       applyFilters();
     });
     topicSel.addEventListener("change", applyFilters);
+    if (pickArchiveBtn) {
+      pickArchiveBtn.addEventListener("click", async () => {
+        if (!("showDirectoryPicker" in window)) {
+          statusEl.textContent = "Browser non supporta l'accesso alle cartelle locali.";
+          return;
+        }
+        try {
+          let root = await window.showDirectoryPicker();
+          if (root.name !== "Consegna compiti in classe") {
+            root = await root.getDirectoryHandle("Consegna compiti in classe");
+          }
+          statusEl.textContent = "Caricamento quiz locali...";
+          const localRecords = await buildIndexFromLocal(root);
+          records = records.concat(localRecords);
+          const subjects = [...new Set(records.map(r => r.subject))].sort();
+          const classes = [...new Set(records.map(r => r.className))].sort();
+          const sections = [...new Set(records.map(r => r.section))].sort();
+          setOptions(subjectSel, subjects);
+          setOptions(classSel, classes);
+          setOptions(sectionSel, sections);
+          setOptions(studentSel, []);
+          setOptions(topicSel, []);
+          statusEl.textContent = `Quiz trovati: ${records.length}.`;
+          applyFilters();
+        } catch (err) {
+          statusEl.textContent = "Selezione cartella locale annullata.";
+        }
+      });
+    }
     loadArchive();
 
   </script>
