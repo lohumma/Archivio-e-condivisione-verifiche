@@ -147,7 +147,7 @@
       </div>
 
       <div class="status" id="status">
-        Seleziona l'archivio per iniziare. <span class="link-action" id="pick-archive">Seleziona archivio</span>
+        Caricamento elenco quiz da GitHub...
       </div>
 
       <table>
@@ -174,8 +174,6 @@
     const topicSel = document.getElementById("filter-topic");
     const statusEl = document.getElementById("status");
     const studentsBody = document.getElementById("students-body");
-    const pickArchiveBtn = document.getElementById("pick-archive");
-    let archiveHandle = null;
     let records = [];
 
     function setOptions(select, values) {
@@ -216,37 +214,48 @@
       return m ? m[1] : "";
     }
 
-    async function buildIndex(root) {
+    async function buildIndexFromGithub() {
+      const owner = "lohumma";
+      const repo = "Archivio-e-condivisione-verifiche";
+      const commit = "e6aeb98d5503ae4f16f107f0026ab9a5cda9454a";
+      const subdir = "Consegna compiti in classe";
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${commit}?recursive=1`;
+      const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/${commit}`;
+      const resp = await fetch(apiUrl);
+      if (!resp.ok) throw new Error("Fetch GitHub fallita");
+      const data = await resp.json();
+      const tree = Array.isArray(data.tree) ? data.tree : [];
+      const htmlFiles = tree.filter(item =>
+        item.type === "blob" &&
+        item.path.startsWith(subdir + "/") &&
+        item.path.toLowerCase().endsWith(".html") &&
+        item.path.toLowerCase().includes("/quiz_")
+      );
       const out = [];
-      for await (const entry of root.values()) {
-        if (entry.kind !== "directory") continue;
-        for await (const sub of entry.values()) {
-          if (sub.kind === "file") {
-            if (!sub.name.toLowerCase().endsWith(".html")) continue;
-            if (!sub.name.toLowerCase().startsWith("quiz_")) continue;
-            const file = await sub.getFile();
-            const text = await file.text();
-            const materia = readConstValue(text, "materiaLabel");
-            const classeLabel = readConstValue(text, "classeLabel");
-            const topic = readConstValue(text, "topicLabel");
-            const studLabel = readConstValue(text, "studentLabel");
-            if (!materia || !classeLabel || !topic || !studLabel) continue;
-            const stud = parseStudentLabel(studLabel);
-            const cls = parseClassLabel(classeLabel);
-            out.push({
-              subject: materia,
-              className: cls.classe,
-              section: cls.sezione,
-              topic,
-              studentKey: studLabel.trim(),
-              reg: stud.reg,
-              surname: stud.surname,
-              name: stud.name,
-              fileHandle: sub,
-              fileName: sub.name
-            });
-          }
-        }
+      for (const item of htmlFiles) {
+        const url = rawBase + "/" + item.path;
+        const fileResp = await fetch(url);
+        if (!fileResp.ok) continue;
+        const text = await fileResp.text();
+        const materia = readConstValue(text, "materiaLabel");
+        const classeLabel = readConstValue(text, "classeLabel");
+        const topic = readConstValue(text, "topicLabel");
+        const studLabel = readConstValue(text, "studentLabel");
+        if (!materia || !classeLabel || !topic || !studLabel) continue;
+        const stud = parseStudentLabel(studLabel);
+        const cls = parseClassLabel(classeLabel);
+        out.push({
+          subject: materia,
+          className: cls.classe,
+          section: cls.sezione,
+          topic,
+          studentKey: studLabel.trim(),
+          reg: stud.reg,
+          surname: stud.surname,
+          name: stud.name,
+          fileUrl: url,
+          fileName: item.path.split("/").pop()
+        });
       }
       return out;
     }
@@ -320,9 +329,9 @@
       filtered.forEach(r => {
         const key = [r.studentKey, r.topic].join("|");
         if (!map.has(key)) {
-          map.set(key, { reg: r.reg, surname: r.surname, name: r.name, topic: r.topic, files: [] });
+          map.set(key, { reg: r.reg, surname: r.surname, name: r.name, topic: r.topic, urls: [] });
         }
-        map.get(key).files.push(r.fileHandle);
+        map.get(key).urls.push(r.fileUrl);
       });
       const rows = Array.from(map.values()).map((g, idx) => {
         const btnId = "open-btn-" + idx;
@@ -344,33 +353,21 @@
       });
     }
 
-    async function openGroupFiles(group) {
-      if (!group || !group.files?.length) return;
-      for (const handle of group.files) {
-        const file = await handle.getFile();
-        const url = URL.createObjectURL(file);
+    function openGroupFiles(group) {
+      if (!group || !group.urls?.length) return;
+      group.urls.forEach((url) => {
         const link = document.createElement("a");
         link.href = url;
         link.target = "_blank";
         link.rel = "noopener";
         link.click();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-      }
+      });
     }
 
     async function loadArchive() {
-      if (!("showDirectoryPicker" in window)) {
-        statusEl.textContent = "Browser non supporta l'accesso alle cartelle locali.";
-        return;
-      }
       try {
-        archiveHandle = await window.showDirectoryPicker();
-        let consegnaDir = archiveHandle;
-        if (archiveHandle.name !== "Consegna compiti in classe") {
-          consegnaDir = await archiveHandle.getDirectoryHandle("Consegna compiti in classe");
-        }
-        statusEl.textContent = "Scansione archivio in corso...";
-        records = await buildIndex(consegnaDir);
+        statusEl.textContent = "Scarico elenco quiz da GitHub...";
+        records = await buildIndexFromGithub();
         const subjects = [...new Set(records.map(r => r.subject))].sort();
         const classes = [...new Set(records.map(r => r.className))].sort();
         const sections = [...new Set(records.map(r => r.section))].sort();
@@ -379,10 +376,10 @@
         setOptions(sectionSel, sections);
         setOptions(studentSel, []);
         setOptions(topicSel, []);
-        statusEl.textContent = `Archivio caricato. Quiz trovati: ${records.length}.`;
+        statusEl.textContent = `Quiz trovati: ${records.length}.`;
         applyFilters();
       } catch (err) {
-        statusEl.textContent = "Selezione archivio annullata.";
+        statusEl.textContent = "Errore nel caricamento da GitHub.";
       }
     }
 
@@ -397,7 +394,7 @@
       applyFilters();
     });
     topicSel.addEventListener("change", applyFilters);
-    pickArchiveBtn.addEventListener("click", loadArchive);
+    loadArchive();
 
   </script>
 </body>
