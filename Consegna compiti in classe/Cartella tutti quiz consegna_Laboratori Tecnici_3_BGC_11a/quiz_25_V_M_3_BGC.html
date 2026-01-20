@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Quiz | 3 BERNARDINI MATTEO</title>
+  <title>Quiz | 25 VALLINI MATILDE</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; }
     .hidden { display: none !important; }
@@ -22,7 +22,7 @@
 <body class="noselect">
   <h2 id="pageTitle">Compito di Laboratori Tecnici</h2>
   <div id="intro">
-    <p><strong>Studente:</strong> 3 BERNARDINI MATTEO</p>
+    <p><strong>Studente:</strong> 25 VALLINI MATILDE</p>
     <p><strong>Classe:</strong> 3 BGC</p>
     <p><label><input type="checkbox" id="riduzioneTempo"  disabled> Riduzione o tempo aggiuntivo</label></p>
     <div style="margin:12px 0; padding:12px; border:1px solid #cbd5e1; border-radius:6px; background:#f1f5f9; color:#0f172a;">
@@ -64,7 +64,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    const allQuestions = [{"qid":"q1","qhash":"17d87mf","question":"rfsac","options":[{"id":"o11","hash":"1ycdc4k","t":"asd"},{"id":"o12","hash":"5838d","t":"asfgd"},{"id":"o13","hash":"1ywcjii","t":"mhgngfb"},{"id":"o14","hash":"1xiej1n","t":"xfvbv"}],"correctHash":"eajksm"}];
+    const allQuestions = [{"qid":"q1","qhash":"17d87mf","question":"aa","options":[{"id":"o11","hash":"1ycdc4k","t":"1"},{"id":"o12","hash":"5838d","t":"2"},{"id":"o13","hash":"1ywcjii","t":"3"},{"id":"o14","hash":"1xiej1n","t":"4"}],"correctHash":"eajksm"}];
     const safeName = (str) => String(str || "").trim().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "");
     const hashToken = (str) => String(str || "").trim().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_-]/g, "");
     const hashId = (value) => {
@@ -77,13 +77,13 @@
       return (hash >>> 0).toString(36);
     };
     const hashJoin = (qid, oid) => hashId(qid + "+" + oid);
-    const studentLabel = "3 BERNARDINI MATTEO";
-    const studentReg = "3";
-    const studentSurname = "BERNARDINI";
-    const studentName = "MATTEO";
+    const studentLabel = "25 VALLINI MATILDE";
+    const studentReg = "25";
+    const studentSurname = "VALLINI";
+    const studentName = "MATILDE";
     const materiaLabel = "Laboratori Tecnici";
     const classeLabel = "3 BGC";
-    const topicLabel = "aasa1";
+    const topicLabel = "11a";
     const uploadOnly = true;
     const generatedDate = new Date().toLocaleDateString("it-IT");
     let current = 0;
