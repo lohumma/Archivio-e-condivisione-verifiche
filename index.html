@@ -239,7 +239,7 @@
       const owner = "lohumma";
       const repo = "Archivio-e-condivisione-verifiche";
       const commit = "main";
-      const subdir = "Consegna compiti in classe";
+      const subdir = "Consegna_compiti_in_classe";
       const apiUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${commit}?recursive=1`;
       const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/${commit}`;
       const resp = await fetch(apiUrl);
@@ -455,8 +455,8 @@
         }
         try {
           let root = await window.showDirectoryPicker();
-          if (root.name !== "Consegna compiti in classe") {
-            root = await root.getDirectoryHandle("Consegna compiti in classe");
+          if (root.name !== "Consegna_compiti_in_classe") {
+            root = await root.getDirectoryHandle("Consegna_compiti_in_classe");
           }
           statusEl.textContent = "Caricamento quiz locali...";
           const localRecords = await buildIndexFromLocal(root);
