@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 17 RINELLI TOMAS</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 17 RINELLI TOMAS · Classe: 5 AGC · Materia: Storia del linguaggio artistico e grafico · Argomento: Prova_Quiz</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">← Precedente</button>
+        <button id="next">Successiva →</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const questions = [{"idx":1,"text":"Descrivi il rapporto tra arte e mass media nella Pop Art.","open":true,"options":[],"answer":"Perchè si usano immagini da pubblicità come televisioni giornali quindi i mass media. Perchè influenzano la quotidianità. ","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":2,"text":"Spiega perché la serialità è centrale nella poetica pop.","open":true,"options":[],"answer":"Perchè riflette la produzione di massa, ripetendo immagini comuni mostrando la società di massa e di consumo, scandalizza simboli, gusti trasformandoli in icone riconoscibili. ","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":3,"text":"Analizza l’uso dell’ironia come strumento critico.","open":true,"options":[],"answer":"L'ironia viene utilizzata spesso per mandare un messaggio anche in maniera diversa, ma spesso può toccare chi legge in maniera profonda nonostante l'uso di essa. Questo però spesso porta di ricordare di più il messaggio o un elaborato grafico. ","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":4,"text":"Quale elemento rende l’opera pop immediatamente accessibile allo spettatore?","open":false,"options":["A. La complessità concettuale","B. La citazione colta","C. La familiarità delle immagini","D. L’uso della prospettiva"],"answer":"C. La familiarità delle immagini","correct":"C. La familiarità delle immagini","score":"","feedback":""},{"idx":5,"text":"Quale differenza principale separa l’arte pop dall’arte d’avanguardia storica?","open":false,"options":["A. Uso del colore","B. Rapporto diretto con i mass media","C. Centralità del gesto","D. Astrazione totale"],"answer":"B. Rapporto diretto con i mass media","correct":"B. Rapporto diretto con i mass media","score":"","feedback":""},{"idx":6,"text":"Quale atteggiamento critico accomuna nuovi dadaismi e Pop Art?","open":false,"options":["A. Rifiuto della tecnologia","B. Analisi ironica della realtà","C. Idealizzazione del passato","D. Centralità dell’astrazione"],"answer":"B. Analisi ironica della realtà","correct":"B. Analisi ironica della realtà","score":"","feedback":""},{"idx":7,"text":"Quale caratteristica definisce l’atteggiamento pop verso la società dei consumi?","open":false,"options":["A. Condanna diretta","B. Ambiguità tra critica e accettazione","C. Rifiuto totale","D. Idealizzazione romantica"],"answer":"B. Ambiguità tra critica e accettazione","correct":"B. Ambiguità tra critica e accettazione","score":"","feedback":""},{"idx":8,"text":"Quale linguaggio rende immediatamente riconoscibili le opere pop?","open":false,"options":["A. Astratto","B. Iconico e diretto","C. Simbolico complesso","D. Gestuale"],"answer":"B. Iconico e diretto","correct":"B. Iconico e diretto","score":"","feedback":""},{"idx":9,"text":"Quale ruolo ha lo spettatore nelle opere pop?","open":false,"options":["A. Passivo","B. Riconoscere immagini familiari","C. Interpretare simboli antichi","D. Comprendere il gesto pittorico"],"answer":"B. Riconoscere immagini familiari","correct":"B. Riconoscere immagini familiari","score":"","feedback":""},{"idx":10,"text":"Quale aspetto rende la Pop Art fortemente legata al suo tempo?","open":false,"options":["A. Uso di materiali tradizionali","B. Riferimento ai media contemporanei","C. Ripresa della pittura storica","D. Astrazione simbolica"],"answer":"B. Riferimento ai media contemporanei","correct":"B. Riferimento ai media contemporanei","score":"","feedback":""},{"idx":11,"text":"Quale strategia espressiva viene recuperata dal Dada storico?","open":false,"options":["A. Naturalismo","B. Uso del caso e dell’assemblaggio","C. Prospettiva scientifica","D. Mimesi del reale"],"answer":"B. Uso del caso e dell’assemblaggio","correct":"B. Uso del caso e dell’assemblaggio","score":"","feedback":""},{"idx":12,"text":"Quale artista utilizza il monocromo blu come esperienza sensoriale e concettuale?","open":false,"options":["A. Klein","B. Warhol","C. Lichtenstein","D. Rauschenberg"],"answer":"A. Klein","correct":"A. Klein","score":"","feedback":""},{"idx":13,"text":"Quale artista europeo è associato al Nouveau Réalisme?","open":false,"options":["A. Yves Klein","B. Andy Warhol","C. Roy Lichtenstein","D. Mark Rothko"],"answer":"A. Yves Klein","correct":"A. Yves Klein","score":"","feedback":""},{"idx":14,"text":"Quale rapporto instaura la Pop Art con i mass media?","open":false,"options":["A. Rifiuto totale","B. Uso critico e diretto","C. Indifferenza","D. Condanna moralistica"],"answer":"B. Uso critico e diretto","correct":"B. Uso critico e diretto","score":"","feedback":""},{"idx":15,"text":"Quale oggetto quotidiano diventa spesso materiale artistico nei nuovi dadaismi?","open":false,"options":["A. Strumenti musicali","B. Oggetti di uso comune","C. Elementi naturali","D. Materiali nobili tradizionali"],"answer":"B. Oggetti di uso comune","correct":"B. Oggetti di uso comune","score":"","feedback":""},{"idx":16,"text":"Quale funzione assume la serialità nell’arte pop?","open":false,"options":["A. Decorativa","B. Critica alla produzione di massa","C. Espressiva","D. Simbolica religiosa"],"answer":"B. Critica alla produzione di massa","correct":"B. Critica alla produzione di massa","score":"","feedback":""},{"idx":17,"text":"Quale atteggiamento verso l’arte tradizionale accomuna i nuovi dadaismi?","open":false,"options":["A. Continuità stilistica","B. Critica ironica e dissacrante","C. Ritorno al classicismo","D. Centralità dell’abilità tecnica"],"answer":"B. Critica ironica e dissacrante","correct":"B. Critica ironica e dissacrante","score":"","feedback":""},{"idx":18,"text":"Quale artista trasforma il concetto di ready-made in uno strumento critico radicale contro l’arte tradizionale?","open":false,"options":["A. Andy Warhol","B. Roy Lichtenstein","C. Marcel Duchamp","D. Jasper Johns"],"answer":"C. Marcel Duchamp","correct":"C. Marcel Duchamp","score":"","feedback":""},{"idx":19,"text":"Quale elemento rende la Pop Art facilmente riconoscibile?","open":false,"options":["A. Astrazione totale","B. Riferimenti mitologici","C. Icone mediatiche","D. Gestualità violenta"],"answer":"C. Icone mediatiche","correct":"C. Icone mediatiche","score":"","feedback":""},{"idx":20,"text":"Quale aspetto rende i nuovi dadaismi una critica dell’arte stessa?","open":false,"options":["A. Uso della pittura tradizionale","B. Messa in discussione dei criteri artistici","C. Centralità della bellezza","D. Ripresa dei modelli classici"],"answer":"B. Messa in discussione dei criteri artistici","correct":"B. Messa in discussione dei criteri artistici","score":"","feedback":""}];
+    const totalPoints = 17;
+    const totalMax = 26;
+    const voto = 6.5;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

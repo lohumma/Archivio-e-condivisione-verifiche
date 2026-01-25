@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 4 BRACALI MIRCO</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 4 BRACALI MIRCO · Classe: 5 AGC · Materia: Storia del linguaggio artistico e grafico · Argomento: Prova_Quiz</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">← Precedente</button>
+        <button id="next">Successiva →</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const questions = [{"idx":1,"text":"Descrivi il concetto di ready-made e il suo valore artistico.","open":true,"options":[],"answer":"prenderte l oggetto e dargli un altro valore","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":2,"text":"Spiega il significato dei nuovi dadaismi nel contesto del secondo dopoguerra.","open":true,"options":[],"answer":"ere critico e concettuale","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":3,"text":"Spiega perché oggetti quotidiani diventano soggetti artistici.","open":true,"options":[],"answer":"diventano quotidiani ma artistici nella pop art dandogli una loro interpretazione","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":4,"text":"Quale tema è ricorrente nella Pop Art?","open":false,"options":["A. Mitologia classica","B. Cultura dei consumi","C. Paesaggio naturale","D. Religione"],"answer":"D. Religione","correct":"B. Cultura dei consumi","score":"","feedback":""},{"idx":5,"text":"Quale rapporto c’è tra Pop Art e pubblicità?","open":false,"options":["A. Contrapposizione","B. Uso e rielaborazione","C. Rifiuto ideologico","D. Ignoranza reciproca"],"answer":"B. Uso e rielaborazione","correct":"B. Uso e rielaborazione","score":"","feedback":""},{"idx":6,"text":"Quale atteggiamento verso l’emozione caratterizza l’arte pop?","open":false,"options":["A. Coinvolgimento drammatico","B. Neutralità apparente","C. Espressività violenta","D. Spiritualità intensa"],"answer":"B. Neutralità apparente","correct":"B. Neutralità apparente","score":"","feedback":""},{"idx":7,"text":"Quale artista europeo è associato al Nouveau Réalisme?","open":false,"options":["A. Yves Klein","B. Andy Warhol","C. Roy Lichtenstein","D. Mark Rothko"],"answer":"C. Roy Lichtenstein","correct":"A. Yves Klein","score":"","feedback":""},{"idx":8,"text":"Quale aspetto della società contemporanea viene riflesso dalla Pop Art?","open":false,"options":["A. La spiritualità","B. La società dei consumi","C. La tradizione classica","D. Il mondo rurale"],"answer":"B. La società dei consumi","correct":"B. La società dei consumi","score":"","feedback":""},{"idx":9,"text":"In che modo Roy Lichtenstein simula il processo di stampa industriale?","open":false,"options":["A. Con il dripping","B. Con collage fotografici","C. Con i punti Ben-Day","D. Con la serigrafia monocroma"],"answer":"B. Con collage fotografici","correct":"C. Con i punti Ben-Day","score":"","feedback":""},{"idx":10,"text":"Quale aspetto rende Pop Art e nuovi dadaismi ancora attuali?","open":false,"options":["A. Tecniche tradizionali","B. Riflessione sui media e sul consumo","C. Ritorno alla pittura storica","D. Uso esclusivo della scultura"],"answer":"D. Uso esclusivo della scultura","correct":"B. Riflessione sui media e sul consumo","score":"","feedback":""},{"idx":11,"text":"Quale artista utilizza il monocromo blu come esperienza sensoriale e concettuale?","open":false,"options":["A. Klein","B. Warhol","C. Lichtenstein","D. Rauschenberg"],"answer":"A. Klein","correct":"A. Klein","score":"","feedback":""},{"idx":12,"text":"Quale atteggiamento verso l’originalità emerge nella Pop Art?","open":false,"options":["A. Centralità dell’unicità","B. Valorizzazione della serialità","C. Ritorno all’opera unica","D. Rifiuto della riproduzione"],"answer":"D. Rifiuto della riproduzione","correct":"B. Valorizzazione della serialità","score":"","feedback":""},{"idx":13,"text":"Quale atteggiamento verso l’arte tradizionale accomuna i nuovi dadaismi?","open":false,"options":["A. Continuità stilistica","B. Critica ironica e dissacrante","C. Ritorno al classicismo","D. Centralità dell’abilità tecnica"],"answer":"B. Critica ironica e dissacrante","correct":"B. Critica ironica e dissacrante","score":"","feedback":""},{"idx":14,"text":"Quale aspetto rende i nuovi dadaismi una critica dell’arte stessa?","open":false,"options":["A. Uso della pittura tradizionale","B. Messa in discussione dei criteri artistici","C. Centralità della bellezza","D. Ripresa dei modelli classici"],"answer":"B. Messa in discussione dei criteri artistici","correct":"B. Messa in discussione dei criteri artistici","score":"","feedback":""},{"idx":15,"text":"Quale valore viene attribuito all’immagine banale nella Pop Art?","open":false,"options":["A. Nessuno","B. Diventa soggetto artistico","C. Viene eliminata","D. È solo decorativa"],"answer":"B. Diventa soggetto artistico","correct":"B. Diventa soggetto artistico","score":"","feedback":""},{"idx":16,"text":"Quale concetto viene messo in discussione dall’uso del ready-made?","open":false,"options":["A. Il colore","B. L’autore come genio","C. La materia","D. La composizione"],"answer":"C. La materia","correct":"B. L’autore come genio","score":"","feedback":""},{"idx":17,"text":"Quale artista è associato ai ready-made?","open":false,"options":["A. Andy Warhol","B. Marcel Duchamp","C. Roy Lichtenstein","D. Jackson Pollock"],"answer":"B. Marcel Duchamp","correct":"B. Marcel Duchamp","score":"","feedback":""},{"idx":18,"text":"Quale atteggiamento verso il mercato dell’arte emerge nella Pop Art?","open":false,"options":["A. Rifiuto totale","B. Ignoranza del sistema commerciale","C. Accettazione e utilizzo dei suoi meccanismi","D. Ritorno all’artigianato"],"answer":"B. Ignoranza del sistema commerciale","correct":"C. Accettazione e utilizzo dei suoi meccanismi","score":"","feedback":""},{"idx":19,"text":"Quale opera di Rauschenberg unisce pittura e oggetti reali?","open":false,"options":["A. Combine Paintings","B. Brillo Box","C. Flag","D. Marilyn Diptych"],"answer":"C. Flag","correct":"A. Combine Paintings","score":"","feedback":""},{"idx":20,"text":"Quale opera di Andy Warhol utilizza l’immagine seriale di un prodotto commerciale?","open":false,"options":["A. Marilyn Diptych","B. Campbell’s Soup Cans","C. Fiesta Pig 184","D. Electric Chair"],"answer":"D. Electric Chair","correct":"B. Campbell’s Soup Cans","score":"","feedback":""}];
+    const totalPoints = 8;
+    const totalMax = 26;
+    const voto = 3.1;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

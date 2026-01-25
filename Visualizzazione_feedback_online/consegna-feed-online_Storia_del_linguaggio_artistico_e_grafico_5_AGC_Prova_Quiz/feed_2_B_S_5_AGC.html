@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 2 BAFFA STELLA</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 2 BAFFA STELLA · Classe: 5 AGC · Materia: Storia del linguaggio artistico e grafico · Argomento: Prova_Quiz</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">← Precedente</button>
+        <button id="next">Successiva →</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const questions = [{"idx":1,"text":"Descrivi il concetto di ready-made e il suo valore artistico.","open":true,"options":[],"answer":"Il concetto di ready made riguarda il riutilizzo di oggetti, come oggetti industriali, ai quali viene data un'importanza e un significato diversi rispetto all'originale. Ritroviamo un esempio nell'opera \"La fontana\" di Duchamp. Le opere assumono difatti un valore artistico diverso, dato che si viene a creare una narrazione diversa da quella visiva.","correct":"","score":3,"feedback":"Definisci correttamente il ready-made come oggetto comune/industriale a cui l’artista attribuisce un nuovo significato e citi Duchamp con un esempio pertinente."},{"idx":2,"text":"Descrivi il modo in cui la Pop Art riflette la società dei consumi.","open":true,"options":[],"answer":"La Pop Art riflette la società dei consumi, ovvero una società di massa, ormai caratterizzata dal consumismo e dal capitalismo, rappresentando visivamente, con opere scultoree, pittoriche ecc, le quali vengono ripetute in modo seriale richiamando la produzione in serie industriale, e sono realizzate con colori accesi e vividi. Tali opere cercano di rappresentare l 'effetto mediatico e dei nuovi canali mediatici sulla società, dato che la società di massa veniva sommersa da immagini e oggetti industriali e con i canali mediatici temi come la morte, la sedia elettrica venivano svalorizzati e posti sullo stesso livello di divi cinematografici, per esempio.","correct":"","score":3,"feedback":"Colleghi bene Pop Art e società dei consumi: società di massa, mass media e ripetizione/serialità legata alla produzione industriale. Alcuni esempi sono più specifici del riferimento, ma il senso generale è corretto."},{"idx":3,"text":"Spiega come la Pop Art utilizza immagini della cultura di massa.","open":true,"options":[],"answer":"La Pop Art utilizza immagini della cultura di massa, sia come barattoli di zuppa del supermercato, sia come divi cinematografici, come Marilyn Monroe, e altri; utilizzando immagini di oggetti di uso quotidiano ","correct":"","score":2,"feedback":"Spieghi l’uso di immagini della cultura di massa e di oggetti quotidiani, ma resti soprattutto su esempi e non espliciti bene il legame con media, pubblicità e società dei consumi come nel riferimento."},{"idx":4,"text":"Quale artista europeo è associato al Nouveau Réalisme?","open":false,"options":["A. Yves Klein","B. Andy Warhol","C. Roy Lichtenstein","D. Mark Rothko"],"answer":"A. Yves Klein","correct":"A. Yves Klein","score":"","feedback":""},{"idx":5,"text":"Quale valore assume l’oggetto comune nelle ricerche dei nuovi dadaismi?","open":false,"options":["A. Decorativo","B. Simbolico tradizionale","C. Critico e concettuale","D. Puramente estetico"],"answer":"C. Critico e concettuale","correct":"C. Critico e concettuale","score":"","feedback":""},{"idx":6,"text":"Quale concetto viene messo in crisi dalla serialità pop?","open":false,"options":["A. Il colore","B. L’unicità dell’opera","C. La materia","D. La superficie"],"answer":"C. La materia","correct":"B. L’unicità dell’opera","score":"","feedback":""},{"idx":7,"text":"Quale atteggiamento verso l’emozione caratterizza l’arte pop?","open":false,"options":["A. Coinvolgimento drammatico","B. Neutralità apparente","C. Espressività violenta","D. Spiritualità intensa"],"answer":"B. Neutralità apparente","correct":"B. Neutralità apparente","score":"","feedback":""},{"idx":8,"text":"Quale artista pop riflette sul confine tra pittura e oggetto reale?","open":false,"options":["A. Jasper Johns","B. Mark Rothko","C. Pollock","D. Fontana"],"answer":"A. Jasper Johns","correct":"A. Jasper Johns","score":"","feedback":""},{"idx":9,"text":"Quale aspetto della società contemporanea viene riflesso dalla Pop Art?","open":false,"options":["A. La spiritualità","B. La società dei consumi","C. La tradizione classica","D. Il mondo rurale"],"answer":"B. La società dei consumi","correct":"B. La società dei consumi","score":"","feedback":""},{"idx":10,"text":"Quale relazione si crea tra arte pop e quotidianità?","open":false,"options":["A. Distanza totale","B. Rappresentazione idealizzata","C. Sovrapposizione e contaminazione","D. Negazione del reale"],"answer":"C. Sovrapposizione e contaminazione","correct":"C. Sovrapposizione e contaminazione","score":"","feedback":""},{"idx":11,"text":"Quale artista trasforma il concetto di ready-made in uno strumento critico radicale contro l’arte tradizionale?","open":false,"options":["A. Andy Warhol","B. Roy Lichtenstein","C. Marcel Duchamp","D. Jasper Johns"],"answer":"C. Marcel Duchamp","correct":"C. Marcel Duchamp","score":"","feedback":""},{"idx":12,"text":"Quale artista è associato ai ready-made?","open":false,"options":["A. Andy Warhol","B. Marcel Duchamp","C. Roy Lichtenstein","D. Jackson Pollock"],"answer":"B. Marcel Duchamp","correct":"B. Marcel Duchamp","score":"","feedback":""},{"idx":13,"text":"Quale aspetto rende i nuovi dadaismi una critica dell’arte stessa?","open":false,"options":["A. Uso della pittura tradizionale","B. Messa in discussione dei criteri artistici","C. Centralità della bellezza","D. Ripresa dei modelli classici"],"answer":"B. Messa in discussione dei criteri artistici","correct":"B. Messa in discussione dei criteri artistici","score":"","feedback":""},{"idx":14,"text":"Quale ruolo ha il colore nelle opere pop?","open":false,"options":["A. Naturalistico","B. Simbolico tradizionale","C. Acceso e artificiale","D. Monocromatico"],"answer":"D. Monocromatico","correct":"C. Acceso e artificiale","score":"","feedback":""},{"idx":15,"text":"Quale artista utilizza immagini seriali di prodotti commerciali?","open":false,"options":["A. Francis Bacon","B. Andy Warhol","C. Jean Dubuffet","D. Alberto Burri"],"answer":"B. Andy Warhol","correct":"B. Andy Warhol","score":"","feedback":""},{"idx":16,"text":"Quale atteggiamento verso l’originalità emerge nella Pop Art?","open":false,"options":["A. Centralità dell’unicità","B. Valorizzazione della serialità","C. Ritorno all’opera unica","D. Rifiuto della riproduzione"],"answer":"B. Valorizzazione della serialità","correct":"B. Valorizzazione della serialità","score":"","feedback":""},{"idx":17,"text":"Quale pratica artistica caratterizza Arman?","open":false,"options":["A. Performance corporee","B. Accumuli di oggetti","C. Tagli sulla tela","D. Pittura monocroma"],"answer":"D. Pittura monocroma","correct":"B. Accumuli di oggetti","score":"","feedback":""},{"idx":18,"text":"Quale funzione assume la serialità nell’arte pop?","open":false,"options":["A. Decorativa","B. Critica alla produzione di massa","C. Espressiva","D. Simbolica religiosa"],"answer":"B. Critica alla produzione di massa","correct":"B. Critica alla produzione di massa","score":"","feedback":""},{"idx":19,"text":"Quale rapporto instaura la Pop Art con i mass media?","open":false,"options":["A. Rifiuto totale","B. Uso critico e diretto","C. Indifferenza","D. Condanna moralistica"],"answer":"D. Condanna moralistica","correct":"B. Uso critico e diretto","score":"","feedback":""},{"idx":20,"text":"Quale rapporto c’è tra Pop Art e pubblicità?","open":false,"options":["A. Contrapposizione","B. Uso e rielaborazione","C. Rifiuto ideologico","D. Ignoranza reciproca"],"answer":"B. Uso e rielaborazione","correct":"B. Uso e rielaborazione","score":"","feedback":""}];
+    const totalPoints = 21;
+    const totalMax = 26;
+    const voto = 8.1;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

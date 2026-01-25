@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 8 CRECCHI AMBRA</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 8 CRECCHI AMBRA · Classe: 5 AGC · Materia: Storia del linguaggio artistico e grafico · Argomento: Prova_Quiz</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">← Precedente</button>
+        <button id="next">Successiva →</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const questions = [{"idx":1,"text":"Descrivi la poetica di Yves Klein e il valore simbolico del blu.","open":true,"options":[],"answer":"Yves Klein realizza opere di colore principalmente blu, rendendolo l'elemento centrale dell'opera stessa.","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":2,"text":"Spiega perché la serialità è centrale nella poetica pop.","open":true,"options":[],"answer":"La serialità è centrale nella Pop Art perché rompe con l'unicità dell'opera d'arte tradizionale, democratizzando l'arte e rendendo le icone accessibili e allo stesso tempo sottolinea l'omogeneità della cultura di consumo.","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":3,"text":"Descrivi il rapporto tra arte e mass media nella Pop Art.","open":true,"options":[],"answer":"Il rapporto tra arte e mass media è importante: l'arte fornisce ai media (cinema, pubblicità, social media) linguaggi visivi e ispirazione, mentre i media diventano nuovi strumenti ed espressione per gli artisti, creando un'arte interattiva, sfidando i confini tradizionali. ","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":4,"text":"Quale mezzo influenza maggiormente l’estetica pop?","open":false,"options":["A. Scultura classica","B. Cinema e televisione","C. Architettura","D. Arte medievale"],"answer":"B. Cinema e televisione","correct":"B. Cinema e televisione","score":"","feedback":""},{"idx":5,"text":"Quale elemento rende la Pop Art facilmente riconoscibile?","open":false,"options":["A. Astrazione totale","B. Riferimenti mitologici","C. Icone mediatiche","D. Gestualità violenta"],"answer":"C. Icone mediatiche","correct":"C. Icone mediatiche","score":"","feedback":""},{"idx":6,"text":"Quale artista è associato ai ready-made?","open":false,"options":["A. Andy Warhol","B. Marcel Duchamp","C. Roy Lichtenstein","D. Jackson Pollock"],"answer":"B. Marcel Duchamp","correct":"B. Marcel Duchamp","score":"","feedback":""},{"idx":7,"text":"In che modo Roy Lichtenstein simula il processo di stampa industriale?","open":false,"options":["A. Con il dripping","B. Con collage fotografici","C. Con i punti Ben-Day","D. Con la serigrafia monocroma"],"answer":"D. Con la serigrafia monocroma","correct":"C. Con i punti Ben-Day","score":"","feedback":""},{"idx":8,"text":"Quale oggetto quotidiano diventa spesso materiale artistico nei nuovi dadaismi?","open":false,"options":["A. Strumenti musicali","B. Oggetti di uso comune","C. Elementi naturali","D. Materiali nobili tradizionali"],"answer":"B. Oggetti di uso comune","correct":"B. Oggetti di uso comune","score":"","feedback":""},{"idx":9,"text":"Quale aspetto della società contemporanea viene riflesso dalla Pop Art?","open":false,"options":["A. La spiritualità","B. La società dei consumi","C. La tradizione classica","D. Il mondo rurale"],"answer":"B. La società dei consumi","correct":"B. La società dei consumi","score":"","feedback":""},{"idx":10,"text":"Quale immagine diventa icona della Pop Art americana?","open":false,"options":["A. Paesaggio rurale","B. Volti di celebrità","C. Scene storiche","D. Nature morte tradizionali"],"answer":"B. Volti di celebrità","correct":"B. Volti di celebrità","score":"","feedback":""},{"idx":11,"text":"Quale concetto viene messo in crisi dalla serialità pop?","open":false,"options":["A. Il colore","B. L’unicità dell’opera","C. La materia","D. La superficie"],"answer":"B. L’unicità dell’opera","correct":"B. L’unicità dell’opera","score":"","feedback":""},{"idx":12,"text":"Quale elemento comune lega nuovi dadaismi e Pop Art?","open":false,"options":["A. Centralità del mito","B. Uso del quotidiano","C. Rifiuto dell’immagine","D. Astrattismo"],"answer":"B. Uso del quotidiano","correct":"B. Uso del quotidiano","score":"","feedback":""},{"idx":13,"text":"Quale pratica caratterizza il Nouveau Réalisme?","open":false,"options":["A. Astrazione","B. Assemblaggio di oggetti reali","C. Pittura gestuale","D. Minimalismo"],"answer":"B. Assemblaggio di oggetti reali","correct":"B. Assemblaggio di oggetti reali","score":"","feedback":""},{"idx":14,"text":"Quale ruolo ha il colore nelle opere pop?","open":false,"options":["A. Naturalistico","B. Simbolico tradizionale","C. Acceso e artificiale","D. Monocromatico"],"answer":"C. Acceso e artificiale","correct":"C. Acceso e artificiale","score":"","feedback":""},{"idx":15,"text":"Quale rapporto instaura la Pop Art con i mass media?","open":false,"options":["A. Rifiuto totale","B. Uso critico e diretto","C. Indifferenza","D. Condanna moralistica"],"answer":"B. Uso critico e diretto","correct":"B. Uso critico e diretto","score":"","feedback":""},{"idx":16,"text":"Quale artista trasforma il concetto di ready-made in uno strumento critico radicale contro l’arte tradizionale?","open":false,"options":["A. Andy Warhol","B. Roy Lichtenstein","C. Marcel Duchamp","D. Jasper Johns"],"answer":"C. Marcel Duchamp","correct":"C. Marcel Duchamp","score":"","feedback":""},{"idx":17,"text":"Quale artista pop riflette sul confine tra pittura e oggetto reale?","open":false,"options":["A. Jasper Johns","B. Mark Rothko","C. Pollock","D. Fontana"],"answer":"A. Jasper Johns","correct":"A. Jasper Johns","score":"","feedback":""},{"idx":18,"text":"Quale valore assume l’oggetto comune nelle ricerche dei nuovi dadaismi?","open":false,"options":["A. Decorativo","B. Simbolico tradizionale","C. Critico e concettuale","D. Puramente estetico"],"answer":"C. Critico e concettuale","correct":"C. Critico e concettuale","score":"","feedback":""},{"idx":19,"text":"Quale relazione si crea tra arte pop e quotidianità?","open":false,"options":["A. Distanza totale","B. Rappresentazione idealizzata","C. Sovrapposizione e contaminazione","D. Negazione del reale"],"answer":"B. Rappresentazione idealizzata","correct":"C. Sovrapposizione e contaminazione","score":"","feedback":""},{"idx":20,"text":"Quale funzione assume l’immagine seriale nelle opere di Warhol?","open":false,"options":["A. Espressione soggettiva","B. Decorazione astratta","C. Critica alla riproducibilità e al consumo","D. Racconto autobiografico"],"answer":"A. Espressione soggettiva","correct":"C. Critica alla riproducibilità e al consumo","score":"","feedback":""}];
+    const totalPoints = 14;
+    const totalMax = 26;
+    const voto = 5.4;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

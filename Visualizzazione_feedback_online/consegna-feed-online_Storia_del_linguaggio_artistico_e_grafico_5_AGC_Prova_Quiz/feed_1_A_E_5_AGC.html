@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 1 ANDREONI ELIA</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 1 ANDREONI ELIA · Classe: 5 AGC · Materia: Storia del linguaggio artistico e grafico · Argomento: Prova_Quiz</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">← Precedente</button>
+        <button id="next">Successiva →</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const questions = [{"idx":1,"text":"Spiega perché oggetti quotidiani diventano soggetti artistici.","open":true,"options":[],"answer":"Numerosi oggetti quotidiani diventano soggetti artistici, ciò rappresenta il forte legame critico che si stava diffondendo con l'avvento della nuova società di massa. Infatti, gli artisti prendono oggetti comuni e li elevano ad opere d'arte.","correct":"","score":2,"feedback":"Colleghi correttamente l’uso di oggetti quotidiani alla società di massa e a una scelta critica degli artisti, ma resti generico su come e perché l’oggetto cambia significato nel contesto artistico."},{"idx":2,"text":"Descrivi il ruolo degli oggetti reali nelle opere di Rauschenberg.","open":true,"options":[],"answer":"Nelle opere di Rauschenberg, oggetti comuni vengono trasformati in opere d'arte, perché pensati e realizzati dall'artista. Esprime un forte senso critico verso l'arte del suo tempo, dimostrando che qualsiasi cosa realizzata dall'artista possa diventare arte per la nuova società di consumo.","correct":"","score":2,"feedback":"Cogli l’idea di inserire oggetti reali e un’intenzione critica, però non descrivi in modo chiaro il funzionamento dei Combine e il ruolo concreto degli oggetti nell’opera."},{"idx":3,"text":"Spiega il significato dei nuovi dadaismi nel contesto del secondo dopoguerra.","open":true,"options":[],"answer":"Dopo la seconda guerra mondiale, iniziano a riemergere varie correnti artistiche. I New Dada riprendevano teorie e tecniche utilizzate in passato dagli artisti Dadaisti e condannano la nuova società di massa nascente.","correct":"","score":2,"feedback":"Riconosci che i New Dada riprendono idee dadaiste nel dopoguerra e che c’è una critica alla società di massa, ma mancano gli aspetti chiave sul ruolo dell’autore e sull’approccio concettuale."},{"idx":4,"text":"Quale mezzo influenza maggiormente l’estetica pop?","open":false,"options":["A. Scultura classica","B. Cinema e televisione","C. Architettura","D. Arte medievale"],"answer":"B. Cinema e televisione","correct":"B. Cinema e televisione","score":"","feedback":""},{"idx":5,"text":"Quale differenza principale separa l’arte pop dall’arte d’avanguardia storica?","open":false,"options":["A. Uso del colore","B. Rapporto diretto con i mass media","C. Centralità del gesto","D. Astrazione totale"],"answer":"B. Rapporto diretto con i mass media","correct":"B. Rapporto diretto con i mass media","score":"","feedback":""},{"idx":6,"text":"Quale funzione assume l’ironia nei nuovi dadaismi?","open":false,"options":["A. Decorativa","B. Critica verso la società e l’arte","C. Narrativa","D. Espressiva emotiva"],"answer":"B. Critica verso la società e l’arte","correct":"B. Critica verso la società e l’arte","score":"","feedback":""},{"idx":7,"text":"Quale aspetto rende la Pop Art fortemente legata al suo tempo?","open":false,"options":["A. Uso di materiali tradizionali","B. Riferimento ai media contemporanei","C. Ripresa della pittura storica","D. Astrazione simbolica"],"answer":"B. Riferimento ai media contemporanei","correct":"B. Riferimento ai media contemporanei","score":"","feedback":""},{"idx":8,"text":"Quale artista europeo è associato al Nouveau Réalisme?","open":false,"options":["A. Yves Klein","B. Andy Warhol","C. Roy Lichtenstein","D. Mark Rothko"],"answer":"B. Andy Warhol","correct":"A. Yves Klein","score":"","feedback":""},{"idx":9,"text":"Quale aspetto della società contemporanea viene riflesso dalla Pop Art?","open":false,"options":["A. La spiritualità","B. La società dei consumi","C. La tradizione classica","D. Il mondo rurale"],"answer":"B. La società dei consumi","correct":"B. La società dei consumi","score":"","feedback":""},{"idx":10,"text":"Quale immagine diventa icona della Pop Art americana?","open":false,"options":["A. Paesaggio rurale","B. Volti di celebrità","C. Scene storiche","D. Nature morte tradizionali"],"answer":"B. Volti di celebrità","correct":"B. Volti di celebrità","score":"","feedback":""},{"idx":11,"text":"Quale funzione assume l’immagine seriale nelle opere di Warhol?","open":false,"options":["A. Espressione soggettiva","B. Decorazione astratta","C. Critica alla riproducibilità e al consumo","D. Racconto autobiografico"],"answer":"C. Critica alla riproducibilità e al consumo","correct":"C. Critica alla riproducibilità e al consumo","score":"","feedback":""},{"idx":12,"text":"Quale opera di Rauschenberg unisce pittura e oggetti reali?","open":false,"options":["A. Combine Paintings","B. Brillo Box","C. Flag","D. Marilyn Diptych"],"answer":"C. Flag","correct":"A. Combine Paintings","score":"","feedback":""},{"idx":13,"text":"Quale elemento rende l’opera pop immediatamente accessibile allo spettatore?","open":false,"options":["A. La complessità concettuale","B. La citazione colta","C. La familiarità delle immagini","D. L’uso della prospettiva"],"answer":"C. La familiarità delle immagini","correct":"C. La familiarità delle immagini","score":"","feedback":""},{"idx":14,"text":"Quale funzione assume la serialità nell’arte pop?","open":false,"options":["A. Decorativa","B. Critica alla produzione di massa","C. Espressiva","D. Simbolica religiosa"],"answer":"B. Critica alla produzione di massa","correct":"B. Critica alla produzione di massa","score":"","feedback":""},{"idx":15,"text":"In che modo Roy Lichtenstein simula il processo di stampa industriale?","open":false,"options":["A. Con il dripping","B. Con collage fotografici","C. Con i punti Ben-Day","D. Con la serigrafia monocroma"],"answer":"A. Con il dripping","correct":"C. Con i punti Ben-Day","score":"","feedback":""},{"idx":16,"text":"Quale atteggiamento verso l’emozione caratterizza l’arte pop?","open":false,"options":["A. Coinvolgimento drammatico","B. Neutralità apparente","C. Espressività violenta","D. Spiritualità intensa"],"answer":"B. Neutralità apparente","correct":"B. Neutralità apparente","score":"","feedback":""},{"idx":17,"text":"Quale atteggiamento critico accomuna nuovi dadaismi e Pop Art?","open":false,"options":["A. Rifiuto della tecnologia","B. Analisi ironica della realtà","C. Idealizzazione del passato","D. Centralità dell’astrazione"],"answer":"B. Analisi ironica della realtà","correct":"B. Analisi ironica della realtà","score":"","feedback":""},{"idx":18,"text":"Quale artista collega arte e performance attraverso il corpo umano?","open":false,"options":["A. Yves Klein","B. Andy Warho","C. Jasper Johns","D. Roy Lichtenstein"],"answer":"C. Jasper Johns","correct":"A. Yves Klein","score":"","feedback":""},{"idx":19,"text":"Quale atteggiamento verso il mercato dell’arte emerge nella Pop Art?","open":false,"options":["A. Rifiuto totale","B. Ignoranza del sistema commerciale","C. Accettazione e utilizzo dei suoi meccanismi","D. Ritorno all’artigianato"],"answer":"B. Ignoranza del sistema commerciale","correct":"C. Accettazione e utilizzo dei suoi meccanismi","score":"","feedback":""},{"idx":20,"text":"Quale strategia espressiva viene recuperata dal Dada storico?","open":false,"options":["A. Naturalismo","B. Uso del caso e dell’assemblaggio","C. Prospettiva scientifica","D. Mimesi del reale"],"answer":"B. Uso del caso e dell’assemblaggio","correct":"B. Uso del caso e dell’assemblaggio","score":"","feedback":""}];
+    const totalPoints = 18;
+    const totalMax = 26;
+    const voto = 6.9;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

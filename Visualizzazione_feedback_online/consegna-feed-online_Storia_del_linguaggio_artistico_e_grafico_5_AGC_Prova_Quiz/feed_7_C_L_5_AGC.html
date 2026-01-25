@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 7 COPPOLA LORENZO</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 7 COPPOLA LORENZO · Classe: 5 AGC · Materia: Storia del linguaggio artistico e grafico · Argomento: Prova_Quiz</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">← Precedente</button>
+        <button id="next">Successiva →</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const questions = [{"idx":1,"text":"Descrivi il ruolo degli oggetti reali nelle opere di Rauschenberg.","open":true,"options":[],"answer":"Sono importanti perché Rauschenberg li utilizzava per rappresentare la realtà, come fece anche con il proprio letto","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":2,"text":"Analizza il rapporto tra arte e pubblicità nella Pop Art.","open":true,"options":[],"answer":"La pop art punta a far diventare delle immagini passive prendendo i simboli della pubblicità come per esempio la cocacola","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":3,"text":"Spiega come la Pop Art utilizza immagini della cultura di massa.","open":true,"options":[],"answer":"in modo ripetitivo","correct":"","score":0,"feedback":"Nessuna correzione trovata"},{"idx":4,"text":"Quale elemento rende l’opera pop immediatamente accessibile allo spettatore?","open":false,"options":["A. La complessità concettuale","B. La citazione colta","C. La familiarità delle immagini","D. L’uso della prospettiva"],"answer":"C. La familiarità delle immagini","correct":"C. La familiarità delle immagini","score":"","feedback":""},{"idx":5,"text":"Quale mezzo influenza maggiormente l’estetica pop?","open":false,"options":["A. Scultura classica","B. Cinema e televisione","C. Architettura","D. Arte medievale"],"answer":"B. Cinema e televisione","correct":"B. Cinema e televisione","score":"","feedback":""},{"idx":6,"text":"Quale ruolo ha lo spettatore nelle opere pop?","open":false,"options":["A. Passivo","B. Riconoscere immagini familiari","C. Interpretare simboli antichi","D. Comprendere il gesto pittorico"],"answer":"B. Riconoscere immagini familiari","correct":"B. Riconoscere immagini familiari","score":"","feedback":""},{"idx":7,"text":"Quale aspetto rende la Pop Art fortemente legata al suo tempo?","open":false,"options":["A. Uso di materiali tradizionali","B. Riferimento ai media contemporanei","C. Ripresa della pittura storica","D. Astrazione simbolica"],"answer":"B. Riferimento ai media contemporanei","correct":"B. Riferimento ai media contemporanei","score":"","feedback":""},{"idx":8,"text":"Quale tema è ricorrente nella Pop Art?","open":false,"options":["A. Mitologia classica","B. Cultura dei consumi","C. Paesaggio naturale","D. Religione"],"answer":"B. Cultura dei consumi","correct":"B. Cultura dei consumi","score":"","feedback":""},{"idx":9,"text":"Quale valore assume l’oggetto comune nelle ricerche dei nuovi dadaismi?","open":false,"options":["A. Decorativo","B. Simbolico tradizionale","C. Critico e concettuale","D. Puramente estetico"],"answer":"C. Critico e concettuale","correct":"C. Critico e concettuale","score":"","feedback":""},{"idx":10,"text":"Quale artista è associato ai ready-made?","open":false,"options":["A. Andy Warhol","B. Marcel Duchamp","C. Roy Lichtenstein","D. Jackson Pollock"],"answer":"B. Marcel Duchamp","correct":"B. Marcel Duchamp","score":"","feedback":""},{"idx":11,"text":"In che modo Roy Lichtenstein simula il processo di stampa industriale?","open":false,"options":["A. Con il dripping","B. Con collage fotografici","C. Con i punti Ben-Day","D. Con la serigrafia monocroma"],"answer":"D. Con la serigrafia monocroma","correct":"C. Con i punti Ben-Day","score":"","feedback":""},{"idx":12,"text":"Quale valore viene attribuito all’immagine banale nella Pop Art?","open":false,"options":["A. Nessuno","B. Diventa soggetto artistico","C. Viene eliminata","D. È solo decorativa"],"answer":"B. Diventa soggetto artistico","correct":"B. Diventa soggetto artistico","score":"","feedback":""},{"idx":13,"text":"Quale pratica artistica caratterizza Arman?","open":false,"options":["A. Performance corporee","B. Accumuli di oggetti","C. Tagli sulla tela","D. Pittura monocroma"],"answer":"B. Accumuli di oggetti","correct":"B. Accumuli di oggetti","score":"","feedback":""},{"idx":14,"text":"Quale artista pop riflette sul confine tra pittura e oggetto reale?","open":false,"options":["A. Jasper Johns","B. Mark Rothko","C. Pollock","D. Fontana"],"answer":"A. Jasper Johns","correct":"A. Jasper Johns","score":"","feedback":""},{"idx":15,"text":"Quale elemento comune lega nuovi dadaismi e Pop Art?","open":false,"options":["A. Centralità del mito","B. Uso del quotidiano","C. Rifiuto dell’immagine","D. Astrattismo"],"answer":"B. Uso del quotidiano","correct":"B. Uso del quotidiano","score":"","feedback":""},{"idx":16,"text":"Quale funzione assume la serialità nell’arte pop?","open":false,"options":["A. Decorativa","B. Critica alla produzione di massa","C. Espressiva","D. Simbolica religiosa"],"answer":"C. Espressiva","correct":"B. Critica alla produzione di massa","score":"","feedback":""},{"idx":17,"text":"Quale strategia espressiva viene recuperata dal Dada storico?","open":false,"options":["A. Naturalismo","B. Uso del caso e dell’assemblaggio","C. Prospettiva scientifica","D. Mimesi del reale"],"answer":"A. Naturalismo","correct":"B. Uso del caso e dell’assemblaggio","score":"","feedback":""},{"idx":18,"text":"Quale atteggiamento critico accomuna nuovi dadaismi e Pop Art?","open":false,"options":["A. Rifiuto della tecnologia","B. Analisi ironica della realtà","C. Idealizzazione del passato","D. Centralità dell’astrazione"],"answer":"B. Analisi ironica della realtà","correct":"B. Analisi ironica della realtà","score":"","feedback":""},{"idx":19,"text":"Quale aspetto rende i nuovi dadaismi una critica dell’arte stessa?","open":false,"options":["A. Uso della pittura tradizionale","B. Messa in discussione dei criteri artistici","C. Centralità della bellezza","D. Ripresa dei modelli classici"],"answer":"B. Messa in discussione dei criteri artistici","correct":"B. Messa in discussione dei criteri artistici","score":"","feedback":""},{"idx":20,"text":"Quale funzione assume l’immagine seriale nelle opere di Warhol?","open":false,"options":["A. Espressione soggettiva","B. Decorazione astratta","C. Critica alla riproducibilità e al consumo","D. Racconto autobiografico"],"answer":"C. Critica alla riproducibilità e al consumo","correct":"C. Critica alla riproducibilità e al consumo","score":"","feedback":""}];
+    const totalPoints = 14;
+    const totalMax = 26;
+    const voto = 5.4;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>
