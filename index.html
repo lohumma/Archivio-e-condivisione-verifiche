@@ -387,32 +387,30 @@
       if (!resp.ok) throw new Error("Fetch GitHub fallita");
       const data = await resp.json();
       const tree = Array.isArray(data.tree) ? data.tree : [];
-      const jsonFiles = tree.filter(item =>
+      const htmlFiles = tree.filter(item =>
         item.type === "blob" &&
         item.path.startsWith(subdir + "/") &&
-        item.path.toLowerCase().endsWith(".json") &&
-        item.path.toLowerCase().includes("/valutazione_")
+        item.path.toLowerCase().endsWith(".html") &&
+        item.path.toLowerCase().includes("/consegna-feed-online_")
       );
       const out = [];
-      for (const item of jsonFiles) {
+      for (const item of htmlFiles) {
         const url = rawBase + "/" + item.path;
         const fileResp = await fetch(url);
         if (!fileResp.ok) continue;
         const text = await fileResp.text();
-        let dataJson;
-        try {
-          dataJson = JSON.parse(text);
-        } catch (_) {
-          continue;
-        }
-        const studLabel = dataJson.studente || "";
-        const cls = parseClassLabel(dataJson.classe || "");
+        const materia = readConstValue(text, "materiaLabel");
+        const classeLabel = readConstValue(text, "classeLabel");
+        const topic = readConstValue(text, "topicLabel");
+        const studLabel = readConstValue(text, "studentLabel");
+        if (!materia || !classeLabel || !topic || !studLabel) continue;
         const stud = parseStudentLabel(studLabel);
+        const cls = parseClassLabel(classeLabel);
         out.push({
-          subject: dataJson.materia || "",
+          subject: materia,
           className: cls.classe || "",
           section: cls.sezione || "",
-          topic: dataJson.argomento || "",
+          topic,
           studentKey: studLabel.trim(),
           reg: stud.reg,
           surname: stud.surname,
