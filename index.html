@@ -30,6 +30,37 @@
       margin: 0 auto;
       padding: 32px 36px;
     }
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .side-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .side-actions .btn {
+      width: 100%;
+      padding: 14px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #0f2038;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+    }
+    .side-actions .btn.active {
+      border-color: rgba(14,165,233,0.4);
+      box-shadow: 0 0 0 2px rgba(14,165,233,0.15) inset;
+      background: #102a4a;
+    }
+    .panel.light {
+      background: #132d4f;
+      border-color: #284066;
+    }
     h1 {
       margin: 0 0 12px;
       font-size: 22px;
@@ -112,6 +143,9 @@
       font-size: 13px;
     }
     @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
       .toolbar {
         grid-template-columns: 1fr 1fr;
       }
@@ -122,7 +156,13 @@
   <div class="wrap">
     <h1>StudHub</h1>
     <div class="subtitle">Filtro rapido e apertura quiz per studente.</div>
-    <div class="panel">
+    <div class="layout">
+      <div class="side-actions">
+        <button class="btn active" id="tab-start">Inizia test</button>
+        <button class="btn" id="tab-feedback">Visualizza feedback</button>
+      </div>
+      <div>
+        <div class="panel" id="panel-test">
       <div class="toolbar">
         <div>
           <label>Materia</label>
@@ -164,6 +204,51 @@
         </tbody>
       </table>
     </div>
+
+    <div class="panel light" id="panel-feedback" style="display:none;">
+      <div class="toolbar">
+        <div>
+          <label>Materia</label>
+          <select id="fb-subject"></select>
+        </div>
+        <div>
+          <label>Classe</label>
+          <select id="fb-class"></select>
+        </div>
+        <div>
+          <label>Sezione</label>
+          <select id="fb-section"></select>
+        </div>
+        <div>
+          <label>Studente</label>
+          <select id="fb-student"></select>
+        </div>
+        <div>
+          <label>Argomento</label>
+          <select id="fb-topic"></select>
+        </div>
+      </div>
+
+      <div class="status" id="fb-status">
+        Caricamento feedback da GitHub...
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>N. Registro</th>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>File</th>
+          </tr>
+        </thead>
+        <tbody id="fb-body">
+          <tr><td colspan="4">Nessun dato.</td></tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -176,6 +261,28 @@
     const studentsBody = document.getElementById("students-body");
     const pickArchiveBtn = document.getElementById("pick-archive");
     let records = [];
+
+    const tabStart = document.getElementById("tab-start");
+    const tabFeedback = document.getElementById("tab-feedback");
+    const panelTest = document.getElementById("panel-test");
+    const panelFeedback = document.getElementById("panel-feedback");
+
+    const fbSubjectSel = document.getElementById("fb-subject");
+    const fbClassSel = document.getElementById("fb-class");
+    const fbSectionSel = document.getElementById("fb-section");
+    const fbStudentSel = document.getElementById("fb-student");
+    const fbTopicSel = document.getElementById("fb-topic");
+    const fbStatusEl = document.getElementById("fb-status");
+    const fbBody = document.getElementById("fb-body");
+    let feedbackRecords = [];
+
+    function setActivePanel(which) {
+      const isTest = which === "test";
+      panelTest.style.display = isTest ? "" : "none";
+      panelFeedback.style.display = isTest ? "none" : "";
+      tabStart.classList.toggle("active", isTest);
+      tabFeedback.classList.toggle("active", !isTest);
+    }
 
     function setOptions(select, values) {
       select.innerHTML = "";
@@ -262,6 +369,54 @@
         if (!base) continue;
         out.push({
           ...base,
+          fileUrl: url,
+          fileName: item.path.split("/").pop()
+        });
+      }
+      return out;
+    }
+
+    async function buildFeedbackIndexFromGithub() {
+      const owner = "lohumma";
+      const repo = "Archivio-e-condivisione-verifiche";
+      const commit = "main";
+      const subdir = "Visualizzazione_feedback_online";
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${commit}?recursive=1`;
+      const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/${commit}`;
+      const resp = await fetch(apiUrl);
+      if (!resp.ok) throw new Error("Fetch GitHub fallita");
+      const data = await resp.json();
+      const tree = Array.isArray(data.tree) ? data.tree : [];
+      const jsonFiles = tree.filter(item =>
+        item.type === "blob" &&
+        item.path.startsWith(subdir + "/") &&
+        item.path.toLowerCase().endsWith(".json") &&
+        item.path.toLowerCase().includes("/valutazione_")
+      );
+      const out = [];
+      for (const item of jsonFiles) {
+        const url = rawBase + "/" + item.path;
+        const fileResp = await fetch(url);
+        if (!fileResp.ok) continue;
+        const text = await fileResp.text();
+        let dataJson;
+        try {
+          dataJson = JSON.parse(text);
+        } catch (_) {
+          continue;
+        }
+        const studLabel = dataJson.studente || "";
+        const cls = parseClassLabel(dataJson.classe || "");
+        const stud = parseStudentLabel(studLabel);
+        out.push({
+          subject: dataJson.materia || "",
+          className: cls.classe || "",
+          section: cls.sezione || "",
+          topic: dataJson.argomento || "",
+          studentKey: studLabel.trim(),
+          reg: stud.reg,
+          surname: stud.surname,
+          name: stud.name,
           fileUrl: url,
           fileName: item.path.split("/").pop()
         });
@@ -393,6 +548,82 @@
       });
     }
 
+    function updateFeedbackStudentOptions() {
+      const subject = fbSubjectSel.value;
+      const className = fbClassSel.value;
+      const section = fbSectionSel.value;
+      if (!subject || !className || !section) {
+        setOptions(fbStudentSel, []);
+        setOptions(fbTopicSel, []);
+        return;
+      }
+      const filtered = feedbackRecords.filter(r =>
+        r.subject === subject &&
+        r.className === className &&
+        r.section === section
+      );
+      const map = new Map();
+      filtered.forEach(r => {
+        if (!map.has(r.studentKey)) {
+          const label = [r.reg, r.surname, r.name].filter(Boolean).join(" ").trim() || r.studentKey;
+          map.set(r.studentKey, label);
+        }
+      });
+      const values = Array.from(map.entries())
+        .map(([value, label]) => ({ value, label }))
+        .sort((a, b) => a.label.localeCompare(b.label, "it"));
+      setOptions(fbStudentSel, values);
+      setOptions(fbTopicSel, []);
+    }
+
+    function updateFeedbackTopicOptions() {
+      const subject = fbSubjectSel.value;
+      const className = fbClassSel.value;
+      const section = fbSectionSel.value;
+      const student = fbStudentSel.value;
+      if (!subject || !className || !section || !student) {
+        setOptions(fbTopicSel, []);
+        return;
+      }
+      const topics = [...new Set(feedbackRecords
+        .filter(r =>
+          r.subject === subject &&
+          r.className === className &&
+          r.section === section &&
+          r.studentKey === student
+        )
+        .map(r => r.topic))].sort();
+      setOptions(fbTopicSel, topics);
+    }
+
+    function applyFeedbackFilters() {
+      const subject = fbSubjectSel.value;
+      const className = fbClassSel.value;
+      const section = fbSectionSel.value;
+      const student = fbStudentSel.value;
+      const topic = fbTopicSel.value;
+      if (!subject || !className || !section || !student || !topic) {
+        fbBody.innerHTML = '<tr><td colspan="4">Completa tutti i filtri.</td></tr>';
+        return;
+      }
+      const filtered = feedbackRecords.filter(r =>
+        r.subject === subject &&
+        r.className === className &&
+        r.section === section &&
+        r.studentKey === student &&
+        r.topic === topic
+      );
+      const rows = filtered.map(f => `
+        <tr>
+          <td>${f.reg || ""}</td>
+          <td>${f.surname || ""}</td>
+          <td>${f.name || ""}</td>
+          <td><a class="link-action inline-link" href="${f.fileUrl}" target="_blank" rel="noopener">Apri file</a></td>
+        </tr>
+      `).join("");
+      fbBody.innerHTML = rows || '<tr><td colspan="4">Nessun feedback trovato.</td></tr>';
+    }
+
     async function openGroupFiles(group) {
       if (!group || !group.items?.length) return;
       for (const item of group.items) {
@@ -436,6 +667,25 @@
       }
     }
 
+    async function loadFeedbackArchive() {
+      try {
+        fbStatusEl.textContent = "Scarico feedback da GitHub...";
+        feedbackRecords = await buildFeedbackIndexFromGithub();
+        const subjects = [...new Set(feedbackRecords.map(r => r.subject))].sort();
+        const classes = [...new Set(feedbackRecords.map(r => r.className))].sort();
+        const sections = [...new Set(feedbackRecords.map(r => r.section))].sort();
+        setOptions(fbSubjectSel, subjects);
+        setOptions(fbClassSel, classes);
+        setOptions(fbSectionSel, sections);
+        setOptions(fbStudentSel, []);
+        setOptions(fbTopicSel, []);
+        fbStatusEl.textContent = `Feedback trovati: ${feedbackRecords.length}.`;
+        applyFeedbackFilters();
+      } catch (err) {
+        fbStatusEl.textContent = "Errore nel caricamento feedback da GitHub.";
+      }
+    }
+
     [subjectSel, classSel, sectionSel].forEach(sel => {
       sel.addEventListener("change", () => {
         updateStudentOptions();
@@ -476,7 +726,23 @@
         }
       });
     }
+    if (tabStart) tabStart.addEventListener("click", () => setActivePanel("test"));
+    if (tabFeedback) tabFeedback.addEventListener("click", () => setActivePanel("feedback"));
+
+    [fbSubjectSel, fbClassSel, fbSectionSel].forEach(sel => {
+      sel.addEventListener("change", () => {
+        updateFeedbackStudentOptions();
+        applyFeedbackFilters();
+      });
+    });
+    fbStudentSel.addEventListener("change", () => {
+      updateFeedbackTopicOptions();
+      applyFeedbackFilters();
+    });
+    fbTopicSel.addEventListener("change", applyFeedbackFilters);
+
     loadArchive();
+    loadFeedbackArchive();
 
   </script>
 </body>
