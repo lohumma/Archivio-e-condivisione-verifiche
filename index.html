@@ -342,6 +342,51 @@
       };
     }
 
+    function parseFeedbackFromPath(path) {
+      const parts = String(path || "").split("/");
+      const fileName = parts[parts.length - 1] || "";
+      const folder = parts[parts.length - 2] || "";
+      let subject = "";
+      let className = "";
+      let section = "";
+      let topic = "";
+      if (folder.toLowerCase().startsWith("consegna-feed-online_")) {
+        const rest = folder.slice("consegna-feed-online_".length);
+        const tokens = rest.split("_").filter(Boolean);
+        if (tokens.length >= 3) {
+          subject = tokens[0];
+          className = tokens[1];
+          section = tokens[2];
+          topic = tokens.slice(3).join("_") || "";
+        } else if (tokens.length) {
+          subject = tokens[0];
+        }
+      }
+      let reg = "";
+      let surname = "";
+      let name = "";
+      if (fileName.toLowerCase().startsWith("feed_")) {
+        const base = fileName.replace(/\.html$/i, "");
+        const tokens = base.split("_").filter(Boolean);
+        let idx = 1;
+        if (tokens[idx] && /^\d+$/.test(tokens[idx])) {
+          reg = tokens[idx];
+          idx++;
+        }
+        const surnameInitial = tokens[idx] || "";
+        const nameInitial = tokens[idx + 1] || "";
+        surname = surnameInitial;
+        name = nameInitial;
+        const tail = tokens.slice(idx + 2);
+        if (tail.length >= 2) {
+          className = className || tail[tail.length - 2];
+          section = section || tail[tail.length - 1];
+        }
+      }
+      const studentKey = [reg, surname, name].filter(Boolean).join(" ").trim();
+      return { subject, className, section, topic, studentKey, reg, surname, name };
+    }
+
     async function buildIndexFromGithub() {
       const owner = "lohumma";
       const repo = "Archivio-e-condivisione-verifiche";
@@ -398,10 +443,18 @@
         const fileResp = await fetch(url);
         if (!fileResp.ok) continue;
         const text = await fileResp.text();
-        const materia = readConstValue(text, "materiaLabel");
-        const classeLabel = readConstValue(text, "classeLabel");
-        const topic = readConstValue(text, "topicLabel");
-        const studLabel = readConstValue(text, "studentLabel");
+        let materia = readConstValue(text, "materiaLabel");
+        let classeLabel = readConstValue(text, "classeLabel");
+        let topic = readConstValue(text, "topicLabel");
+        let studLabel = readConstValue(text, "studentLabel");
+        let parsed = null;
+        if (!materia || !classeLabel || !topic || !studLabel) {
+          parsed = parseFeedbackFromPath(item.path);
+          materia = materia || parsed.subject;
+          classeLabel = classeLabel || [parsed.className, parsed.section].filter(Boolean).join(" ");
+          topic = topic || parsed.topic;
+          studLabel = studLabel || parsed.studentKey;
+        }
         if (!materia || !classeLabel || !topic || !studLabel) continue;
         const stud = parseStudentLabel(studLabel);
         const cls = parseClassLabel(classeLabel);
