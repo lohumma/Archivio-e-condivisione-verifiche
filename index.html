@@ -389,9 +389,8 @@
       const tree = Array.isArray(data.tree) ? data.tree : [];
       const htmlFiles = tree.filter(item =>
         item.type === "blob" &&
-        item.path.startsWith(subdir + "/") &&
-        item.path.toLowerCase().endsWith(".html") &&
-        item.path.toLowerCase().includes("/consegna-feed-online_")
+        item.path.toLowerCase().startsWith(subdir.toLowerCase() + "/") &&
+        item.path.toLowerCase().endsWith(".html")
       );
       const out = [];
       for (const item of htmlFiles) {
