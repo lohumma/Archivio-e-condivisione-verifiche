@@ -354,10 +354,18 @@
         const rest = folder.slice("consegna-feed-online_".length);
         const tokens = rest.split("_").filter(Boolean);
         if (tokens.length >= 3) {
-          subject = tokens[0];
-          className = tokens[1];
-          section = tokens[2];
-          topic = tokens.slice(3).join("_") || "";
+          const classIdx = tokens.findIndex(t => /^[1-5]$/.test(t));
+          if (classIdx >= 0 && tokens[classIdx + 1]) {
+            subject = tokens.slice(0, classIdx).join("_");
+            className = tokens[classIdx];
+            section = tokens[classIdx + 1];
+            topic = tokens.slice(classIdx + 2).join("_") || "";
+          } else {
+            subject = tokens[0];
+            className = tokens[1] || "";
+            section = tokens[2] || "";
+            topic = tokens.slice(3).join("_") || "";
+          }
         } else if (tokens.length) {
           subject = tokens[0];
         }
@@ -663,12 +671,19 @@
         r.studentKey === student &&
         r.topic === topic
       );
-      const rows = filtered.map(f => `
+      const rows = filtered
+        .slice()
+        .sort((a, b) => {
+          const aLabel = [a.reg, a.surname, a.name].filter(Boolean).join(" ");
+          const bLabel = [b.reg, b.surname, b.name].filter(Boolean).join(" ");
+          return aLabel.localeCompare(bLabel, "it");
+        })
+        .map(f => `
         <tr>
           <td>${f.reg || ""}</td>
           <td>${f.surname || ""}</td>
           <td>${f.name || ""}</td>
-          <td><a class="link-action inline-link" href="${f.fileUrl}" target="_blank" rel="noopener">Apri file</a></td>
+          <td><a class="link-action inline-link" href="https://htmlpreview.github.io/?${encodeURIComponent(f.fileUrl)}" target="_blank" rel="noopener">Apri file</a></td>
         </tr>
       `).join("");
       fbBody.innerHTML = rows || '<tr><td colspan="4">Nessun feedback trovato.</td></tr>';
