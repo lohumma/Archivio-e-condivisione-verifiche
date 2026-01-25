@@ -535,9 +535,15 @@
         }
       });
       const values = Array.from(map.entries())
-        .map(([value, label]) => ({ value, label }))
-        .sort((a, b) => a.label.localeCompare(b.label, "it"));
-      setOptions(studentSel, values);
+        .map(([value, label]) => {
+          const parsed = parseStudentLabel(label);
+          const regNum = Number(parsed.reg || 0);
+          const sortKey = [parsed.surname, parsed.name].filter(Boolean).join(" ").toLowerCase();
+          return { value, label, regNum, sortKey };
+        })
+        .sort((a, b) => (a.regNum - b.regNum) || a.sortKey.localeCompare(b.sortKey, "it"));
+      const trimmed = values.map(({ value, label }) => ({ value, label }));
+      setOptions(studentSel, trimmed);
       setOptions(topicSel, []);
     }
 
