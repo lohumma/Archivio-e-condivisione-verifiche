@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 1 BANTI MARGHERITA</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #5a3f2f;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 1 BANTI MARGHERITA � Classe: 4 AGC � Materia: Tecnologie_dei_processi_di_produzione � Argomento: Social_media_e_metaverso</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "1 BANTI MARGHERITA";
+    const classeLabel = "4 AGC";
+    const materiaLabel = "Tecnologie_dei_processi_di_produzione";
+    const topicLabel = "Social_media_e_metaverso";
+    const questions = [{"idx":1,"text":"Elenca e spiega gli elementi tecnologici necessari allo sviluppo del metaverso.","open":true,"options":[],"answer":"secondo gli studiosi servono:\nHardware: visori VR, sensori, telecamere, dispositivi potenti; \nNetworking: connessione veloce, bassa latenza, affidabilità;\nPotenze di calcolo: serve una grande capacità per elaborare i dati, sincronizzare utenti, rendere l'esperienza fluida;\nNuove piattaforme virtuali: spazi dove poter studiare, lavorare, fare nuovi acquisti e partecipare a degli eventi.","correct":"","score":2,"feedback":"Risposta complessivamente corretta ma incompleta: individua diversi elementi fondamentali e li descrive in modo coerente, però mancano aspetti tecnologici rilevanti legati alla standardizzazione e ai pagamenti."},{"idx":2,"text":"Spiega i rischi e le opportunità del metaverso dal punto di vista sociale ed economico.","open":true,"options":[],"answer":"I rischi del metaverso la grande raccolta dei dati personali; la privacy è a rischio; la dipendenza da servizi a pagamento e c'è appunto il rischio se il servizio appunto è gratis, il prodotto potremo essere proprio noi.\nLe opportunità del metaverso: le persone hanno la possibilità di incontrarsi in modo digitale in ambienti 3D; avere la possibilità di partecipare a eventi virtuali; poter collaborare in tempo reale.","correct":"","score":2,"feedback":"Risposta pertinente: riconosce correttamente il rischio legato ai dati personali e descrive alcune opportunità di interazione e partecipazione. Mancano però riferimenti a elementi economici specifici e ai rischi connessi ai dati biometrici e al grado di immersione."},{"idx":3,"text":"Qual è la funzione della crittografia?","open":true,"options":[],"answer":"La funzione della crittografia permette di proteggere le informazioni così da trasformare le informazioni che solo lui ha la possibilità di poterle leggere. ","correct":"","score":3,"feedback":"Risposta corretta: spiega che la crittografia serve a proteggere le informazioni rendendole leggibili solo a chi è autorizzato."},{"idx":4,"text":"Cosa si intende per \"latenza\".","open":true,"options":[],"answer":"Si indica per Latenza il tempo di ritardo che troviamo tra l'invio di una transizione e l'effettiva conferma sul blockchain.","correct":"","score":1,"feedback":"Risposta molto incompleta: coglie l’idea generale di “ritardo”, ma la definizione è spostata su un caso specifico e non descrive correttamente il concetto in ambito rete."},{"idx":5,"text":"Un NFT rappresenta:","open":false,"options":["A. L’acquisto fisico di un bene","B. La prova di un diritto su un bene unico","C. Una criptovaluta","D. Un file multimediale"],"answer":"B. La prova di un diritto su un bene unico","correct":"B. La prova di un diritto su un bene unico","score":"","feedback":""},{"idx":6,"text":"Secondo il testo, quale rischio principale è legato al metaverso?","open":false,"options":["A. Scarsa qualità grafica","B. Raccolta e uso dei dati sensibili","C. Mancanza di utenti","D. Assenza di mercati"],"answer":"B. Raccolta e uso dei dati sensibili","correct":"B. Raccolta e uso dei dati sensibili","score":"","feedback":""},{"idx":7,"text":"Quale figura professionale è citata come centrale nel Social Media Marketing?","open":false,"options":["A. Il grafico","B. L’influencer","C. Il programmatore","D. Il tipografo"],"answer":"B. L’influencer","correct":"B. L’influencer","score":"","feedback":""},{"idx":8,"text":"Che cosa caratterizza il marketing globale?","open":false,"options":["A. Strategie locali diverse","B. Brand e strategie unificate a livello mondiale","C. Produzione artigianale","D. Assenza di comunicazione"],"answer":"B. Brand e strategie unificate a livello mondiale","correct":"B. Brand e strategie unificate a livello mondiale","score":"","feedback":""},{"idx":9,"text":"Il marketing relazionale si focalizza soprattutto su:","open":false,"options":["A. Il prezzo","B. Il cliente","C. Il prodotto","D. La distribuzione"],"answer":"B. Il cliente","correct":"B. Il cliente","score":"","feedback":""},{"idx":10,"text":"Chi ha usato per primo il termine metaverso nel 1992?","open":false,"options":["A. Philip Kotler","B. Neal Stephenson","C. Mark Zuckerberg","D. Satoshi Nakamoto"],"answer":"B. Neal Stephenson","correct":"B. Neal Stephenson","score":"","feedback":""},{"idx":11,"text":"1. Che cosa si intende per marketing digitale?","open":false,"options":["A. Una strategia basata esclusivamente sulla pubblicità televisiva","B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","C. Una forma di marketing usata solo dalle grandi aziende","D. Una tecnica di vendita diretta porta a porta"],"answer":"B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","correct":"B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","score":"","feedback":""},{"idx":12,"text":"Qual è una delle principali motivazioni economiche dietro lo sviluppo del metaverso?","open":false,"options":["A. Ridurre i costi energetici","B. Creare un nuovo grande mercato","C. Eliminare la concorrenza","D. Sostituire il lavoro umano"],"answer":"B. Creare un nuovo grande mercato","correct":"B. Creare un nuovo grande mercato","score":"","feedback":""},{"idx":13,"text":"Il termine metaverso indica:","open":false,"options":["A. Un nuovo social network","B. Un universo oltre quello fisico","C. Un software di montaggio","D. Un videogioco specifico"],"answer":"B. Un universo oltre quello fisico","correct":"B. Un universo oltre quello fisico","score":"","feedback":""},{"idx":14,"text":"Che cosa garantisce la blockchain?","open":false,"options":["A. La velocità di connessione","B. La sicurezza e l’unicità delle transazioni","C. La qualità grafica","D. La compressione dei file"],"answer":"B. La sicurezza e l’unicità delle transazioni","correct":"B. La sicurezza e l’unicità delle transazioni","score":"","feedback":""}];
+    const totalPoints = 18;
+    const totalMax = 18;
+    const voto = 10;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

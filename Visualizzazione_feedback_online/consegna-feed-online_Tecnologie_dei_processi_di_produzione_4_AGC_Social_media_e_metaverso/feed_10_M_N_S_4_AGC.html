@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 10 MANCA NICCOLO SILVIO</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #5a3f2f;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 10 MANCA NICCOLO SILVIO � Classe: 4 AGC � Materia: Tecnologie_dei_processi_di_produzione � Argomento: Social_media_e_metaverso</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "10 MANCA NICCOLO SILVIO";
+    const classeLabel = "4 AGC";
+    const materiaLabel = "Tecnologie_dei_processi_di_produzione";
+    const topicLabel = "Social_media_e_metaverso";
+    const questions = [{"idx":1,"text":"Quale mezzo di comunicazione ha segnato il Novecento insieme alla radio?","open":false,"options":["A. Internet","B. Televisione","C. Cinema","D. Stampa online"],"answer":"B. Televisione","correct":"B. Televisione","score":"","feedback":""},{"idx":2,"text":"Qual Ã¨ la funzione principale del marketing?","open":false,"options":["A. Vendere direttamente un prodotto","B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","C. Creare slogan pubblicitari","D. Gestire solo la comunicazione visiva"],"answer":"B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","correct":"B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","score":"","feedback":""},{"idx":3,"text":"Quali sono i rischi e le opportunitÃ  del metaverso dal punto di vista sociale ed economico?","open":false,"options":["A. Garantisce esclusivamente benefici economici senza alcun impatto sociale o rischio per gli utenti.","B. Non presenta alcuna utilitÃ  concreta e non influisce nÃ© sulla societÃ  nÃ© sullâ€™economia.","C. Offre nuove opportunitÃ  di lavoro, innovazione e socializzazione, ma comporta anche rischi legati a privacy, disuguaglianze digitali e dipendenza tecnologica.","D. Ãˆ uno strumento utilizzato unicamente per il gioco, senza implicazioni sociali o professionali"],"answer":"C. Offre nuove opportunitÃ  di lavoro, innovazione e socializzazione, ma comporta anche rischi legati a privacy, disuguaglianze digitali e dipendenza tecnologica.","correct":"C. Offre nuove opportunitÃ  di lavoro, innovazione e socializzazione, ma comporta anche rischi legati a privacy, disuguaglianze digitali e dipendenza tecnologica.","score":"","feedback":""},{"idx":4,"text":"Che cosa caratterizza il marketing globale?","open":false,"options":["A. Strategie locali diverse","B. Brand e strategie unificate a livello mondiale","C. Produzione artigianale","D. Assenza di comunicazione"],"answer":"B. Brand e strategie unificate a livello mondiale","correct":"B. Brand e strategie unificate a livello mondiale","score":"","feedback":""},{"idx":5,"text":"Quale caratteristica NON appartiene agli NFT?","open":false,"options":["A. IndivisibilitÃ ","B. UnicitÃ ","C. RiproducibilitÃ  infinita","D. TracciabilitÃ "],"answer":"C. RiproducibilitÃ  infinita","correct":"C. RiproducibilitÃ  infinita","score":"","feedback":""},{"idx":6,"text":"Quale tecnologia consente di provare prodotti in modo virtuale?","open":false,"options":["A. Blockchain","B. RealtÃ  aumentata","C. Streaming","D. Peer to peer"],"answer":"B. RealtÃ  aumentata","correct":"B. RealtÃ  aumentata","score":"","feedback":""},{"idx":7,"text":"Cosa si intende per latenza?","open":false,"options":["A. Lâ€™intensitÃ  di uno stimolo applicato a un sistema.","B. La quantitÃ  di dati trasmessi in un secondo.","C. La capacitÃ  massima di memoria di un dispositivo","D. Il tempo che intercorre tra uno stimolo e la risposta corrispondente."],"answer":"B. La quantitÃ  di dati trasmessi in un secondo.","correct":"D. Il tempo che intercorre tra uno stimolo e la risposta corrispondente.","score":"","feedback":""},{"idx":8,"text":"PerchÃ© i social media sono paragonati alle agorÃ  dellâ€™antichitÃ ?","open":false,"options":["A. PerchÃ© sono luoghi fisici destinati esclusivamente al commercio di beni e servizi.","B. PerchÃ© rappresentano spazi virtuali in cui le persone si incontrano per discutere, informarsi e confrontarsi pubblicamente.","C. PerchÃ© sono strumenti utilizzati solo dai governi per diffondere comunicazioni ufficiali.","D. PerchÃ© consentono unicamente comunicazioni private tra due persone."],"answer":"B. PerchÃ© rappresentano spazi virtuali in cui le persone si incontrano per discutere, informarsi e confrontarsi pubblicamente.","correct":"B. PerchÃ© rappresentano spazi virtuali in cui le persone si incontrano per discutere, informarsi e confrontarsi pubblicamente.","score":"","feedback":""},{"idx":9,"text":"Nel romanzo Snow Crash, il metaverso Ã¨:","open":false,"options":["A. Un archivio digitale","B. Un mondo virtuale 3D popolato da avatar","C. Un social bidimensionale","D. Un sistema di pagamento"],"answer":"B. Un mondo virtuale 3D popolato da avatar","correct":"B. Un mondo virtuale 3D popolato da avatar","score":"","feedback":""},{"idx":10,"text":"Che cosa garantisce la blockchain?","open":false,"options":["A. La velocitÃ  di connessione","B. La sicurezza e lâ€™unicitÃ  delle transazioni","C. La qualitÃ  grafica","D. La compressione dei file"],"answer":"B. La sicurezza e lâ€™unicitÃ  delle transazioni","correct":"B. La sicurezza e lâ€™unicitÃ  delle transazioni","score":"","feedback":""},{"idx":11,"text":"Qual Ã¨ il funzionamento di base della blockchain?","open":false,"options":["A. Ãˆ un registro distribuito in cui le transazioni vengono raggruppate in blocchi collegati tra loro e validati tramite un meccanismo crittografico condiviso","B. Ãˆ un database centralizzato gestito da unâ€™unica autoritÃ  che controlla e modifica tutte le transazioni.","C. Ãˆ un sistema di archiviazione dati che salva informazioni solo in locale su un singolo dispositivo.","D. Ãˆ un software che aumenta la velocitÃ  di connessione a Internet attraverso server dedicati."],"answer":"A. Ãˆ un registro distribuito in cui le transazioni vengono raggruppate in blocchi collegati tra loro e validati tramite un meccanismo crittografico condiviso","correct":"A. Ãˆ un registro distribuito in cui le transazioni vengono raggruppate in blocchi collegati tra loro e validati tramite un meccanismo crittografico condiviso","score":"","feedback":""},{"idx":12,"text":"Il marketing sociale utilizza le strategie del marketing per:","open":false,"options":["A. Aumentare solo i profitti","B. Influenzare comportamenti a vantaggio degli individui o della societÃ ","C. Eliminare la pubblicitÃ ","D. Sostituire le istituzioni"],"answer":"B. Influenzare comportamenti a vantaggio degli individui o della societÃ ","correct":"B. Influenzare comportamenti a vantaggio degli individui o della societÃ ","score":"","feedback":""},{"idx":13,"text":"PerchÃ© le aziende utilizzano i social media nel marketing?","open":false,"options":["A. PerchÃ© sono gratuiti","B. PerchÃ© gli utenti vi trascorrono molto tempo","C. PerchÃ© sostituiscono i prodotti","D. PerchÃ© eliminano la concorrenza"],"answer":"B. PerchÃ© gli utenti vi trascorrono molto tempo","correct":"B. PerchÃ© gli utenti vi trascorrono molto tempo","score":"","feedback":""},{"idx":14,"text":"Che cosa ha supplito alle attivitÃ  in presenza durante la pandemia?","open":false,"options":["A. Solo i social network","B. Teleconferenze, didattica a distanza e telelavoro","C. La televisione","D. La stampa"],"answer":"B. Teleconferenze, didattica a distanza e telelavoro","correct":"B. Teleconferenze, didattica a distanza e telelavoro","score":"","feedback":""}];
+    const totalPoints = 13;
+    const totalMax = 14;
+    const voto = 9.3;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

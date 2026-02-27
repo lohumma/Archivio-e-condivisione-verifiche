@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 3 CORCACEL MARCO COSTANTIN</title>
+  <style>
+    :root {
+      --bg: #0b1a2c;
+      --panel: #132d4f;
+      --card: #10243f;
+      --accent: #38bdf8;
+      --text: #5a3f2f;
+      --muted: #94a3b8;
+      --border: #1f2a44;
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 900px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button { border-radius: 10px; border: 1px solid var(--border); background: #0f2038; color: var(--text); padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    .mask { position: fixed; inset: 0; background: rgba(6, 16, 30, 0.75); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 3 CORCACEL MARCO COSTANTIN � Classe: 4 AGC � Materia: Tecnologie_dei_processi_di_produzione � Argomento: Social_media_e_metaverso</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "3 CORCACEL MARCO COSTANTIN";
+    const classeLabel = "4 AGC";
+    const materiaLabel = "Tecnologie_dei_processi_di_produzione";
+    const topicLabel = "Social_media_e_metaverso";
+    const questions = [{"idx":1,"text":"Cosa si intende per \"latenza\".","open":true,"options":[],"answer":"La velocità, o meglio la lentezza, con cui i dati viaggiano in rete. La banda dati invece è la quantità di dati che viaggia contemporaneamente. ","correct":"","score":3,"feedback":"Risposta corretta: definisce la latenza come ritardo nel viaggio dei dati in rete e distingue correttamente la latenza dalla larghezza di banda."},{"idx":2,"text":"Spiega perché i social media sono paragonati alle agorà dell’antichità.","open":true,"options":[],"answer":"I social media possiamo dire che sono la diretta evoluzione delle piazze del mercato in epoca antica, dove i cittadini potevano comunicare tra loro e le amministrazioni potevano comunicare con i passanti, grazie a graffiti sui muri. \n\nCon l'avvento di Seven... nel 2000 abbiamo una prima forma, al tempo ancora molto grezza, di social media. \n\nSolo con l'apertura di Myspace del 2003 e consecutiva uscita di Facebook nello stesso anno, che, a differenza di Seven..., rese possibile comunicare privatamente tra singoli utenti, abbiamo la concreta realizzazione di un primo social media. ","correct":"","score":2,"feedback":"Risposta nel complesso coerente: collega i social a luoghi di incontro e scambio come le piazze del passato. Tuttavia inserisce dettagli storici non necessari o imprecisi e perde alcuni aspetti chiave del paragone."},{"idx":3,"text":"Qual è la funzione della crittografia?","open":true,"options":[],"answer":"La crittografia rendere complessa la lettura e soprattutto, praticamente impossibile, la modifica e manomissione di un documento o file. \n\nLa crittografia è direttamnente collegabile alla bockchain in quanto questa sfrutta una crittografia concatenata, ovvero, una crittografia che tiene conto di una crittografia avvenuta precedentemente, richideno per la modifica di un blocco (\"documento\" che contine tutte le informazioni, nel caso di un bloccop che attesti la trasizione di bitcoin: nome del mittente, nome del destinatario, e somma di denaro) la decrittografia dei blocchi  precedenti e successivi, in quanto quest'ultimi identificando una modifica dell'hash (codice univoco che attensta la formazione di un blocco che tiene in considerazione l'hash del blocco che lo precede) diventano non più validi, ponendo fine alla catena. \n\nQuesta tecnologia è stata scoperta da un due notai che nel 1993 vollero rendere automativa e soprattutto più sicura la \"firma\" di documenti ed attestati.","correct":"","score":2,"feedback":"Risposta in parte corretta: collega la crittografia alla protezione delle informazioni e alla sicurezza del sistema blockchain. Però contiene molte informazioni non pertinenti o non verificabili e non centra con precisione la funzione principale richiesta."},{"idx":4,"text":"Spiega la differenza tra marketing e advertising.","open":true,"options":[],"answer":"Il marketing è la ricerca delle nuove necessitudini di un gruppo di persone e conseguente realizzazione di un prodotto o servizio che vada a soddisfare questa necessità. \n\nL'advertising invece è una fase successiva del marketing dove l'azienda studia e attua strategie comunicative per rendere noto al pubblico questo prodotto o servizio. \n\nEsistono 5 tipologie di marketing: \n- marketing sociale: si vuole portare un utente a cambare in maniera autonoma il suo comportamento influenzandolo;\n- marketing digitale: strategia che sfrutta le nuove piattaforme online per pubblicizzare e raggiungere un pubblico maggiore;\n- marketing gobale: le grandi multinazionale che vendono in numerosi stati devo applicare strategie comunicative unificate a livello grlobale;\n- marketing  \n- marketing ","correct":"","score":2,"feedback":"Risposta corretta nelle definizioni principali: descrive il marketing come individuazione dei bisogni e l’advertising come fase di promozione. Manca però un riferimento esplicito ai canali a pagamento e la parte sui tipi di marketing è incompleta."},{"idx":5,"text":"Descrivi il concetto di metaverso e la sua origine culturale.","open":true,"options":[],"answer":"Il termine di metaverso è l'unione della parola graca \"metha\" (\"oltre\") e l'abbreviazione di \"universo\", volto a definire una realtà al di fuori dell'universo (fisico). Il termine venne coniato per la prima volta da uno scrittore americano che lo utilizzo nel suo romanzo fantascientifico: Snow Crash, 1993. Nel romando, l'autore immaginava un mondo virtuale in 3d abitato da avatar digitali degli utenti. Sono richiesti 4 cartatteristiche: hardwsare specifico per entrarvi come visori e guanti aptici, una grande potenza di calcolo, piattaforme realizzate appositamente per interconnettere più dispositivi e una brande banda di rete capace di rendere instantaneo le interazioni (dell'utente del mondo analogico nel mondo digitale).","correct":"","score":2,"feedback":"Risposta complessivamente corretta: spiega il significato del termine e lo collega al romanzo di fantascienza in cui viene introdotto. Tuttavia presenta un’imprecisione sull’anno e manca una parte degli elementi necessari allo sviluppo del metaverso."},{"idx":6,"text":"Perché il sistema dei social viene definito bidirezionale e non democratico?","open":false,"options":["A. Perché tutti hanno gli stessi diritti","B. Perché opera su piattaforme proprietarie","C. Perché non permette commenti","D. Perché è anonimo"],"answer":"B. Perché opera su piattaforme proprietarie","correct":"B. Perché opera su piattaforme proprietarie","score":"","feedback":""},{"idx":7,"text":"Quali strumenti permettono esperienze immersive nel metaverso?","open":false,"options":["A. Mouse e tastiera","B. Visori VR e guanti aptici","C. Stampanti 3D","D. Scanner tradizionali"],"answer":"B. Visori VR e guanti aptici","correct":"B. Visori VR e guanti aptici","score":"","feedback":""},{"idx":8,"text":"Qual è una delle principali motivazioni economiche dietro lo sviluppo del metaverso?","open":false,"options":["A. Ridurre i costi energetici","B. Creare un nuovo grande mercato","C. Eliminare la concorrenza","D. Sostituire il lavoro umano"],"answer":"B. Creare un nuovo grande mercato","correct":"B. Creare un nuovo grande mercato","score":"","feedback":""},{"idx":9,"text":"Quale mezzo di comunicazione ha segnato il Novecento insieme alla radio?","open":false,"options":["A. Internet","B. Televisione","C. Cinema","D. Stampa online"],"answer":"B. Televisione","correct":"B. Televisione","score":"","feedback":""},{"idx":10,"text":"Con l’avvento di internet, le aziende hanno affiancato ai media tradizionali:","open":false,"options":["A. Solo la televisione satellitare","B. I nuovi media nati con la rete","C. Esclusivamente i videogiochi","D. Unicamente le app proprietarie"],"answer":"B. I nuovi media nati con la rete","correct":"B. I nuovi media nati con la rete","score":"","feedback":""},{"idx":11,"text":"Nel romanzo Snow Crash, il metaverso è:","open":false,"options":["A. Un archivio digitale","B. Un mondo virtuale 3D popolato da avatar","C. Un social bidimensionale","D. Un sistema di pagamento"],"answer":"B. Un mondo virtuale 3D popolato da avatar","correct":"B. Un mondo virtuale 3D popolato da avatar","score":"","feedback":""},{"idx":12,"text":"Quale caratteristica NON appartiene agli NFT?","open":false,"options":["A. Indivisibilità","B. Unicità","C. Riproducibilità infinita","D. Tracciabilità"],"answer":"C. Riproducibilità infinita","correct":"C. Riproducibilità infinita","score":"","feedback":""},{"idx":13,"text":"Cosa intendiamo quando parliamo di PPD?","open":false,"options":["A. Pixel Per Grado","B. Nessuna delle altre risposte","C. Pixel Per Densità","D. Pixel per durata"],"answer":"A. Pixel Per Grado","correct":"A. Pixel Per Grado","score":"","feedback":""},{"idx":14,"text":"Perché le aziende utilizzano i social media nel marketing?","open":false,"options":["A. Perché sono gratuiti","B. Perché gli utenti vi trascorrono molto tempo","C. Perché sostituiscono i prodotti","D. Perché eliminano la concorrenza"],"answer":"B. Perché gli utenti vi trascorrono molto tempo","correct":"B. Perché gli utenti vi trascorrono molto tempo","score":"","feedback":""},{"idx":15,"text":"Il marketing sociale utilizza le strategie del marketing per:","open":false,"options":["A. Aumentare solo i profitti","B. Influenzare comportamenti a vantaggio degli individui o della società","C. Eliminare la pubblicità","D. Sostituire le istituzioni"],"answer":"B. Influenzare comportamenti a vantaggio degli individui o della società","correct":"B. Influenzare comportamenti a vantaggio degli individui o della società","score":"","feedback":""},{"idx":16,"text":"Il marketing digitale applica strategie comunicative principalmente su:","open":false,"options":["A. Supporti cartacei","B. Dispositivi digitali","C. Eventi dal vivo","D. Canali radiofonici"],"answer":"B. Dispositivi digitali","correct":"B. Dispositivi digitali","score":"","feedback":""},{"idx":17,"text":"1. Che cosa si intende per marketing digitale?","open":false,"options":["A. Una strategia basata esclusivamente sulla pubblicità televisiva","B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","C. Una forma di marketing usata solo dalle grandi aziende","D. Una tecnica di vendita diretta porta a porta"],"answer":"B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","correct":"B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","score":"","feedback":""},{"idx":18,"text":"Che cosa garantisce oggi maggiormente la qualità di un prodotto o servizio?","open":false,"options":["A. La pubblicità televisiva","B. Il passaparola sui social media","C. Il prezzo elevato","D. Il marchio storico"],"answer":"B. Il passaparola sui social media","correct":"B. Il passaparola sui social media","score":"","feedback":""},{"idx":19,"text":"Il termine metaverso indica:","open":false,"options":["A. Un nuovo social network","B. Un universo oltre quello fisico","C. Un software di montaggio","D. Un videogioco specifico"],"answer":"B. Un universo oltre quello fisico","correct":"B. Un universo oltre quello fisico","score":"","feedback":""},{"idx":20,"text":"Che cosa caratterizza il marketing globale?","open":false,"options":["A. Strategie locali diverse","B. Brand e strategie unificate a livello mondiale","C. Produzione artigianale","D. Assenza di comunicazione"],"answer":"B. Brand e strategie unificate a livello mondiale","correct":"B. Brand e strategie unificate a livello mondiale","score":"","feedback":""}];
+    const totalPoints = 26;
+    const totalMax = 26;
+    const voto = 10;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>
