@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 20 SESTINI ALICE</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 20 SESTINI ALICE � Classe: 4 AGC � Materia: Tecnologie_dei_processi_di_produzione � Argomento: Social_media_e_metaverso</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "20 SESTINI ALICE";
+    const classeLabel = "4 AGC";
+    const materiaLabel = "Tecnologie_dei_processi_di_produzione";
+    const topicLabel = "Social_media_e_metaverso";
+    const questions = [{"idx":1,"text":"Cosa si intende per \"latenza\".","open":true,"options":[],"answer":"La latenza indica il tempo di ritardo tra l'invio di una transizione e la sua effettiva conferma sulla blockchain, in pratica è il tempo di ritardo dall'invio all'arrivo.","correct":"","score":2,"feedback":"Definizione in parte corretta (ritardo tra invio e arrivo dei dati), ma l’esempio sulla blockchain non è pertinente rispetto al concetto trattato: qui si parla di prestazioni della rete e tempi di risposta."},{"idx":2,"text":"Descrivi che cosa sono gli NFT e il loro possibile utilizzo nel metaverso.","open":true,"options":[],"answer":"Gli NFT (Non-fungible Token) sono token digitali unici registrati su una blockchain e identificano l'utenticità della proprietà. Nel Metaverso gli NFT serve per opere d'arte digitali, oggetti, skin e oggetti nei videogiochi e abiti per avatar.","correct":"","score":3,"feedback":"Risposta corretta: definisci l’NFT come risorsa digitale unica su blockchain e proponi esempi coerenti di uso nel metaverso. Per essere più completa serviva chiarire che l’NFT certifica un diritto sul bene e non necessariamente l’acquisto, e indicare le caratteristiche tipiche (unicità, indivisibilità, tracciabilità)."},{"idx":3,"text":"Qual è la funzione della crittografia?","open":true,"options":[],"answer":"E' la disciplina che permette di proteggere le informazioni, trasformando le informazioni in modo tale che solo colui che ha la chiave possa leggerle.","correct":"","score":3,"feedback":"Risposta completa e corretta: spieghi che la crittografia protegge i dati rendendoli leggibili solo con la chiave."},{"idx":4,"text":"Elenca e spiega gli elementi tecnologici necessari allo sviluppo del metaverso.","open":true,"options":[],"answer":"Si divide in due categorie:\n-Hardware: visori VR, telecamere, sensori e dispositivi potenti;\n-Software/networking: rete veloce, affidabilità, bassa latenza. ","correct":"","score":2,"feedback":"Risposta corretta ma incompleta: individui hardware e rete (latenza/affidabilità). Mancano però altri elementi abilitanti come potenza di calcolo, piattaforme, standard, sistemi di pagamento (blockchain/NFT), contenuti e aspetti legati all’uso da parte degli utenti."},{"idx":5,"text":"Spiega il funzionamento di base della blockchain.","open":true,"options":[],"answer":"La blockchain è una sottospecie di \"notaio digitale\" serve e proteggere i dati di colui che investe soldi delle crypto valute. ","correct":"","score":1,"feedback":"Risposta molto incompleta e in parte imprecisa: l’idea del “notaio digitale” può essere corretta, ma non spieghi come funziona (blocchi, hash, proof of work, peer-to-peer e consenso dei nodi) e a cosa serve in generale oltre alle criptovalute."},{"idx":6,"text":"Che cosa garantisce la blockchain?","open":false,"options":["A. La velocità di connessione","B. La sicurezza e l’unicità delle transazioni","C. La qualità grafica","D. La compressione dei file"],"answer":"C. La qualità grafica","correct":"B. La sicurezza e l’unicità delle transazioni","score":"","feedback":""},{"idx":7,"text":"Perché il sistema dei social viene definito bidirezionale e non democratico?","open":false,"options":["A. Perché tutti hanno gli stessi diritti","B. Perché opera su piattaforme proprietarie","C. Perché non permette commenti","D. Perché è anonimo"],"answer":"B. Perché opera su piattaforme proprietarie","correct":"B. Perché opera su piattaforme proprietarie","score":"","feedback":""},{"idx":8,"text":"Chi ha usato per primo il termine metaverso nel 1992?","open":false,"options":["A. Philip Kotler","B. Neal Stephenson","C. Mark Zuckerberg","D. Satoshi Nakamoto"],"answer":"B. Neal Stephenson","correct":"B. Neal Stephenson","score":"","feedback":""},{"idx":9,"text":"Che cosa caratterizza il marketing globale?","open":false,"options":["A. Strategie locali diverse","B. Brand e strategie unificate a livello mondiale","C. Produzione artigianale","D. Assenza di comunicazione"],"answer":"B. Brand e strategie unificate a livello mondiale","correct":"B. Brand e strategie unificate a livello mondiale","score":"","feedback":""},{"idx":10,"text":"Cosa intendiamo quando parliamo di PPD?","open":false,"options":["A. Pixel Per Grado","B. Nessuna delle altre risposte","C. Pixel Per Densità","D. Pixel per durata"],"answer":"D. Pixel per durata","correct":"A. Pixel Per Grado","score":"","feedback":""},{"idx":11,"text":"Con l’avvento di internet, le aziende hanno affiancato ai media tradizionali:","open":false,"options":["A. Solo la televisione satellitare","B. I nuovi media nati con la rete","C. Esclusivamente i videogiochi","D. Unicamente le app proprietarie"],"answer":"B. I nuovi media nati con la rete","correct":"B. I nuovi media nati con la rete","score":"","feedback":""},{"idx":12,"text":"Il marketing sociale utilizza le strategie del marketing per:","open":false,"options":["A. Aumentare solo i profitti","B. Influenzare comportamenti a vantaggio degli individui o della società","C. Eliminare la pubblicità","D. Sostituire le istituzioni"],"answer":"B. Influenzare comportamenti a vantaggio degli individui o della società","correct":"B. Influenzare comportamenti a vantaggio degli individui o della società","score":"","feedback":""},{"idx":13,"text":"Qual è una delle principali motivazioni economiche dietro lo sviluppo del metaverso?","open":false,"options":["A. Ridurre i costi energetici","B. Creare un nuovo grande mercato","C. Eliminare la concorrenza","D. Sostituire il lavoro umano"],"answer":"B. Creare un nuovo grande mercato","correct":"B. Creare un nuovo grande mercato","score":"","feedback":""},{"idx":14,"text":"Quale tecnologia consente di provare prodotti in modo virtuale?","open":false,"options":["A. Blockchain","B. Realtà aumentata","C. Streaming","D. Peer to peer"],"answer":"B. Realtà aumentata","correct":"B. Realtà aumentata","score":"","feedback":""},{"idx":15,"text":"Qual è definita come la vera ricchezza del XXI secolo?","open":false,"options":["A. L’oro","B. Le informazioni","C. L’energia","D. Il territorio"],"answer":"C. L’energia","correct":"B. Le informazioni","score":"","feedback":""},{"idx":16,"text":"Quale caratteristica NON appartiene agli NFT?","open":false,"options":["A. Indivisibilità","B. Unicità","C. Riproducibilità infinita","D. Tracciabilità"],"answer":"A. Indivisibilità","correct":"C. Riproducibilità infinita","score":"","feedback":""},{"idx":17,"text":"Quale evento ha accelerato l’uso delle piattaforme digitali?","open":false,"options":["A. La crisi economica del 2008","B. La pandemia da Covid-19","C. La nascita dei social","D. L’avvento degli smartphone"],"answer":"B. La pandemia da Covid-19","correct":"B. La pandemia da Covid-19","score":"","feedback":""},{"idx":18,"text":"Il marketing relazionale si focalizza soprattutto su:","open":false,"options":["A. Il prezzo","B. Il cliente","C. Il prodotto","D. La distribuzione"],"answer":"B. Il cliente","correct":"B. Il cliente","score":"","feedback":""},{"idx":19,"text":"Che cosa garantisce oggi maggiormente la qualità di un prodotto o servizio?","open":false,"options":["A. La pubblicità televisiva","B. Il passaparola sui social media","C. Il prezzo elevato","D. Il marchio storico"],"answer":"A. La pubblicità televisiva","correct":"B. Il passaparola sui social media","score":"","feedback":""},{"idx":20,"text":"Che cosa significa gamification?","open":false,"options":["A. Eliminare il gioco","B. Usare il gioco come leva motivazionale","C. Sostituire il marketing","D. Creare videogiochi"],"answer":"B. Usare il gioco come leva motivazionale","correct":"B. Usare il gioco come leva motivazionale","score":"","feedback":""}];
+    const totalPoints = 21;
+    const totalMax = 30;
+    const voto = 7;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

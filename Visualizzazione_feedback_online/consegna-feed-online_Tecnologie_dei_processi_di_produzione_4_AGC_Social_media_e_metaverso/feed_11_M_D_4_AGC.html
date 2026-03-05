@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 11 MARCHETTI DIEGO</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 11 MARCHETTI DIEGO � Classe: 4 AGC � Materia: Tecnologie_dei_processi_di_produzione � Argomento: Social_media_e_metaverso</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "11 MARCHETTI DIEGO";
+    const classeLabel = "4 AGC";
+    const materiaLabel = "Tecnologie_dei_processi_di_produzione";
+    const topicLabel = "Social_media_e_metaverso";
+    const questions = [{"idx":1,"text":"Descrivi che cosa sono gli NFT e il loro possibile utilizzo nel metaverso.","open":true,"options":[],"answer":"Gli NFT, not fungible token, sono delle risorse digitali aventi un diritto di unicità. Possono essere usati nel metaverso come premi limitati catalogati rari. Ad esempio, nei giochi, possono essere riconosciuti come premi, vestiti limitati, icone, che incitano i giocatori a immergersi nel gioco. Le sue caratteristiche sono unicità (non può essere replicato in copie), indivisibilità (non può essere diviso in più parti) e tracciabilità (tramite un ID può essere tracciato).","correct":"","score":2,"feedback":"Risposta corretta ma non perfettamente completa: sono presenti le tre caratteristiche (indivisibilità, unicità, tracciabilità) e un utilizzo nel metaverso. Manca l’esplicitazione dell’NFT come prova di un diritto su un bene e il riferimento all’ID unico su blockchain."},{"idx":2,"text":"Elenca e spiega gli elementi tecnologici necessari allo sviluppo del metaverso.","open":true,"options":[],"answer":"Gli elementi tecnologici necessari allo sviluppo del metaverso sono 6: la componente hardware, ovvero tutti quegli elementi, come visori VR o quanti aptici, che ci immergono al meglio nell'esperienza, componente di standardizzazione, così tutti i dispositivi possono ricevere e lettere determinati dati, potenza di calcolo, che definisce il numero e la velocità di sincronizzazione e aggiornamento dei dati, il sistema di pagamento, utile ad acquistare, trasferire e vendere, poi le piattaforme, ovvero i luoghi virtuali presenti nel metaverso che possono avere differenti scopi e infine la streetworking, cioè la larghezza di banda, (quantità dati), la latenza, ovvero il tempo necessario per far viaggiare un dato da un punto all'altro e l'affidabilità.","correct":"","score":2,"feedback":"Risposta corretta e abbastanza completa: identifica correttamente hardware, networking (banda, latenza, affidabilità), potenza di calcolo, piattaforme virtuali, standard e sistemi di pagamento. Mancano però altri aspetti trattati nel riferimento tra gli elementi necessari allo sviluppo completo del metaverso (contenuti/servizi e comportamento degli utenti/società)."},{"idx":3,"text":"Descrivi il concetto di metaverso e la sua origine culturale.","open":true,"options":[],"answer":"Il metaverso è un universo parallelo distinto, controllato e condiviso in  cui le persone possono vivere e comunicare tramite una identità digitale, superando limiti di spazio tempo, imposti dall'universo reale fisico. Nel metaverso si possono trovare luoghi adatti per vivere, lavorare, relazionarsi, studiare e formarsi.\n","correct":"","score":1,"feedback":"Risposta incompleta: descrive in modo generico il concetto di metaverso, ma non riporta l’origine culturale (autore/anno/opera) né l’etimologia."},{"idx":4,"text":"Spiega perché i social media sono paragonati alle agorà dell’antichità.","open":true,"options":[],"answer":"Le antiche agorà, comuni ad esempio in Grecia, erano un luogo di aggregazioni di vari individui, i quali potevano comunicare, lavorare e relazionarsi tra di loro. Ad oggi, i social media hanno la stessa funzione; la differenza sta nel modo in cui lo fanno, superando i limiti di spazio tempo imposti dalla realtà fisica. ","correct":"","score":2,"feedback":"Risposta corretta nella parte centrale: spiega che l’agorà era un luogo di aggregazione e comunicazione e collega questa funzione ai social, includendo l’idea di superare i limiti spazio-temporali. Manca però la parte del paragone legata a contrapposizione e scambio economico."},{"idx":5,"text":"Spiega il funzionamento di base della blockchain.","open":true,"options":[],"answer":"La blockchain (catena di blocco) è un archivio di trasferimento dati utilizzata come prevenzione alle truffe o hackeraggi, regolati dalla criptografia. La blockchain è formata da blocchi, i quali sono basati sul peer-to-peer, ovvero legati tutti dagli stessi nodi (persone), i quali hanno 3 caratteristiche base: i dati di trasferimento (ad esempio nel caso di bitcoin, il trasferimento di un determinato numero di bitcoin da un soggetto all'altro), l'hash del blocco stesso (ovvero una sorta di codice fiscale identificativo del blocco, unico tra tutti gli altri) e l'hash del blocco precedente (che collega il blocco con quello precedente, per dare affidabilità alla catena e prevenire hackeraggi). Alla modifica di un solo blocco, tutti i blocchi successivi dovranno essere aggiornati nella loro componente dell'hash del blocco precedente. Questo procedimento, seppure sembra semplice, grazie al proof of work, viene reso molto lungo (nel caso dei bitcoin ci impiega 10 minuti a blocco), e tramite i nonce viene aggiunto un codice a numeri con funzione di protezione.se non dovesse andare  abuon fine, comunque rimane il fatto che tutti hanno una copia della catena, e vince la maggioranza (e la catena diversa dalle altre viene annullata e privata della sua veridicità), per questo si dice che è ''democratica''.","correct":"","score":3,"feedback":"Risposta completa e corretta: descrive la blockchain come registro distribuito basato su peer to peer, spiega la struttura dei blocchi (dati, hash del blocco e hash precedente), il ruolo dell’hash nel rilevare manomissioni, il proof of work/nonce e il meccanismo di consenso della maggioranza. Anche l’esempio sui tempi di calcolo è coerente."},{"idx":6,"text":"Quali strumenti permettono esperienze immersive nel metaverso?","open":false,"options":["A. Mouse e tastiera","B. Visori VR e guanti aptici","C. Stampanti 3D","D. Scanner tradizionali"],"answer":"B. Visori VR e guanti aptici","correct":"B. Visori VR e guanti aptici","score":"","feedback":""},{"idx":7,"text":"Che cosa garantisce oggi maggiormente la qualità di un prodotto o servizio?","open":false,"options":["A. La pubblicità televisiva","B. Il passaparola sui social media","C. Il prezzo elevato","D. Il marchio storico"],"answer":"B. Il passaparola sui social media","correct":"B. Il passaparola sui social media","score":"","feedback":""},{"idx":8,"text":"Secondo il testo, la direzione evolutiva dei social è legata a:","open":false,"options":["A. Riduzione delle interazioni","B. Esperienze immersive e metaverso","C. Ritorno ai media tradizionali","D. Scomparsa del digitale"],"answer":"B. Esperienze immersive e metaverso","correct":"B. Esperienze immersive e metaverso","score":"","feedback":""},{"idx":9,"text":"Nel marketing relazionale, che ruolo ha l’utente “evangelist”?","open":false,"options":["A. È un dipendente dell’azienda","B. È un cliente che promuove spontaneamente il brand","C. È un influencer pagato","D. È un fornitore"],"answer":"B. È un cliente che promuove spontaneamente il brand","correct":"B. È un cliente che promuove spontaneamente il brand","score":"","feedback":""},{"idx":10,"text":"Cosa intendiamo quando parliamo di PPD?","open":false,"options":["A. Pixel Per Grado","B. Nessuna delle altre risposte","C. Pixel Per Densità","D. Pixel per durata"],"answer":"A. Pixel Per Grado","correct":"A. Pixel Per Grado","score":"","feedback":""},{"idx":11,"text":"Quale caratteristica NON appartiene agli NFT?","open":false,"options":["A. Indivisibilità","B. Unicità","C. Riproducibilità infinita","D. Tracciabilità"],"answer":"C. Riproducibilità infinita","correct":"C. Riproducibilità infinita","score":"","feedback":""},{"idx":12,"text":"Il marketing sociale utilizza le strategie del marketing per:","open":false,"options":["A. Aumentare solo i profitti","B. Influenzare comportamenti a vantaggio degli individui o della società","C. Eliminare la pubblicità","D. Sostituire le istituzioni"],"answer":"B. Influenzare comportamenti a vantaggio degli individui o della società","correct":"B. Influenzare comportamenti a vantaggio degli individui o della società","score":"","feedback":""},{"idx":13,"text":"Il marketing digitale applica strategie comunicative principalmente su:","open":false,"options":["A. Supporti cartacei","B. Dispositivi digitali","C. Eventi dal vivo","D. Canali radiofonici"],"answer":"B. Dispositivi digitali","correct":"B. Dispositivi digitali","score":"","feedback":""},{"idx":14,"text":"La pubblicità (advertising) viene descritta come:","open":false,"options":["A. Sinonimo di marketing","B. Una componente del marketing","C. Un’attività indipendente dal marketing","D. Una pratica esclusivamente digitale"],"answer":"B. Una componente del marketing","correct":"B. Una componente del marketing","score":"","feedback":""},{"idx":15,"text":"Perché il sistema dei social viene definito bidirezionale e non democratico?","open":false,"options":["A. Perché tutti hanno gli stessi diritti","B. Perché opera su piattaforme proprietarie","C. Perché non permette commenti","D. Perché è anonimo"],"answer":"B. Perché opera su piattaforme proprietarie","correct":"B. Perché opera su piattaforme proprietarie","score":"","feedback":""},{"idx":16,"text":"Secondo il testo, quale rischio principale è legato al metaverso?","open":false,"options":["A. Scarsa qualità grafica","B. Raccolta e uso dei dati sensibili","C. Mancanza di utenti","D. Assenza di mercati"],"answer":"B. Raccolta e uso dei dati sensibili","correct":"B. Raccolta e uso dei dati sensibili","score":"","feedback":""},{"idx":17,"text":"Quale evento ha accelerato l’uso delle piattaforme digitali?","open":false,"options":["A. La crisi economica del 2008","B. La pandemia da Covid-19","C. La nascita dei social","D. L’avvento degli smartphone"],"answer":"B. La pandemia da Covid-19","correct":"B. La pandemia da Covid-19","score":"","feedback":""},{"idx":18,"text":"Il termine metaverso indica:","open":false,"options":["A. Un nuovo social network","B. Un universo oltre quello fisico","C. Un software di montaggio","D. Un videogioco specifico"],"answer":"B. Un universo oltre quello fisico","correct":"B. Un universo oltre quello fisico","score":"","feedback":""},{"idx":19,"text":"Qual è definita come la vera ricchezza del XXI secolo?","open":false,"options":["A. L’oro","B. Le informazioni","C. L’energia","D. Il territorio"],"answer":"B. Le informazioni","correct":"B. Le informazioni","score":"","feedback":""},{"idx":20,"text":"Qual è una delle principali motivazioni economiche dietro lo sviluppo del metaverso?","open":false,"options":["A. Ridurre i costi energetici","B. Creare un nuovo grande mercato","C. Eliminare la concorrenza","D. Sostituire il lavoro umano"],"answer":"B. Creare un nuovo grande mercato","correct":"B. Creare un nuovo grande mercato","score":"","feedback":""}];
+    const totalPoints = 25;
+    const totalMax = 30;
+    const voto = 8.3;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

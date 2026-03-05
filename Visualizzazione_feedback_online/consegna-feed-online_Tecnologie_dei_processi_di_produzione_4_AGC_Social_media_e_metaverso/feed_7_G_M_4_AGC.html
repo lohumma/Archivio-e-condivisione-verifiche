@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 7 GENNAI MATILDA</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 7 GENNAI MATILDA � Classe: 4 AGC � Materia: Tecnologie_dei_processi_di_produzione � Argomento: Social_media_e_metaverso</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "7 GENNAI MATILDA";
+    const classeLabel = "4 AGC";
+    const materiaLabel = "Tecnologie_dei_processi_di_produzione";
+    const topicLabel = "Social_media_e_metaverso";
+    const questions = [{"idx":1,"text":"Cosa si intende per \"latenza\".","open":true,"options":[],"answer":"Una latenza è il tempo necessario per far viaggiare dei dati da un punto all'altro.","correct":"","score":1,"feedback":"Risposta corretta ma sintetica: è presente la definizione di latenza, manca un riferimento esplicito ai tempi di risposta."},{"idx":2,"text":"Qual è la funzione della crittografia?","open":true,"options":[],"answer":"","correct":"","score":0,"feedback":"Risposta assente."},{"idx":3,"text":"Spiega il funzionamento di base della blockchain.","open":true,"options":[],"answer":"La blockchain è una catena di blocchi che contengono i dati di ogni transizione è registrata. Ogni informazione è contenuta nei blocchi, visibili a tutti. Per prevenire a eventuali modifiche o corruzioni degli acquisti o investimenti esistono gli NFT, ovvero dei certificati che certificano la transizione.  ","correct":"","score":1,"feedback":"Risposta parzialmente pertinente: riconosce la blockchain come catena di blocchi e l’idea di registro visibile, ma confonde il ruolo degli NFT e non descrive i meccanismi che garantiscono l’immutabilità e la sicurezza del registro."},{"idx":4,"text":"Elenca e spiega gli elementi tecnologici necessari allo sviluppo del metaverso.","open":true,"options":[],"answer":"Gli elementi principali necessari per lo sviluppo del metaverso sono: la latenza, le piattaforme ","correct":"","score":1,"feedback":"Risposta molto incompleta: cita solo alcuni elementi senza spiegarli e manca la maggior parte degli elementi necessari."},{"idx":5,"text":"Descrivi il concetto di metaverso e la sua origine culturale.","open":true,"options":[],"answer":"Il metaverso è un spazio dove è possibile immergersi. Questo termine nasce da Neal Stephenson nel 1992 con il cyberpunk Snow Cash, che non è solamente un gioco ma un universo 3D persistente dove si vive, lavora...  \nCi sono quattro elementi che permettono la sua esistenza: Hardware, Networking, piattaforme virtuali.  ","correct":"","score":2,"feedback":"Risposta complessivamente corretta: indica autore, anno e opera e descrive il metaverso come universo 3D persistente popolato da avatar. Tuttavia l’elenco degli elementi tecnologici è incompleto e mancano aspetti importanti (significato del termine, standard e pagamenti)."},{"idx":6,"text":"Chi ha usato per primo il termine metaverso nel 1992?","open":false,"options":["A. Philip Kotler","B. Neal Stephenson","C. Mark Zuckerberg","D. Satoshi Nakamoto"],"answer":"B. Neal Stephenson","correct":"B. Neal Stephenson","score":"","feedback":""},{"idx":7,"text":"Che cosa significa gamification?","open":false,"options":["A. Eliminare il gioco","B. Usare il gioco come leva motivazionale","C. Sostituire il marketing","D. Creare videogiochi"],"answer":"B. Usare il gioco come leva motivazionale","correct":"B. Usare il gioco come leva motivazionale","score":"","feedback":""},{"idx":8,"text":"Quali strumenti permettono esperienze immersive nel metaverso?","open":false,"options":["A. Mouse e tastiera","B. Visori VR e guanti aptici","C. Stampanti 3D","D. Scanner tradizionali"],"answer":"B. Visori VR e guanti aptici","correct":"B. Visori VR e guanti aptici","score":"","feedback":""},{"idx":9,"text":"Quale figura professionale è citata come centrale nel Social Media Marketing?","open":false,"options":["A. Il grafico","B. L’influencer","C. Il programmatore","D. Il tipografo"],"answer":"B. L’influencer","correct":"B. L’influencer","score":"","feedback":""},{"idx":10,"text":"Quale evento ha accelerato l’uso delle piattaforme digitali?","open":false,"options":["A. La crisi economica del 2008","B. La pandemia da Covid-19","C. La nascita dei social","D. L’avvento degli smartphone"],"answer":"B. La pandemia da Covid-19","correct":"B. La pandemia da Covid-19","score":"","feedback":""},{"idx":11,"text":"Qual è definita come la vera ricchezza del XXI secolo?","open":false,"options":["A. L’oro","B. Le informazioni","C. L’energia","D. Il territorio"],"answer":"B. Le informazioni","correct":"B. Le informazioni","score":"","feedback":""},{"idx":12,"text":"Con l’avvento di internet, le aziende hanno affiancato ai media tradizionali:","open":false,"options":["A. Solo la televisione satellitare","B. I nuovi media nati con la rete","C. Esclusivamente i videogiochi","D. Unicamente le app proprietarie"],"answer":"B. I nuovi media nati con la rete","correct":"B. I nuovi media nati con la rete","score":"","feedback":""},{"idx":13,"text":"Il marketing sociale utilizza le strategie del marketing per:","open":false,"options":["A. Aumentare solo i profitti","B. Influenzare comportamenti a vantaggio degli individui o della società","C. Eliminare la pubblicità","D. Sostituire le istituzioni"],"answer":"B. Influenzare comportamenti a vantaggio degli individui o della società","correct":"B. Influenzare comportamenti a vantaggio degli individui o della società","score":"","feedback":""},{"idx":14,"text":"Qual è la funzione principale del marketing?","open":false,"options":["A. Vendere direttamente un prodotto","B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","C. Creare slogan pubblicitari","D. Gestire solo la comunicazione visiva"],"answer":"B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","correct":"B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","score":"","feedback":""},{"idx":15,"text":"Il marketing relazionale si focalizza soprattutto su:","open":false,"options":["A. Il prezzo","B. Il cliente","C. Il prodotto","D. La distribuzione"],"answer":"B. Il cliente","correct":"B. Il cliente","score":"","feedback":""},{"idx":16,"text":"Nel romanzo Snow Crash, il metaverso è:","open":false,"options":["A. Un archivio digitale","B. Un mondo virtuale 3D popolato da avatar","C. Un social bidimensionale","D. Un sistema di pagamento"],"answer":"B. Un mondo virtuale 3D popolato da avatar","correct":"B. Un mondo virtuale 3D popolato da avatar","score":"","feedback":""},{"idx":17,"text":"Che cosa garantisce oggi maggiormente la qualità di un prodotto o servizio?","open":false,"options":["A. La pubblicità televisiva","B. Il passaparola sui social media","C. Il prezzo elevato","D. Il marchio storico"],"answer":"B. Il passaparola sui social media","correct":"B. Il passaparola sui social media","score":"","feedback":""},{"idx":18,"text":"Secondo il testo, quale rischio principale è legato al metaverso?","open":false,"options":["A. Scarsa qualità grafica","B. Raccolta e uso dei dati sensibili","C. Mancanza di utenti","D. Assenza di mercati"],"answer":"B. Raccolta e uso dei dati sensibili","correct":"B. Raccolta e uso dei dati sensibili","score":"","feedback":""},{"idx":19,"text":"Il termine metaverso indica:","open":false,"options":["A. Un nuovo social network","B. Un universo oltre quello fisico","C. Un software di montaggio","D. Un videogioco specifico"],"answer":"B. Un universo oltre quello fisico","correct":"B. Un universo oltre quello fisico","score":"","feedback":""},{"idx":20,"text":"Che cosa caratterizza il marketing globale?","open":false,"options":["A. Strategie locali diverse","B. Brand e strategie unificate a livello mondiale","C. Produzione artigianale","D. Assenza di comunicazione"],"answer":"B. Brand e strategie unificate a livello mondiale","correct":"B. Brand e strategie unificate a livello mondiale","score":"","feedback":""}];
+    const totalPoints = 20;
+    const totalMax = 30;
+    const voto = 6.7;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

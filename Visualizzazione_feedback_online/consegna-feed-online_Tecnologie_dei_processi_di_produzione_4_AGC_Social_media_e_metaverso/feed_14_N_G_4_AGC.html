@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 14 NOBILE GRETA</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 14 NOBILE GRETA � Classe: 4 AGC � Materia: Tecnologie_dei_processi_di_produzione � Argomento: Social_media_e_metaverso</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "14 NOBILE GRETA";
+    const classeLabel = "4 AGC";
+    const materiaLabel = "Tecnologie_dei_processi_di_produzione";
+    const topicLabel = "Social_media_e_metaverso";
+    const questions = [{"idx":1,"text":"Descrivi il concetto di metaverso e la sua origine culturale.","open":true,"options":[],"answer":"Il metaverso è uno spazio online nel quale persone comunicano, interagiscono, condividono e possono creare nuovi contenuti,  ha avuto origine dal romanzo di Neal Stephenson dove fu vista per la prima volta la parola metaverso.","correct":"","score":1,"feedback":"Risposta parziale: è presente l’origine generica (Stephenson), ma mancano gli elementi espliciti richiesti (1992, Snow Crash, etimologia e 3D/avatar)."},{"idx":2,"text":"Descrivi che cosa sono gli NFT e il loro possibile utilizzo nel metaverso.","open":true,"options":[],"answer":"Gli NFT sono dei certificati che dimostrano la proprietà, la validità e l'unicità di un prodotto venduto dagli utenti nel metaverso e servono per vendere, scambiare e tracciare i prodotti online.","correct":"","score":1,"feedback":"Risposta generica: manca la definizione precisa (diritto su bene unico) e mancano caratteristiche e meccanismo di tracciabilità tramite ID su blockchain."},{"idx":3,"text":"Descrivi il ruolo dei social media nell’evoluzione della comunicazione aziendale.","open":true,"options":[],"answer":"Grazie al ruolo dei social media la comunicazione aziendale si è evoluta, al giorno d'oggi le aziende comunicano direttamente con il cliente in tempo reale, le vendite sono più facilitate grazie alle pubblicità che con i social arrivano a più persone e permettono anche di interagire maggiormente.","correct":"","score":2,"feedback":"Risposta corretta nella direzione: evidenzia comunicazione diretta e interazione in tempo reale e l’ampliamento della portata delle pubblicità. Manca però il quadro completo indicato nel riferimento (diversificazione dei media, social media marketing, passaparola e natura bidirezionale ma su piattaforme proprietarie)."},{"idx":4,"text":"Spiega la differenza tra marketing e advertising.","open":true,"options":[],"answer":"MARKETING: Ha l'obiettivo di capire i punti deboli, i bisogni e le necessità della società e \ntrovare per lei le soluzioni e le risposte che le risolvono i problemi.\nADVERTISING: è una componente del marketing che viene utilizzata nel caso in cui si sponsorizza un prodotto e si trae guadagno da esso.","correct":"","score":3,"feedback":"Risposta corretta: spiega il marketing come analisi dei bisogni e ricerca di soluzioni e definisce l’advertising come componente del marketing legata alla promozione/sponsorizzazione del prodotto."},{"idx":5,"text":"Spiega perché i social media sono paragonati alle agorà dell’antichità.","open":true,"options":[],"answer":"I social media vengono paragonati alle agorà dell'antichità perché come loro, diventano un luogo di condivisione e scambi tra le persone.","correct":"","score":2,"feedback":"Risposta parzialmente corretta: coglie l’idea di luogo di scambio e interazione tra persone. Manca però l’esplicitazione del confronto delle idee e della possibile contrapposizione, che completano il paragone."},{"idx":6,"text":"Il marketing sociale utilizza le strategie del marketing per:","open":false,"options":["A. Aumentare solo i profitti","B. Influenzare comportamenti a vantaggio degli individui o della società","C. Eliminare la pubblicità","D. Sostituire le istituzioni"],"answer":"B. Influenzare comportamenti a vantaggio degli individui o della società","correct":"B. Influenzare comportamenti a vantaggio degli individui o della società","score":"","feedback":""},{"idx":7,"text":"Quali strumenti permettono esperienze immersive nel metaverso?","open":false,"options":["A. Mouse e tastiera","B. Visori VR e guanti aptici","C. Stampanti 3D","D. Scanner tradizionali"],"answer":"B. Visori VR e guanti aptici","correct":"B. Visori VR e guanti aptici","score":"","feedback":""},{"idx":8,"text":"La pubblicità (advertising) viene descritta come:","open":false,"options":["A. Sinonimo di marketing","B. Una componente del marketing","C. Un’attività indipendente dal marketing","D. Una pratica esclusivamente digitale"],"answer":"B. Una componente del marketing","correct":"B. Una componente del marketing","score":"","feedback":""},{"idx":9,"text":"1. Che cosa si intende per marketing digitale?","open":false,"options":["A. Una strategia basata esclusivamente sulla pubblicità televisiva","B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","C. Una forma di marketing usata solo dalle grandi aziende","D. Una tecnica di vendita diretta porta a porta"],"answer":"B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","correct":"B. L’uso di strumenti digitali per raggiungere i clienti attraverso reti e piattaforme online","score":"","feedback":""},{"idx":10,"text":"Quale tecnologia consente di provare prodotti in modo virtuale?","open":false,"options":["A. Blockchain","B. Realtà aumentata","C. Streaming","D. Peer to peer"],"answer":"B. Realtà aumentata","correct":"B. Realtà aumentata","score":"","feedback":""},{"idx":11,"text":"Perché il sistema dei social viene definito bidirezionale e non democratico?","open":false,"options":["A. Perché tutti hanno gli stessi diritti","B. Perché opera su piattaforme proprietarie","C. Perché non permette commenti","D. Perché è anonimo"],"answer":"B. Perché opera su piattaforme proprietarie","correct":"B. Perché opera su piattaforme proprietarie","score":"","feedback":""},{"idx":12,"text":"Che cosa ha supplito alle attività in presenza durante la pandemia?","open":false,"options":["A. Solo i social network","B. Teleconferenze, didattica a distanza e telelavoro","C. La televisione","D. La stampa"],"answer":"B. Teleconferenze, didattica a distanza e telelavoro","correct":"B. Teleconferenze, didattica a distanza e telelavoro","score":"","feedback":""},{"idx":13,"text":"Quale evento ha accelerato l’uso delle piattaforme digitali?","open":false,"options":["A. La crisi economica del 2008","B. La pandemia da Covid-19","C. La nascita dei social","D. L’avvento degli smartphone"],"answer":"B. La pandemia da Covid-19","correct":"B. La pandemia da Covid-19","score":"","feedback":""},{"idx":14,"text":"Secondo il testo, quale rischio principale è legato al metaverso?","open":false,"options":["A. Scarsa qualità grafica","B. Raccolta e uso dei dati sensibili","C. Mancanza di utenti","D. Assenza di mercati"],"answer":"B. Raccolta e uso dei dati sensibili","correct":"B. Raccolta e uso dei dati sensibili","score":"","feedback":""},{"idx":15,"text":"Che cosa garantisce oggi maggiormente la qualità di un prodotto o servizio?","open":false,"options":["A. La pubblicità televisiva","B. Il passaparola sui social media","C. Il prezzo elevato","D. Il marchio storico"],"answer":"B. Il passaparola sui social media","correct":"B. Il passaparola sui social media","score":"","feedback":""},{"idx":16,"text":"Chi ha usato per primo il termine metaverso nel 1992?","open":false,"options":["A. Philip Kotler","B. Neal Stephenson","C. Mark Zuckerberg","D. Satoshi Nakamoto"],"answer":"B. Neal Stephenson","correct":"B. Neal Stephenson","score":"","feedback":""},{"idx":17,"text":"Qual è la funzione principale del marketing?","open":false,"options":["A. Vendere direttamente un prodotto","B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","C. Creare slogan pubblicitari","D. Gestire solo la comunicazione visiva"],"answer":"B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","correct":"B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","score":"","feedback":""},{"idx":18,"text":"Qual è una delle principali motivazioni economiche dietro lo sviluppo del metaverso?","open":false,"options":["A. Ridurre i costi energetici","B. Creare un nuovo grande mercato","C. Eliminare la concorrenza","D. Sostituire il lavoro umano"],"answer":"B. Creare un nuovo grande mercato","correct":"B. Creare un nuovo grande mercato","score":"","feedback":""},{"idx":19,"text":"Un NFT rappresenta:","open":false,"options":["A. L’acquisto fisico di un bene","B. La prova di un diritto su un bene unico","C. Una criptovaluta","D. Un file multimediale"],"answer":"B. La prova di un diritto su un bene unico","correct":"B. La prova di un diritto su un bene unico","score":"","feedback":""},{"idx":20,"text":"Che cosa significa gamification?","open":false,"options":["A. Eliminare il gioco","B. Usare il gioco come leva motivazionale","C. Sostituire il marketing","D. Creare videogiochi"],"answer":"B. Usare il gioco come leva motivazionale","correct":"B. Usare il gioco come leva motivazionale","score":"","feedback":""}];
+    const totalPoints = 24;
+    const totalMax = 30;
+    const voto = 8;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 5 ERCOLANO GRETA</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 5 ERCOLANO GRETA � Classe: 4 AGC � Materia: Tecnologie_dei_processi_di_produzione � Argomento: Social_media_e_metaverso</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "5 ERCOLANO GRETA";
+    const classeLabel = "4 AGC";
+    const materiaLabel = "Tecnologie_dei_processi_di_produzione";
+    const topicLabel = "Social_media_e_metaverso";
+    const questions = [{"idx":1,"text":"Descrivi il concetto di metaverso e la sua origine culturale.","open":true,"options":[],"answer":"La parola metaverso venne usata per la prima volta nel 1992 da Neal Stephenson nel libro cyberpunk \"Snow Crash\", dove descrisse un mondo in 3D popolato da avantar, ovvero copie digitali di sè stessi. \nIl metaverso è l'unione della parola greco \"metà\" e della parola \"universo\", indica qualcosa che va oltre il mondo reale, fisico. ","correct":"","score":3,"feedback":"Risposta completa e corretta: indica l’origine culturale del termine (autore, anno e opera) e spiega in modo chiaro il significato e la definizione di metaverso."},{"idx":2,"text":"Spiega i rischi e le opportunità del metaverso dal punto di vista sociale ed economico.","open":true,"options":[],"answer":"I rischi del metaverso sono vari. Il più pericoloso è sicuramente quello che segue il processo \"se il servizio è gratis, la merce sei tu\", perchè, essendo che dovremmo indossare strumenti che analizzano i nostri dati biometrici (ovvero battito cardiaco, emozioni e pressione), i dati che rilevano dicono tutto sulla nostra salute e sul nostro carattere, perciò potrebbero essere raccolti e usati dalle aziende come merce. \nNonostante tutto, il metaverso ha anche molti vantaggi, come la possibilità di avere tutto digitalmente, offrendoci delle esperienze sensoriali quasi reali. ","correct":"","score":2,"feedback":"Risposta pertinente: descrive bene il rischio principale legato alla raccolta di dati sensibili e biometrici e collega correttamente il tema al principio “se un servizio è gratis, la merce sei tu”. Le opportunità sono indicate in modo generico e manca l’aspetto economico del nuovo mercato e della fidelizzazione."},{"idx":3,"text":"Spiega perché i social media sono paragonati alle agorà dell’antichità.","open":true,"options":[],"answer":"I social media sono paragonati alle agorà dell'antichità perchè svolgono la medesima funzione. L'uomo ha sempre avuto il bisogno innato di comunicare e diffondere il sapere, nell'antichità, questo bisogno veniva soddisfatto proprio nelle agorà, dove avvenivano discussioni e scambi di idee. Oggi, i social media sono un mezzo per esprimere i nostri pensieri e opinioni con altri utenti anche in varie parti del mondo.","correct":"","score":1,"feedback":"Risposta parziale: è presente l’idea di luogo di comunicazione e confronto, ma mancano elementi espliciti :contrapposizione e scambio economico."},{"idx":4,"text":"Qual è la funzione della crittografia?","open":true,"options":[],"answer":"La crittografia, usata anche da grandi aziende come Meta Platforms in app come Whatsapp, serve a salvaguardare la nostra privacy e rende difficile la visualizzazione dei nostri dati da parte di utenti malintenzionati.","correct":"","score":1,"feedback":"Risposta parziale: è presente l’idea di protezione dei dati, ma non è esplicitata la funzione di garantire riservatezza delle operazioni e sicurezza informatica del sistema."},{"idx":5,"text":"Descrivi che cosa sono gli NFT e il loro possibile utilizzo nel metaverso.","open":true,"options":[],"answer":"Gli NFT (Not-Fungible Token) e un sistema di certificazione che dimostra di avere un diritto su un bene unico e insostituibile, solitamente garantito dalla blockchain Ethereum. In futuro, gli NFT, ci permetteranno di acquistare accessori per gli avantar, partecipare ad eventi privati, gestire l'acquisto di immobili, gestire la propria Identità Digitale (SSI), certificando titoli di studio e dati personali in modo sicuro.","correct":"","score":2,"feedback":"Risposta corretta e ricca di esempi d’uso, ma manca l’elenco esplicito delle tre caratteristiche richieste (indivisibilità, unicità, tracciabilità tramite ID unico su blockchain)."},{"idx":6,"text":"Qual è la funzione principale del marketing?","open":false,"options":["A. Vendere direttamente un prodotto","B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","C. Creare slogan pubblicitari","D. Gestire solo la comunicazione visiva"],"answer":"B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","correct":"B. Identificare i bisogni delle persone e trovare il modo migliore per soddisfarli","score":"","feedback":""},{"idx":7,"text":"Un NFT rappresenta:","open":false,"options":["A. L’acquisto fisico di un bene","B. La prova di un diritto su un bene unico","C. Una criptovaluta","D. Un file multimediale"],"answer":"B. La prova di un diritto su un bene unico","correct":"B. La prova di un diritto su un bene unico","score":"","feedback":""},{"idx":8,"text":"Secondo il testo, quale rischio principale è legato al metaverso?","open":false,"options":["A. Scarsa qualità grafica","B. Raccolta e uso dei dati sensibili","C. Mancanza di utenti","D. Assenza di mercati"],"answer":"B. Raccolta e uso dei dati sensibili","correct":"B. Raccolta e uso dei dati sensibili","score":"","feedback":""},{"idx":9,"text":"Chi ha usato per primo il termine metaverso nel 1992?","open":false,"options":["A. Philip Kotler","B. Neal Stephenson","C. Mark Zuckerberg","D. Satoshi Nakamoto"],"answer":"B. Neal Stephenson","correct":"B. Neal Stephenson","score":"","feedback":""},{"idx":10,"text":"Quale caratteristica NON appartiene agli NFT?","open":false,"options":["A. Indivisibilità","B. Unicità","C. Riproducibilità infinita","D. Tracciabilità"],"answer":"B. Unicità","correct":"C. Riproducibilità infinita","score":"","feedback":""},{"idx":11,"text":"Nel marketing relazionale, che ruolo ha l’utente “evangelist”?","open":false,"options":["A. È un dipendente dell’azienda","B. È un cliente che promuove spontaneamente il brand","C. È un influencer pagato","D. È un fornitore"],"answer":"B. È un cliente che promuove spontaneamente il brand","correct":"B. È un cliente che promuove spontaneamente il brand","score":"","feedback":""},{"idx":12,"text":"Secondo il testo, la direzione evolutiva dei social è legata a:","open":false,"options":["A. Riduzione delle interazioni","B. Esperienze immersive e metaverso","C. Ritorno ai media tradizionali","D. Scomparsa del digitale"],"answer":"B. Esperienze immersive e metaverso","correct":"B. Esperienze immersive e metaverso","score":"","feedback":""},{"idx":13,"text":"Che cosa ha supplito alle attività in presenza durante la pandemia?","open":false,"options":["A. Solo i social network","B. Teleconferenze, didattica a distanza e telelavoro","C. La televisione","D. La stampa"],"answer":"B. Teleconferenze, didattica a distanza e telelavoro","correct":"B. Teleconferenze, didattica a distanza e telelavoro","score":"","feedback":""},{"idx":14,"text":"Che cosa garantisce oggi maggiormente la qualità di un prodotto o servizio?","open":false,"options":["A. La pubblicità televisiva","B. Il passaparola sui social media","C. Il prezzo elevato","D. Il marchio storico"],"answer":"B. Il passaparola sui social media","correct":"B. Il passaparola sui social media","score":"","feedback":""},{"idx":15,"text":"Il marketing relazionale si focalizza soprattutto su:","open":false,"options":["A. Il prezzo","B. Il cliente","C. Il prodotto","D. La distribuzione"],"answer":"B. Il cliente","correct":"B. Il cliente","score":"","feedback":""},{"idx":16,"text":"Che cosa caratterizza il marketing globale?","open":false,"options":["A. Strategie locali diverse","B. Brand e strategie unificate a livello mondiale","C. Produzione artigianale","D. Assenza di comunicazione"],"answer":"B. Brand e strategie unificate a livello mondiale","correct":"B. Brand e strategie unificate a livello mondiale","score":"","feedback":""},{"idx":17,"text":"La pubblicità (advertising) viene descritta come:","open":false,"options":["A. Sinonimo di marketing","B. Una componente del marketing","C. Un’attività indipendente dal marketing","D. Una pratica esclusivamente digitale"],"answer":"B. Una componente del marketing","correct":"B. Una componente del marketing","score":"","feedback":""},{"idx":18,"text":"Il termine metaverso indica:","open":false,"options":["A. Un nuovo social network","B. Un universo oltre quello fisico","C. Un software di montaggio","D. Un videogioco specifico"],"answer":"B. Un universo oltre quello fisico","correct":"B. Un universo oltre quello fisico","score":"","feedback":""},{"idx":19,"text":"Quale tecnologia consente di provare prodotti in modo virtuale?","open":false,"options":["A. Blockchain","B. Realtà aumentata","C. Streaming","D. Peer to peer"],"answer":"B. Realtà aumentata","correct":"B. Realtà aumentata","score":"","feedback":""},{"idx":20,"text":"Che cosa significa gamification?","open":false,"options":["A. Eliminare il gioco","B. Usare il gioco come leva motivazionale","C. Sostituire il marketing","D. Creare videogiochi"],"answer":"B. Usare il gioco come leva motivazionale","correct":"B. Usare il gioco come leva motivazionale","score":"","feedback":""}];
+    const totalPoints = 23;
+    const totalMax = 30;
+    const voto = 7.7;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>
