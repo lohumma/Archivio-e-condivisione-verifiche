@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 1 ALEOTTI ALESSANDRO</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 1 ALEOTTI ALESSANDRO - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "1 ALEOTTI ALESSANDRO";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Descrivi la tecnica della piramide rovesciata.","open":true,"options":[],"answer":"la piramide rovesciata è una tecnica utilizzata nei siti web, dove si parte da una categoria più generale che evidenzia una categoria merceologica, man a mano si fa più intricata offrendo più categorie nello specifico.","correct":"","score":1,"feedback":"Risposta non corretta: descrive una struttura gerarchica di categorie, ma non spiega che la piramide rovesciata è una tecnica di scrittura che presenta subito le informazioni essenziali e solo dopo i dettagli."},{"idx":2,"text":"Descrivi cosa si intende per landing page.","open":true,"options":[],"answer":"è la pagina principale che ci appare ogni qualvolta apriamo un sito web, serve ad accoglierci sul sito web dell'azienda, è importante che sia di buon impatto da darci delle ragioni per non uscire dal sito ed incuriosirci","correct":"","score":2,"feedback":"Risposta parzialmente corretta: individua la landing page come pagina di accoglienza e di primo impatto, ma non chiarisce che è soprattutto il punto di approdo di una campagna pubblicitaria."},{"idx":3,"text":"Descrivi la funzione dei protocolli TCP e IP.","open":true,"options":[],"answer":"l'ip è una sorta di carta d'identità che permette il passaggio delle informazioni nella rete digitale.\nil tcp assicura l'affidabilità nella trasmissione delle informazioni digitali tramite i canali della rete","correct":"","score":1,"feedback":"Risposta corretta ma non completa: sono presenti le funzioni essenziali di TCP e IP, ma mancano riferimenti più precisi alla verifica dei pacchetti di dati e all’identificazione univoca del dispositivo."},{"idx":4,"text":"Spiega cosa si intende per rete informatica.","open":true,"options":[],"answer":"la rete informatica è dove passano tutte le connessioni/informazioni/collegamenti digitali, è costituita da canali e nodi.\nè composta come una normale rete come la intendiamo noi (es. rete da pesca), solo in formato digitale e non visibile.","correct":"","score":2,"feedback":"Risposta parzialmente corretta: riconosce che nella rete circolano informazioni e che essa è composta da nodi e collegamenti, ma la spiegazione resta generica e poco precisa."},{"idx":5,"text":"Spiega a cosa serve un sito web per unâ€™azienda.","open":true,"options":[],"answer":"il sito web per un'azienda è importante perché permette la diffusione e pubblicità del proprio brand e dei propri prodotti 24/7 in quanto il sito web rimane sempre collegato alla rete; serve a diffondere e informare i consumatori, serve ad avere sempre il proprio business attivo se dispone di servizi vendibili. è utile perché può essere raggiunto da chiunque ed in qualsiasi posizione si trovi, in quanto non si tratta di un luogo fisico, è utile inoltre per accrescere la propria clientela e per far crescere il brand stesso.                                               ","correct":"","score":3,"feedback":"Risposta corretta: sono presenti i concetti fondamentali relativi alla funzione del sito web aziendale come vetrina accessibile, strumento di comunicazione e promozione di brand, prodotti e servizi."},{"idx":6,"text":"Una rete Wi-Fi Ã¨ tecnicamente definita come:","open":false,"options":["A. WLAN","B. WAN","C. MAN","D. PAN"],"answer":"A. WLAN","correct":"A. WLAN","score":"","feedback":""},{"idx":7,"text":"Che cosa sono i webinar?","open":false,"options":["A. Seminari online in diretta o registrati","B. Forum di discussione testuale","C. Documenti condivisi offline","D. Applicazioni per editing video"],"answer":"A. Seminari online in diretta o registrati","correct":"A. Seminari online in diretta o registrati","score":"","feedback":""},{"idx":8,"text":"Che cosa significa landing page?","open":false,"options":["A. Pagina di approdo di una campagna pubblicitaria","B. Pagina di login","C. Pagina di errore","D. Pagina offline"],"answer":"A. Pagina di approdo di una campagna pubblicitaria","correct":"A. Pagina di approdo di una campagna pubblicitaria","score":"","feedback":""},{"idx":9,"text":"Che cosa Ã¨ il World Wide Web?","open":false,"options":["A. Un sistema di documenti collegati tramite ipertesti","B. Un sistema operativo","C. Un programma di navigazione","D. Un database offline"],"answer":"C. Un programma di navigazione","correct":"A. Un sistema di documenti collegati tramite ipertesti","score":"","feedback":""},{"idx":10,"text":"Quale funzione svolge il protocollo TCP?","open":false,"options":["A. Garantire lâ€™affidabilitÃ  della trasmissione dei dati","B. Gestire la grafica delle pagine web","C. Stabilire la velocitÃ  della connessione","D. Assegnare i nomi di dominio"],"answer":"A. Garantire lâ€™affidabilitÃ  della trasmissione dei dati","correct":"A. Garantire lâ€™affidabilitÃ  della trasmissione dei dati","score":"","feedback":""},{"idx":11,"text":"Che cosa si intende per prodotto immateriale?","open":false,"options":["A. Un prodotto privo di forma fisica","B. Un prodotto composto da materiali sintetici","C. Un prodotto digitale memorizzato su supporto ottico","D. Un prodotto non destinato alla vendita"],"answer":"A. Un prodotto privo di forma fisica","correct":"A. Un prodotto privo di forma fisica","score":"","feedback":""},{"idx":12,"text":"Chi definÃ¬ la prima versione del linguaggio di collegamento ipertestuale nel 1990?","open":false,"options":["A. Tim Berners-Lee","B. Bill Gates","C. Steve Jobs","D. Alan Turing"],"answer":"A. Tim Berners-Lee","correct":"A. Tim Berners-Lee","score":"","feedback":""},{"idx":13,"text":"Qual Ã¨ la funzione delle cinque W nella scrittura web?","open":false,"options":["A. Fornire subito le informazioni principali","B. Decorare il testo","C. Allungare lâ€™articolo","D. Ridurre il traffico"],"answer":"A. Fornire subito le informazioni principali","correct":"A. Fornire subito le informazioni principali","score":"","feedback":""},{"idx":14,"text":"Quale tecnica di scrittura Ã¨ consigliata per i contenuti web?","open":false,"options":["A. Piramide rovesciata","B. Scrittura narrativa lineare","C. Scrittura poetica","D. Scrittura dialogica"],"answer":"A. Piramide rovesciata","correct":"A. Piramide rovesciata","score":"","feedback":""},{"idx":15,"text":"Qual Ã¨ la differenza tra prodotto e bene in senso economico?","open":false,"options":["A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","B. Il bene Ã¨ sempre materiale, il prodotto Ã¨ sempre digitale","C. Il prodotto Ã¨ economico, il bene Ã¨ giuridico","D. Il bene Ã¨ sempre industriale, il prodotto Ã¨ sempre artigianale"],"answer":"A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","correct":"A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","score":"","feedback":""}];
+    const totalPoints = 18;
+    const totalMax = 25;
+    const voto = 7.2;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

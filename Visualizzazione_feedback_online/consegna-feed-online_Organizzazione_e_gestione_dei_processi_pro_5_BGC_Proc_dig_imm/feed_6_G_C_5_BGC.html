@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 6 GRONCHI CHRISTIAN</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 6 GRONCHI CHRISTIAN - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "6 GRONCHI CHRISTIAN";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Spiega cosa si intende per rete informatica.","open":true,"options":[],"answer":"Per rete informatica si intende il collegamento tra nodi cioè diversi device, ci sono 4 tipi di rete: \nLAN (telefono-stampante);\nRete fisica;\nRete virtuale;\nWAN.","correct":"","score":1.5,"feedback":"La risposta è parzialmente corretta. Riconosce che una rete informatica è composta da nodi o dispositivi collegati tra loro e richiama alcune tipologie di rete. Restano però imprecisi alcuni passaggi e manca una spiegazione più chiara del collegamento tra i nodi tramite cavi fisici o virtuali e della funzione di comunicazione tra dispositivi e periferiche."},{"idx":2,"text":"Descrivi la tecnica della piramide rovesciata.","open":true,"options":[],"answer":"La piramide rovesciata indica il modo di comunicare e l'utilizzo dei testi in un sito web.\nQuesta tecnica dice che i testi devono essere inizialmente generici e poi sempre più specifici, per far capire agli utenti qual'è l'argomento generale e se interessato può andare verso le informazioni più specifiche.","correct":"","score":2,"feedback":"La risposta è nel complesso corretta. Spiega che nei testi web si parte da un'informazione generale iniziale per poi andare verso dettagli più specifici, cogliendo il senso della tecnica. Manca però una formulazione più precisa del fatto che all'inizio devono comparire subito le informazioni essenziali."},{"idx":3,"text":"Spiega il ruolo dei motori di ricerca nella visibilitÃ  di un sito.","open":true,"options":[],"answer":"I motori di ricerca servono per far navigare le persone sul sito web, è importante seguire le regole date dalla W3c per non avere problemi di lettura dei codici in caso venisse utilizzato un altro motore di ricerca. \nNei motori di ricerca hanno anche un ruolo importante le parole-chiave che servono per far arrivare le persone al sito web.","correct":"","score":1,"feedback":"La risposta è molto parziale. Richiama in modo pertinente il ruolo delle parole-chiave, ma non spiega con chiarezza che la visibilità di un sito dipende dall'indicizzazione e dal posizionamento nei motori di ricerca. Il riferimento al W3C non costituisce il nucleo principale della domanda."},{"idx":4,"text":"Descrivi la nascita del World Wide Web.","open":true,"options":[],"answer":"Nel 1990 Tim Berners-Lee creò il primo WWW e il primo Http creando il primo linguaggio di collegamento ipertestuale, questo velocizzò molto lo sviluppo di siti web fino ad arrivare nel 2021 con 1.74 miliardi di siti web online.","correct":"","score":2,"feedback":"La risposta è parzialmente corretta. Sono presenti Tim Berners-Lee, l'anno 1990, il riferimento al World Wide Web e la crescita successiva del numero dei siti. Restano però imprecisi alcuni passaggi: manca il riferimento al CERN, alla coniazione del nome, al primo server e client e alla pubblicazione del primo sito nel 1991."},{"idx":5,"text":"Spiega perchÃ© i titoli e sottotitoli sono importanti nei testi web.","open":true,"options":[],"answer":"E' importante l'utilizzo di titoli e sottotitoli per attirare gli utenti, le persone sui siti web non perdono tempo a leggere testi troppo lunghi quindi i titoli e i sottotitoli hanno un ruolo importante per attrarre gli utenti e portarli a navigare sul sito.","correct":"","score":2,"feedback":"La risposta è parzialmente corretta. Coglie il fatto che titoli e sottotitoli servono ad attirare l'attenzione dell'utente e a favorire la prosecuzione della lettura sul sito. Manca però una spiegazione più precisa della loro funzione informativa immediata, cioè quella di presentare in forma sintetica i temi principali."},{"idx":6,"text":"Che cosa identifica in modo univoco un dispositivo connesso a Internet?","open":false,"options":["A. Indirizzo IP","B. Password di accesso","C. Protocollo HTTP","D. Browser"],"answer":"A. Indirizzo IP","correct":"A. Indirizzo IP","score":"","feedback":""},{"idx":7,"text":"Quale problema puÃ² causare codice non valido?","open":false,"options":["A. Diversa visualizzazione tra browser","B. Spegnimento del computer","C. Perdita della connessione telefonica","D. Cancellazione automatica del sito"],"answer":"A. Diversa visualizzazione tra browser","correct":"A. Diversa visualizzazione tra browser","score":"","feedback":""},{"idx":8,"text":"Che cosâ€™Ã¨ il W3C?","open":false,"options":["A. Un consorzio che stabilisce gli standard del web","B. Un browser","C. Un provider Internet","D. Un sistema operativo"],"answer":"A. Un consorzio che stabilisce gli standard del web","correct":"A. Un consorzio che stabilisce gli standard del web","score":"","feedback":""},{"idx":9,"text":"Qual Ã¨ una funzione dei social rispetto al sito web?","open":false,"options":["A. Veicolare traffico verso il sito","B. Sostituire definitivamente il sito","C. Eliminare il marketing","D. Bloccare le campagne pubblicitarie"],"answer":"A. Veicolare traffico verso il sito","correct":"A. Veicolare traffico verso il sito","score":"","feedback":""},{"idx":10,"text":"Qual Ã¨ la differenza tra prodotto e bene in senso economico?","open":false,"options":["A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","B. Il bene Ã¨ sempre materiale, il prodotto Ã¨ sempre digitale","C. Il prodotto Ã¨ economico, il bene Ã¨ giuridico","D. Il bene Ã¨ sempre industriale, il prodotto Ã¨ sempre artigianale"],"answer":"A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","correct":"A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","score":"","feedback":""},{"idx":11,"text":"In cosa consiste la piramide rovesciata?","open":false,"options":["A. Presentare prima le informazioni essenziali e poi i dettagli","B. Scrivere prima i dettagli e poi il titolo","C. Inserire solo immagini","D. Utilizzare solo frasi lunghe"],"answer":"A. Presentare prima le informazioni essenziali e poi i dettagli","correct":"A. Presentare prima le informazioni essenziali e poi i dettagli","score":"","feedback":""},{"idx":12,"text":"Attraverso quali dispositivi avviene la fruizione di un ebook?","open":false,"options":["A. Dispositivi elettronici come computer, tablet e smartphone","B. Solo computer desktop","C. Solo lettori CD","D. Stampanti e scanner"],"answer":"A. Dispositivi elettronici come computer, tablet e smartphone","correct":"A. Dispositivi elettronici come computer, tablet e smartphone","score":"","feedback":""},{"idx":13,"text":"Qual Ã¨ lo scopo della validazione di un sito?","open":false,"options":["A. Verificare la conformitÃ  agli standard internazionali","B. Bloccare lâ€™accesso agli utenti","C. Aumentare la dimensione delle immagini","D. Ridurre i contenuti"],"answer":"A. Verificare la conformitÃ  agli standard internazionali","correct":"A. Verificare la conformitÃ  agli standard internazionali","score":"","feedback":""},{"idx":14,"text":"Chi definÃ¬ la prima versione del linguaggio di collegamento ipertestuale nel 1990?","open":false,"options":["A. Tim Berners-Lee","B. Bill Gates","C. Steve Jobs","D. Alan Turing"],"answer":"A. Tim Berners-Lee","correct":"A. Tim Berners-Lee","score":"","feedback":""},{"idx":15,"text":"Cosa indica lâ€™acronimo LAN?","open":false,"options":["A. Local Area Network","B. Long Access Network","C. Linked Application Node","D. Logical Area Node"],"answer":"A. Local Area Network","correct":"A. Local Area Network","score":"","feedback":""}];
+    const totalPoints = 18.5;
+    const totalMax = 25;
+    const voto = 7.4;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

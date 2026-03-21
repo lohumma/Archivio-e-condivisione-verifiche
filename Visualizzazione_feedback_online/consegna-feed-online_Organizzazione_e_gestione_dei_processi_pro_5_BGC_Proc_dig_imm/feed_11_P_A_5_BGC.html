@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 11 PAOLICCHI ALICE</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 11 PAOLICCHI ALICE - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "11 PAOLICCHI ALICE";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Spiega il ruolo dei motori di ricerca nella visibilitÃ  di un sito.","open":true,"options":[],"answer":"I motori di ricerca possiedono un linguaggio apposito per poter leggere e presentare i siti web, anche se ognuno ha standard leggermente diversi. Per questo, i diversi motori di ricerca forniscono diverse visibilità alle varie pagine e siti web. La visibilità del sito fornita dai vari motori di ricerca si basa anche sul giusto linguaggio con cui il sito è stato programmato e dall'accessibilità che essi possono fornire agli utenti effetti da disabilità, più un sito è accessibile più i motori di ricerca gli conferiscono visibilità.","correct":"","score":2,"feedback":"La risposta è parzialmente corretta. Riconosce che la visibilità di un sito dipende da come i motori di ricerca leggono i contenuti e collega in modo pertinente l'accessibilità a una migliore reperibilità. Restano però assenti o poco chiari i riferimenti all'indicizzazione, al posizionamento nei risultati e al ruolo delle parole-chiave."},{"idx":2,"text":"Spiega perchÃ© i titoli e sottotitoli sono importanti nei testi web.","open":true,"options":[],"answer":"Gli utenti che navigano il web impiegano poco tempo per decidere se rimanere in una pagina oppure no, alcuni elementi attirano occhio e cervello  in meno di un secondo e portano l'utente a decidere se continuare a visitare il sito web. Il testo e i contenuti sono parte fondamentale di questo processo, le persone spesso tendono a cercare una sintesi, a trovare l'argomento principale, ancor prima di iniziare a leggere, è per questo che titoli e sottotitoli devono essere pensati bene, in modo da essere immediati e fornire il contenuto principale. I testi dei siti web, infatti, dovrebbero essere strutturati secondo la regola della piramide rovesciata, ovvero fornire prima le informazioni essenziali e poi permettere all'utente, se intenzionato, di poter approfondire.","correct":"","score":3,"feedback":"La risposta è corretta e ben sviluppata. Spiega che sul web l'utente decide rapidamente se restare sulla pagina, che cerca subito una sintesi dell'argomento e che per questo titoli e sottotitoli devono essere immediati e informativi. È pertinente anche il collegamento con la piramide rovesciata."},{"idx":3,"text":"Descrivi la nascita del World Wide Web.","open":true,"options":[],"answer":"I primi tentativi di creare una rete per poter comunicare risalgono agli anni 50 del 900, durante la guerra fredda. Con l'obbiettivo di poter comunicare anche in caso di bombardamento, gli americani riescono a creare una rete che fosse in grado di far comunicare diversi centri di ricerca universitari. Decenni dopo la rete viene migliorata, aumentando notevolmente i dispositivi collegati ad essa. Decenni dopo nel 1990 da un ricercatore americano viene sviluppato il primo sito web, col passare degli anni in maniera esponenziale sempre più siti sono stati creati e emessi in rete nel world wide web.","correct":"","score":2,"feedback":"La risposta è parzialmente corretta. Ricostruisce l'origine della rete nel contesto della Guerra fredda, cita il collegamento tra centri universitari e colloca la nascita del web attorno al 1990. Restano però alcune imprecisioni, soprattutto sull'identità del ricercatore, sul nome del centro di ricerca e sulla scansione precisa tra 1990 e 1991."},{"idx":4,"text":"Spiega il concetto di user experience.","open":true,"options":[],"answer":"Durante la progettazione di un sito web è importante la figura dell'user experience designer, colui che si occupa di rendere l'esperienza dell'utente efficente e piacevole. Mentre lo User interface designer si occupa principalmente dell'aspetto grafico, quindi dell'elemento che attira l'utente a primo impatto, lo UEX si impegna a rendere il sito \"comodo\" e facile da visitare, permettendo un'esperienza piacevole e favorendo la comprensione dei contenuti, in modo tale da, non solo portare l'utente a rimanere nella pagina, ma anche invitarlo a visitare prossimamente la pagina web dell'azienda e quindi di fidelizzarlo.","correct":"","score":3,"feedback":"La risposta è corretta e articolata. Distingue in modo sostanzialmente pertinente tra aspetto grafico e qualità dell'esperienza d'uso, e spiega che la user experience riguarda facilità, piacevolezza di navigazione, comprensione dei contenuti e fidelizzazione dell'utente. La terminologia non è sempre precisa, ma la comprensione complessiva è buona."},{"idx":5,"text":"Spiega a cosa serve un sito web per unâ€™azienda.","open":true,"options":[],"answer":"Il sito web è parte fondamentale di un'azienda o brand. Permette di farsi trovare, promuovere e mostrare ciò che l'azienda ha da offrire prendendo la funzione di una vetrina, non fisica, ma immateriale, col vantaggio di essere disponibile e accessibile in qualsiasi momento e da qualsiasi luogo. Il sito per essere funzionale deve essere progettato e realizzato in maniera corretta, rispettare la brand identity e i valori dell'azienda rende il sito riconoscibile e appropriato al brand che rappresenta. Un'azienda può sfruttare il proprio sito web, oltre che per pubblicizzare e rendere disponibili i prodotti, anche a raccontare la sua storia, i suoi valori e a fornire le giuste informazioni necessarie. Importante è il collegamento con i social, una gestione adeguata dei social dell'azienda permette, infatti, di dare più visibilità al sito web ottenendo più accessi alla pagina. Il sito necessita di revisioni e aggiornamenti periodici, oltre ad aggiungere news, sconti e nuove informazioni, la procedura di revisione permette di non trascurare il sito web, che con il tempo potrebbe diventare obsoleto e non rappresentare più appropriatamente il brand, fornendo quindi un'immagine negativa di esso.","correct":"","score":3,"feedback":"La risposta è completa e corretta. Spiega in modo efficace che il sito serve a far trovare l'azienda, mostrare prodotti e servizi, comunicare valori e identità del brand, funzionare come vetrina sempre accessibile e integrarsi con i social per aumentare visibilità, traffico e fidelizzazione. È corretto anche il richiamo alla necessità di aggiornamento periodico."},{"idx":6,"text":"Cosa indica lâ€™acronimo LAN?","open":false,"options":["A. Local Area Network","B. Long Access Network","C. Linked Application Node","D. Logical Area Node"],"answer":"A. Local Area Network","correct":"A. Local Area Network","score":"","feedback":""},{"idx":7,"text":"Che cosa identifica in modo univoco un dispositivo connesso a Internet?","open":false,"options":["A. Indirizzo IP","B. Password di accesso","C. Protocollo HTTP","D. Browser"],"answer":"A. Indirizzo IP","correct":"A. Indirizzo IP","score":"","feedback":""},{"idx":8,"text":"Quale tra i seguenti esempi rientra nei prodotti digitali immateriali?","open":false,"options":["A. Un ebook","B. Un libro stampato","C. Un catalogo cartaceo","D. Una brochure pubblicitaria"],"answer":"A. Un ebook","correct":"A. Un ebook","score":"","feedback":""},{"idx":9,"text":"Qual Ã¨ la funzione principale di un sito web per unâ€™attivitÃ  economica?","open":false,"options":["A. Farsi trovare e comunicare prodotti e servizi","B. Sostituire la produzione aziendale","C. Archiviare documenti personali","D. Bloccare lâ€™accesso ai social"],"answer":"A. Farsi trovare e comunicare prodotti e servizi","correct":"A. Farsi trovare e comunicare prodotti e servizi","score":"","feedback":""},{"idx":10,"text":"In cosa consiste la piramide rovesciata?","open":false,"options":["A. Presentare prima le informazioni essenziali e poi i dettagli","B. Scrivere prima i dettagli e poi il titolo","C. Inserire solo immagini","D. Utilizzare solo frasi lunghe"],"answer":"A. Presentare prima le informazioni essenziali e poi i dettagli","correct":"A. Presentare prima le informazioni essenziali e poi i dettagli","score":"","feedback":""},{"idx":11,"text":"Quale linguaggio Ã¨ utilizzato per strutturare le pagine web?","open":false,"options":["A. HTML","B. MP3","C. JPEG","D. PDF"],"answer":"A. HTML","correct":"A. HTML","score":"","feedback":""},{"idx":12,"text":"Chi definÃ¬ la prima versione del linguaggio di collegamento ipertestuale nel 1990?","open":false,"options":["A. Tim Berners-Lee","B. Bill Gates","C. Steve Jobs","D. Alan Turing"],"answer":"A. Tim Berners-Lee","correct":"A. Tim Berners-Lee","score":"","feedback":""},{"idx":13,"text":"PerchÃ© un sito web Ã¨ definito una vetrina?","open":false,"options":["A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","B. PerchÃ© espone solo immagini","C. PerchÃ© richiede un negozio fisico","D. PerchÃ© Ã¨ sempre temporaneo"],"answer":"A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","correct":"A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","score":"","feedback":""},{"idx":14,"text":"PerchÃ© Ã¨ importante aggiornare un sito web?","open":false,"options":["A. Per evitare unâ€™immagine negativa dellâ€™attivitÃ ","B. Per ridurre i visitatori","C. Per disattivare i contenuti","D. Per eliminare i motori di ricerca"],"answer":"A. Per evitare unâ€™immagine negativa dellâ€™attivitÃ ","correct":"A. Per evitare unâ€™immagine negativa dellâ€™attivitÃ ","score":"","feedback":""},{"idx":15,"text":"Attraverso quali dispositivi avviene la fruizione di un ebook?","open":false,"options":["A. Dispositivi elettronici come computer, tablet e smartphone","B. Solo computer desktop","C. Solo lettori CD","D. Stampanti e scanner"],"answer":"A. Dispositivi elettronici come computer, tablet e smartphone","correct":"A. Dispositivi elettronici come computer, tablet e smartphone","score":"","feedback":""}];
+    const totalPoints = 23;
+    const totalMax = 25;
+    const voto = 9.2;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

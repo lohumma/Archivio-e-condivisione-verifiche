@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 5 DI GREGORIO EMMA</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 5 DI GREGORIO EMMA - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "5 DI GREGORIO EMMA";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Descrivi il concetto di accessibilitÃ  dei siti web.","open":true,"options":[],"answer":"i siti devono essere accessibili, ovvero devono poter essere usati da più utenti possibili, per esempio gli utenti fotosensibili, con difficoltà motoria, cognitiva o visiva. Per i siti amministrativi è obbligatorio rispettare il concetto di accesibilità, ma anche gli altri sono tenuti a rispettarlo in modo da essere piu inclusivi e essere tra i siti preferiti, quindi più visitati. Bisogna inserire descrizioni a immagini, non utilizzare più di tre volte il pop up perche si rischia di causare attacchi epilettici o convulsioni e aggiungere degli aiuti per la compilazioni di schede.","correct":"","score":2.5,"feedback":"Risposta corretta: sono presenti i concetti essenziali di eliminazione delle barriere informatiche, inclusione degli utenti con disabilità e accessibilità obbligatoria nei siti della pubblica amministrazione."},{"idx":2,"text":"Spiega perchÃ© i titoli e sottotitoli sono importanti nei testi web.","open":true,"options":[],"answer":"Per far sì che un sito web funzioni bisogna seguire un metodo di scrittura come quello della piramide rovesciata, in cui le informazioni principali e riassunte vengano messe per prime cosi da catturare l'attenzione del lettore e fargli capire l'argomento di cui si andrà a parlare. Il lettore sul web, infatti è diverso da un lettore da libro e tende a cercare subito le informazioni che gli servono, non bisogna dunque dilagarci tanto nelle prime righe, senno il lettore tenderà ad abbandonare la pagina. Le informazioni saranno poi approfondite man mano che si legge l'articolo, come pillole. I titoli sono quindi importanti per capire l'argomento generale e per attirare attenzione, mentre i sottotitoli servono per indirizzare il lettore in cio che gli interessa principalmente e guidarlo nella lettura. ","correct":"","score":3,"feedback":"Risposta corretta e ben sviluppata: collega l’uso di titoli e sottotitoli alla scrittura per il web, alla piramide rovesciata, alla rapidità di lettura e alla necessità di guidare subito l’utente verso i contenuti essenziali."},{"idx":3,"text":"Spiega cosa si intende per rete informatica.","open":true,"options":[],"answer":"La rete informatica è una vera e propria rete , come quella da pesca, in cui ci sono interlacci e nodi di cavi fisici o virtuali.","correct":"","score":1,"feedback":"Risposta parzialmente corretta: compaiono i concetti di nodi e di cavi fisici o virtuali, ma manca una definizione più precisa della rete informatica e della sua funzione."},{"idx":4,"text":"Spiega il ruolo dei motori di ricerca nella visibilitÃ  di un sito.","open":true,"options":[],"answer":"i siti devono essere trascritti tramite gli stessi codici validi in modo che la visualizzazione non si modifichi. Per esempio la grafica può perdere di qualità, perdendo collegamenti e il sito sarà piu lento e quindi ci sarà meno visibilità e affluenza sul sito.","correct":"","score":1,"feedback":"Risposta molto incompleta: individua in modo indiretto il rapporto tra problemi tecnici del sito e minore visibilità, ma non spiega chiaramente che i motori di ricerca devono poter memorizzare e indicizzare correttamente i contenuti."},{"idx":5,"text":"Spiega il concetto di user experience.","open":true,"options":[],"answer":"Lo user experience è colui che ha il compito di sviluppare l'esperienza che l'utente avra sul sito. Deve quindi creare uno scheletro del sito, per far si che tutte le pagine siano ben collegate e quindi il processo di navigazione sul sito essere piu naturale possibile. Un utente quando entra sul sito impiega pochi secondi per decidere di continuare nella visione di quello o decidere se abbandonarlo e aprirne un altro, bisogna quindi che il sito sia facile da utilizzare, intuibile e veloce. ","correct":"","score":2.5,"feedback":"Risposta corretta: descrive la user experience come qualità dell’esperienza dell’utente durante la navigazione, sottolineando naturalità d’uso, facilità, velocità e collegamento efficace tra le pagine."},{"idx":6,"text":"Che cosa si intende per accessibilitÃ  web?","open":false,"options":["A. Eliminazione delle barriere per utenti con disabilitÃ ","B. VelocitÃ  di caricamento del sito","C. DisponibilitÃ  di contenuti pubblicitari","D. Numero di pagine pubblicate"],"answer":"A. Eliminazione delle barriere per utenti con disabilitÃ ","correct":"A. Eliminazione delle barriere per utenti con disabilitÃ ","score":"","feedback":""},{"idx":7,"text":"Qual Ã¨ la funzione delle cinque W nella scrittura web?","open":false,"options":["A. Fornire subito le informazioni principali","B. Decorare il testo","C. Allungare lâ€™articolo","D. Ridurre il traffico"],"answer":"A. Fornire subito le informazioni principali","correct":"A. Fornire subito le informazioni principali","score":"","feedback":""},{"idx":8,"text":"Cosa indica lâ€™acronimo LAN?","open":false,"options":["A. Local Area Network","B. Long Access Network","C. Linked Application Node","D. Logical Area Node"],"answer":"A. Local Area Network","correct":"A. Local Area Network","score":"","feedback":""},{"idx":9,"text":"Quale tecnica di scrittura Ã¨ consigliata per i contenuti web?","open":false,"options":["A. Piramide rovesciata","B. Scrittura narrativa lineare","C. Scrittura poetica","D. Scrittura dialogica"],"answer":"A. Piramide rovesciata","correct":"A. Piramide rovesciata","score":"","feedback":""},{"idx":10,"text":"Una rete Wi-Fi Ã¨ tecnicamente definita come:","open":false,"options":["A. WLAN","B. WAN","C. MAN","D. PAN"],"answer":"A. WLAN","correct":"A. WLAN","score":"","feedback":""},{"idx":11,"text":"Quale problema puÃ² causare codice non valido?","open":false,"options":["A. Diversa visualizzazione tra browser","B. Spegnimento del computer","C. Perdita della connessione telefonica","D. Cancellazione automatica del sito"],"answer":"A. Diversa visualizzazione tra browser","correct":"A. Diversa visualizzazione tra browser","score":"","feedback":""},{"idx":12,"text":"Che cosa si intende per content marketing?","open":false,"options":["A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","B. Vendita diretta online","C. Spam pubblicitario","D. Produzione industriale"],"answer":"A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","correct":"A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","score":"","feedback":""},{"idx":13,"text":"Chi definÃ¬ la prima versione del linguaggio di collegamento ipertestuale nel 1990?","open":false,"options":["A. Tim Berners-Lee","B. Bill Gates","C. Steve Jobs","D. Alan Turing"],"answer":"A. Tim Berners-Lee","correct":"A. Tim Berners-Lee","score":"","feedback":""},{"idx":14,"text":"Che cosâ€™Ã¨ il W3C?","open":false,"options":["A. Un consorzio che stabilisce gli standard del web","B. Un browser","C. Un provider Internet","D. Un sistema operativo"],"answer":"A. Un consorzio che stabilisce gli standard del web","correct":"A. Un consorzio che stabilisce gli standard del web","score":"","feedback":""},{"idx":15,"text":"Che cosa significa landing page?","open":false,"options":["A. Pagina di approdo di una campagna pubblicitaria","B. Pagina di login","C. Pagina di errore","D. Pagina offline"],"answer":"A. Pagina di approdo di una campagna pubblicitaria","correct":"A. Pagina di approdo di una campagna pubblicitaria","score":"","feedback":""}];
+    const totalPoints = 20;
+    const totalMax = 25;
+    const voto = 8;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

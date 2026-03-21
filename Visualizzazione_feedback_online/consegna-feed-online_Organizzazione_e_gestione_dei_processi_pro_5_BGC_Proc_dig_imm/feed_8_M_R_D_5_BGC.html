@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 8 MOLDOVAN RICARDO DANIEL</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 8 MOLDOVAN RICARDO DANIEL - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "8 MOLDOVAN RICARDO DANIEL";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Descrivi la tecnica della piramide rovesciata.","open":true,"options":[],"answer":"Questa tecnica si basa sull'ordine di come verranno messe le informazione all'interno di un sito (copiata già dai primi del 900 durante la guerra) ha posto in alto le informazioni principali come le parole chiave per attirare l'attenzione, poi mano a mano si entra nel dettaglio, insieme a lei si applicano le 5w Chi? Come? Quando? Dove? Perche? ","correct":"","score":2,"feedback":"La risposta mostra una comprensione sostanzialmente corretta della tecnica: riconosce che le informazioni principali vengono presentate all’inizio e che in seguito si passa ai dettagli. Il riferimento alle 5W può essere pertinente nel contesto giornalistico, ma qui non chiarisce bene la funzione della tecnica nella scrittura per il web e manca l’idea della comunicazione sintetica che concentra subito l’attenzione sul tema centrale."},{"idx":2,"text":"Descrivi la funzione dei protocolli TCP e IP.","open":true,"options":[],"answer":"TCP (Transfer Control Protocol) ha come obbiettivo il transferimento di dati da un nodo ad un altro della rete,\nIP (Internet Protocol) considerata l'impronta digitale dell'utente e ne associa la posizione geografica la quale permette alle aziende di poter trovare gli interessi e i siti più frequentemente accessati per mandare pubblicità simili, altra cosa che fa, permette la visualizzazione del miglior fornitore in quanto gestore telefonico nell'area assestante in cui l'utente con quel IP si trova ","correct":"","score":1.5,"feedback":"La risposta è solo parzialmente corretta. Per il protocollo TCP viene colta l’idea generale del trasferimento dei dati, ma manca il riferimento alla verifica della corretta ricezione dei pacchetti e all’affidabilità della trasmissione. La parte sull’IP contiene un nucleo corretto, cioè l’identificazione del dispositivo e la possibilità di localizzazione, ma introduce spiegazioni improprie e non pertinenti rispetto alla funzione richiesta."},{"idx":3,"text":"Spiega il concetto di user experience.","open":true,"options":[],"answer":"La User experience, si basa sull'esperienza dell'utente, di come esso interagisce come si comporta e i sui pensieri o criticita relativi all'uso di un sito, questa esperienza ed informazioni sono di vitale importanza allo UX Design il quale ricaverà la miglior sitemap e piano di studio da mandare allo UI in modo che crei un'interfaccia agevole per l'utente","correct":"","score":2,"feedback":"La risposta coglie il nucleo centrale della user experience come esperienza d’uso dell’utente e sottolinea l’importanza dell’interazione con il sito. Tuttavia si allontana in parte dalla definizione richiesta, aggiungendo ruoli progettuali non necessari, mentre manca una formulazione chiara della user experience come funzionalità e naturalezza di utilizzo delle pagine."},{"idx":4,"text":"Descrivi il ruolo del W3C.","open":true,"options":[],"answer":"Il W3C (World Wide Web Consortium) sono una serie di aziende in campo informatico (circa 300) che insieme formano un consorzio e si occupano della gestione e dell'aprovazione di un sito in rete, affinche esso rispetti le normative internazionali infatti loro si assicurano che il codice Html sia adatto a tutti i client (Browser) es: Firefox, Chrome, Opera... a finche l'interfaccia grafica o la parte testuale non campi ma resti invariata","correct":"","score":2.5,"feedback":"La risposta è corretta e completa nei nuclei essenziali. Identifica il W3C come consorzio, ne riconosce il compito di stabilire standard per il web e collega correttamente la validazione alla conformità del codice e alla corretta visualizzazione nei diversi browser. Restano solo lievi imprecisioni formali che non compromettono la comprensione."},{"idx":5,"text":"Descrivi cosa si intende per landing page.","open":true,"options":[],"answer":"La Landing Page è la pagina di arrivo di un utente su un sito, essa di solito contiene l'Header ovvero la parte posta in alto di un sito, con le specifiche informazione, di solito presenta il logo nella parte alta sinistra per poi andare al Body dove vengono riportate info come testi o imaagini le ultime avvolte trovate nello slider (una serie di foto o video che scorrono) infine troviamo il footer in basso con le normative privacy e i social oppure i contatti","correct":"","score":1,"feedback":"La risposta individua correttamente la landing page come pagina di arrivo dell’utente, ma poi si concentra quasi solo sulla struttura generale di una pagina web. Manca il ruolo specifico della landing page come punto di approdo di una campagna comunicativa o pubblicitaria e non viene chiarito che deve offrire ulteriori informazioni e risorse rispetto al contenuto che ha portato l’utente sul sito."},{"idx":6,"text":"Qual Ã¨ la funzione principale di un sito web per unâ€™attivitÃ  economica?","open":false,"options":["A. Farsi trovare e comunicare prodotti e servizi","B. Sostituire la produzione aziendale","C. Archiviare documenti personali","D. Bloccare lâ€™accesso ai social"],"answer":"A. Farsi trovare e comunicare prodotti e servizi","correct":"A. Farsi trovare e comunicare prodotti e servizi","score":"","feedback":""},{"idx":7,"text":"In cosa consiste la piramide rovesciata?","open":false,"options":["A. Presentare prima le informazioni essenziali e poi i dettagli","B. Scrivere prima i dettagli e poi il titolo","C. Inserire solo immagini","D. Utilizzare solo frasi lunghe"],"answer":"A. Presentare prima le informazioni essenziali e poi i dettagli","correct":"A. Presentare prima le informazioni essenziali e poi i dettagli","score":"","feedback":""},{"idx":8,"text":"Una rete Wi-Fi Ã¨ tecnicamente definita come:","open":false,"options":["A. WLAN","B. WAN","C. MAN","D. PAN"],"answer":"A. WLAN","correct":"A. WLAN","score":"","feedback":""},{"idx":9,"text":"Che cosa si intende per content marketing?","open":false,"options":["A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","B. Vendita diretta online","C. Spam pubblicitario","D. Produzione industriale"],"answer":"A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","correct":"A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","score":"","feedback":""},{"idx":10,"text":"Che cosâ€™Ã¨ il W3C?","open":false,"options":["A. Un consorzio che stabilisce gli standard del web","B. Un browser","C. Un provider Internet","D. Un sistema operativo"],"answer":"A. Un consorzio che stabilisce gli standard del web","correct":"A. Un consorzio che stabilisce gli standard del web","score":"","feedback":""},{"idx":11,"text":"Qual Ã¨ lo scopo della validazione di un sito?","open":false,"options":["A. Verificare la conformitÃ  agli standard internazionali","B. Bloccare lâ€™accesso agli utenti","C. Aumentare la dimensione delle immagini","D. Ridurre i contenuti"],"answer":"A. Verificare la conformitÃ  agli standard internazionali","correct":"A. Verificare la conformitÃ  agli standard internazionali","score":"","feedback":""},{"idx":12,"text":"Che cosa si intende per accessibilitÃ  web?","open":false,"options":["A. Eliminazione delle barriere per utenti con disabilitÃ ","B. VelocitÃ  di caricamento del sito","C. DisponibilitÃ  di contenuti pubblicitari","D. Numero di pagine pubblicate"],"answer":"A. Eliminazione delle barriere per utenti con disabilitÃ ","correct":"A. Eliminazione delle barriere per utenti con disabilitÃ ","score":"","feedback":""},{"idx":13,"text":"Quale problema puÃ² causare codice non valido?","open":false,"options":["A. Diversa visualizzazione tra browser","B. Spegnimento del computer","C. Perdita della connessione telefonica","D. Cancellazione automatica del sito"],"answer":"A. Diversa visualizzazione tra browser","correct":"A. Diversa visualizzazione tra browser","score":"","feedback":""},{"idx":14,"text":"Che cosa identifica in modo univoco un dispositivo connesso a Internet?","open":false,"options":["A. Indirizzo IP","B. Password di accesso","C. Protocollo HTTP","D. Browser"],"answer":"A. Indirizzo IP","correct":"A. Indirizzo IP","score":"","feedback":""},{"idx":15,"text":"Qual Ã¨ una funzione dei social rispetto al sito web?","open":false,"options":["A. Veicolare traffico verso il sito","B. Sostituire definitivamente il sito","C. Eliminare il marketing","D. Bloccare le campagne pubblicitarie"],"answer":"A. Veicolare traffico verso il sito","correct":"A. Veicolare traffico verso il sito","score":"","feedback":""}];
+    const totalPoints = 19;
+    const totalMax = 25;
+    const voto = 7.6;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

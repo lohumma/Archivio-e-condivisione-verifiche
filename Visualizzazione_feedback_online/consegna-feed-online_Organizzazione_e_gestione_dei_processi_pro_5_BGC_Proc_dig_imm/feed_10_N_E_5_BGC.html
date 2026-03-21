@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 10 NERI EROS</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 10 NERI EROS - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "10 NERI EROS";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Descrivi cosa si intende per landing page.","open":true,"options":[],"answer":"La landing page è la prima pagina di un sito web sulla quale si approda aprendo un link.\n","correct":"","score":1,"feedback":"La risposta è sostanzialmente corretta perché identifica la landing page come prima pagina su cui l’utente arriva tramite un collegamento. Tuttavia resta incompleta: non viene chiarito che questa pagina è presentata come punto di approdo di una campagna comunicativa o pubblicitaria e che deve offrire ulteriori informazioni e risorse."},{"idx":2,"text":"Descrivi le fasi preliminari della progettazione di un sito web.","open":true,"options":[],"answer":"per iniziare a realizzare un sito web è necessario realizzare un planning, che consiste nella fase di ricerca di un'agenzia. Successivamente si passa alla fase di preventizzazione dove verranno pattuiti tutti i costi e le date di scadenza. Successivamente si passa alla fase di realizzazione di un layout grafico, dove verrà realizzata una bozza di grafica del sito web. Poi si passa alla scrittura dei contenuti; il copy writer è la persona incaricata di scrivere le informazioni che andranno all'interno del sito. Poi si passa alla fase di traduzione dei materiali grafici in codice informatico e per concludere si passa alla fase di pubblicazione.","correct":"","score":2,"feedback":"La risposta mostra una comprensione parziale delle fasi iniziali del progetto: richiama planning, preventivo, grafica, contenuti e traduzione in codice. Tuttavia omette o rende poco chiari alcuni passaggi importanti, come l’analisi dei bisogni del committente, la ricerca e il confronto con soluzioni già esistenti, lo studio dei testi e la costruzione di un prototipo o mockup. Sono inoltre presenti elementi non centrali rispetto alla richiesta."},{"idx":3,"text":"Descrivi la tecnica della piramide rovesciata.","open":true,"options":[],"answer":"La tecnica della piramide rovesciata consiste nel fornire all'inizio della navigazine su un sito web, un numero di informazioni ridotto per poi andare ad ottenere più informazioni specifiche a poco a poco.\nAd esempio in un sito di abbigliamento sportivo, questo concetto si può vedere aprendo il menù a panino. Una volta che si apre il menù appaiono varie voci come: uomo, donna ecc... e andando a cliccare ulteriormente si andranno a scoprire altre informazioni più specifiche.","correct":"","score":1,"feedback":"La risposta coglie solo in parte il principio generale, perché riconosce un passaggio da informazioni generali a dettagli più specifici. Tuttavia confonde la tecnica con la navigazione del sito e con l’organizzazione del menu, mentre la richiesta riguarda una modalità di scrittura dei contenuti."},{"idx":4,"text":"Descrivi il concetto di accessibilitÃ  dei siti web.","open":true,"options":[],"answer":"il concetto dell'accessibilità per un sito web è molto importante perchè un sito web per considerarsi \"giusto\" deve rispettare delle leggi che prevedono intanto un'accessibilità alla pagina web h 24, poi deve essere facilmente accessibile dalle persone disabili : cechi, sordi ecc... \nI contenuti del sito poi devono essere utilizzabili, comprensibili e solidi.","correct":"","score":2,"feedback":"La risposta contiene diversi elementi corretti, in particolare il riferimento alla fruibilità per persone con disabilità e ai principi di utilizzabilità, comprensibilità e solidità. Manca però una definizione più precisa dell’accessibilità come eliminazione di barriere informatiche e non viene esplicitato il principio della percepibilità."},{"idx":5,"text":"Spiega il concetto di user experience.","open":true,"options":[],"answer":"Il concetto di User experience è legato allo studio da parte di un designer web della navigazione di un sito. è colui che in fase di realizzazione del sito si occupa di sperimentare il sito web come se fosse un qualsiasi visitatore.","correct":"","score":1,"feedback":"La risposta resta troppo descrittiva del ruolo del designer e non definisce con precisione il concetto richiesto. È presente il riferimento al punto di vista dell’utente, ma manca la formulazione esplicita della user experience come funzionalità o naturalezza d’uso delle pagine create."},{"idx":6,"text":"Cosa consente la manutenzione periodica di un sito?","open":false,"options":["A. Mantenere aggiornate informazioni e contenuti","B. Ridurre la connessione Internet","C. Eliminare gli utenti","D. Impedire la pubblicitÃ "],"answer":"A. Mantenere aggiornate informazioni e contenuti","correct":"A. Mantenere aggiornate informazioni e contenuti","score":"","feedback":""},{"idx":7,"text":"Che cosâ€™Ã¨ il W3C?","open":false,"options":["A. Un consorzio che stabilisce gli standard del web","B. Un browser","C. Un provider Internet","D. Un sistema operativo"],"answer":"A. Un consorzio che stabilisce gli standard del web","correct":"A. Un consorzio che stabilisce gli standard del web","score":"","feedback":""},{"idx":8,"text":"Qual Ã¨ la differenza tra prodotto e bene in senso economico?","open":false,"options":["A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","B. Il bene Ã¨ sempre materiale, il prodotto Ã¨ sempre digitale","C. Il prodotto Ã¨ economico, il bene Ã¨ giuridico","D. Il bene Ã¨ sempre industriale, il prodotto Ã¨ sempre artigianale"],"answer":"C. Il prodotto Ã¨ economico, il bene Ã¨ giuridico","correct":"A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","score":"","feedback":""},{"idx":9,"text":"Quale funzione svolge il protocollo TCP?","open":false,"options":["A. Garantire lâ€™affidabilitÃ  della trasmissione dei dati","B. Gestire la grafica delle pagine web","C. Stabilire la velocitÃ  della connessione","D. Assegnare i nomi di dominio"],"answer":"B. Gestire la grafica delle pagine web","correct":"A. Garantire lâ€™affidabilitÃ  della trasmissione dei dati","score":"","feedback":""},{"idx":10,"text":"PerchÃ© un sito web Ã¨ definito una vetrina?","open":false,"options":["A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","B. PerchÃ© espone solo immagini","C. PerchÃ© richiede un negozio fisico","D. PerchÃ© Ã¨ sempre temporaneo"],"answer":"A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","correct":"A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","score":"","feedback":""},{"idx":11,"text":"Che cosa sono i webinar?","open":false,"options":["A. Seminari online in diretta o registrati","B. Forum di discussione testuale","C. Documenti condivisi offline","D. Applicazioni per editing video"],"answer":"A. Seminari online in diretta o registrati","correct":"A. Seminari online in diretta o registrati","score":"","feedback":""},{"idx":12,"text":"Attraverso quali dispositivi avviene la fruizione di un ebook?","open":false,"options":["A. Dispositivi elettronici come computer, tablet e smartphone","B. Solo computer desktop","C. Solo lettori CD","D. Stampanti e scanner"],"answer":"A. Dispositivi elettronici come computer, tablet e smartphone","correct":"A. Dispositivi elettronici come computer, tablet e smartphone","score":"","feedback":""},{"idx":13,"text":"Che cosa si intende per prodotto immateriale?","open":false,"options":["A. Un prodotto privo di forma fisica","B. Un prodotto composto da materiali sintetici","C. Un prodotto digitale memorizzato su supporto ottico","D. Un prodotto non destinato alla vendita"],"answer":"A. Un prodotto privo di forma fisica","correct":"A. Un prodotto privo di forma fisica","score":"","feedback":""},{"idx":14,"text":"Quale tra i seguenti esempi rientra nei prodotti digitali immateriali?","open":false,"options":["A. Un ebook","B. Un libro stampato","C. Un catalogo cartaceo","D. Una brochure pubblicitaria"],"answer":"A. Un ebook","correct":"A. Un ebook","score":"","feedback":""},{"idx":15,"text":"Quale tecnica di scrittura Ã¨ consigliata per i contenuti web?","open":false,"options":["A. Piramide rovesciata","B. Scrittura narrativa lineare","C. Scrittura poetica","D. Scrittura dialogica"],"answer":"A. Piramide rovesciata","correct":"A. Piramide rovesciata","score":"","feedback":""}];
+    const totalPoints = 15;
+    const totalMax = 25;
+    const voto = 6;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

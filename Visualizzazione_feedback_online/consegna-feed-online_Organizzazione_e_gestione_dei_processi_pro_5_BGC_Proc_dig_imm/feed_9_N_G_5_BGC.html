@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 9 NASELLI GAIA</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 9 NASELLI GAIA - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "9 NASELLI GAIA";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Spiega a cosa serve un sito web per unâ€™azienda.","open":true,"options":[],"answer":"Il sito web può avere più di una funzione; serve a scopo commerciale per vendere i prodotti, ma anche per far conoscere e comunicare i valori del brand e per farsi trovare, conoscere e interagire con i clienti.","correct":"","score":2,"feedback":"Sintetica, ma corretta."},{"idx":2,"text":"Descrivi cosa si intende per landing page.","open":true,"options":[],"answer":"la landing page di un sito è una pagina singola dove il cliente \"atterra\" e dove trova informazioni più specifiche riguardo a un prodotto.","correct":"","score":2,"feedback":"Risposta parzialmente corretta: riconosce la landing page come pagina di presentazione iniziale e la collega all’accoglienza dell’utente, ma non esplicita con chiarezza il suo ruolo come pagina di approdo legata a una campagna o a un collegamento specifico."},{"idx":3,"text":"Descrivi le fasi preliminari della progettazione di un sito web.","open":true,"options":[],"answer":"Prima della creazione di un sito ci sono diversi step da seguire e rispettare; bisogna prima di tutto definire lo scopo del sito, da qui si capirà quindi come vogliamo realizzare la struttura che verrà definita attraverso un layout, bisogna poi decidere i contenuti che verranno scritti, non dal cliente ma, da un copywriter, un professionista che conosce le modalità di comunicazione per il web.","correct":"","score":2,"feedback":"Sintetica, ma corretta."},{"idx":4,"text":"Descrivi la tecnica della piramide rovesciata.","open":true,"options":[],"answer":"La tecnica della piramide rovesciata, viene ripresa dai giornalisti che scrivevano nelle testate di giornale, dove si scrive subito la notizia principale e poi, mano a mano che si va avanti con l'articolo, si danno sempre più informazioni. Questo perché si vuole attirare subito l'attenzione del lettore che diversamente da un libro vorrà ricevere subito l'informazione richiesta.","correct":"","score":2,"feedback":"Risposta parzialmente corretta: coglie l’idea della disposizione delle informazioni in forma gerarchica, ma non chiarisce con sufficiente precisione che la tecnica prevede la presentazione immediata delle informazioni principali seguite dai dettagli secondari."},{"idx":5,"text":"Spiega il ruolo dellâ€™indirizzo IP nella rete.","open":true,"options":[],"answer":"L'indirizzo IP è un codice formato da 4 numeri che vanno da 0 a 255, che viene attribuito un computer in modo tale da poterlo indentificare. Sulla rete questo indirizzo lascerà delle tracce.","correct":"","score":3,"feedback":"Risposta corretta: sono presenti i concetti fondamentali di identificazione del device e di funzione nell’instradamento delle comunicazioni in rete."},{"idx":6,"text":"Qual Ã¨ la funzione principale di un sito web per unâ€™attivitÃ  economica?","open":false,"options":["A. Farsi trovare e comunicare prodotti e servizi","B. Sostituire la produzione aziendale","C. Archiviare documenti personali","D. Bloccare lâ€™accesso ai social"],"answer":"A. Farsi trovare e comunicare prodotti e servizi","correct":"A. Farsi trovare e comunicare prodotti e servizi","score":"","feedback":""},{"idx":7,"text":"Qual Ã¨ la funzione del protocollo HTTP?","open":false,"options":["A. Consentire la comunicazione tra client e server","B. Proteggere la rete da virus","C. Gestire la memoria del computer","D. Trasformare file audio in testo"],"answer":"A. Consentire la comunicazione tra client e server","correct":"A. Consentire la comunicazione tra client e server","score":"","feedback":""},{"idx":8,"text":"Che cosa Ã¨ il World Wide Web?","open":false,"options":["A. Un sistema di documenti collegati tramite ipertesti","B. Un sistema operativo","C. Un programma di navigazione","D. Un database offline"],"answer":"B. Un sistema operativo","correct":"A. Un sistema di documenti collegati tramite ipertesti","score":"","feedback":""},{"idx":9,"text":"Chi definÃ¬ la prima versione del linguaggio di collegamento ipertestuale nel 1990?","open":false,"options":["A. Tim Berners-Lee","B. Bill Gates","C. Steve Jobs","D. Alan Turing"],"answer":"A. Tim Berners-Lee","correct":"A. Tim Berners-Lee","score":"","feedback":""},{"idx":10,"text":"Che cosa rappresenta la rete informatica?","open":false,"options":["A. Un insieme di nodi collegati tra loro","B. Un unico computer centrale","C. Un archivio di file digitali","D. Un software di navigazione"],"answer":"A. Un insieme di nodi collegati tra loro","correct":"A. Un insieme di nodi collegati tra loro","score":"","feedback":""},{"idx":11,"text":"Cosa consente la manutenzione periodica di un sito?","open":false,"options":["A. Mantenere aggiornate informazioni e contenuti","B. Ridurre la connessione Internet","C. Eliminare gli utenti","D. Impedire la pubblicitÃ "],"answer":"A. Mantenere aggiornate informazioni e contenuti","correct":"A. Mantenere aggiornate informazioni e contenuti","score":"","feedback":""},{"idx":12,"text":"Quale tra i seguenti esempi rientra nei prodotti digitali immateriali?","open":false,"options":["A. Un ebook","B. Un libro stampato","C. Un catalogo cartaceo","D. Una brochure pubblicitaria"],"answer":"A. Un ebook","correct":"A. Un ebook","score":"","feedback":""},{"idx":13,"text":"Qual Ã¨ una funzione dei social rispetto al sito web?","open":false,"options":["A. Veicolare traffico verso il sito","B. Sostituire definitivamente il sito","C. Eliminare il marketing","D. Bloccare le campagne pubblicitarie"],"answer":"A. Veicolare traffico verso il sito","correct":"A. Veicolare traffico verso il sito","score":"","feedback":""},{"idx":14,"text":"PerchÃ© un sito web Ã¨ definito una vetrina?","open":false,"options":["A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","B. PerchÃ© espone solo immagini","C. PerchÃ© richiede un negozio fisico","D. PerchÃ© Ã¨ sempre temporaneo"],"answer":"A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","correct":"A. PerchÃ© Ã¨ accessibile da qualsiasi luogo e momento","score":"","feedback":""},{"idx":15,"text":"Quale funzione svolge il protocollo TCP?","open":false,"options":["A. Garantire lâ€™affidabilitÃ  della trasmissione dei dati","B. Gestire la grafica delle pagine web","C. Stabilire la velocitÃ  della connessione","D. Assegnare i nomi di dominio"],"answer":"A. Garantire lâ€™affidabilitÃ  della trasmissione dei dati","correct":"A. Garantire lâ€™affidabilitÃ  della trasmissione dei dati","score":"","feedback":""}];
+    const totalPoints = 20;
+    const totalMax = 25;
+    const voto = 8;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

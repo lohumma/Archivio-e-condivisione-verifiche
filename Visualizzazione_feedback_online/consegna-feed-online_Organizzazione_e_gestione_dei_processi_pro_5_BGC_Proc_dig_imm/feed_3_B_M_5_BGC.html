@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 3 BILLERI MARTINA</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 3 BILLERI MARTINA - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "3 BILLERI MARTINA";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Spiega il ruolo dellâ€™indirizzo IP nella rete.","open":true,"options":[],"answer":"L'indirizzo IP è come il documento d'identità di un qualsiasi dispositivo che si connette a internet e permette di localizzarlo geograficamente.","correct":"","score":2,"feedback":"La risposta è parzialmente corretta: riconosce l’indirizzo IP come elemento identificativo del dispositivo e ne cita la localizzazione geografica, ma non chiarisce in modo completo la sua funzione di identificazione univoca nella rete."},{"idx":2,"text":"Spiega il ruolo dei motori di ricerca nella visibilitÃ  di un sito.","open":true,"options":[],"answer":"Quando si fa una ricerca su un qualsiasi motore di ricerca ci vengono proposti determinati siti in base alle parole chiave del sito. Il motore di ricerca determina quale parole chiave siano più coerenti con la ricerca effettuata dall'utente e propongono determinati siti piuttosto che altri dando così visibilità.","correct":"","score":2,"feedback":"La risposta coglie il rapporto tra motori di ricerca e visibilità del sito, perché collega la ricerca degli utenti alla comparsa di alcuni siti rispetto ad altri. Rimane però incompleta, perché non richiama il ruolo dell’indicizzazione dei contenuti e il legame con l’aumento o la diminuzione del traffico."},{"idx":3,"text":"Spiega a cosa serve un sito web per unâ€™azienda.","open":true,"options":[],"answer":"Il sito web per una azienda permette di raccontare meglio gli ideali che spesso attraverso i social è difficile comunicare; presentare in maniera dettagliata i vari prodotti e servizi e dare un impostazione grafica all'azienda.","correct":"","score":2,"feedback":"La risposta riporta correttamente la presentazione di prodotti e servizi, il racconto della filosofia aziendale e il valore dell’immagine grafica, ma non esplicita altri elementi centrali come il farsi trovare, la funzione di vetrina e l’accessibilità continua."},{"idx":4,"text":"Descrivi cosa si intende per landing page.","open":true,"options":[],"answer":"La landing page è la pagina alla quale l'utente arriva cliccando un determinato link che può essere sia esterno che interno al sito.","correct":"","score":1,"feedback":"La risposta è corretta ma incompleta: definisce la landing page come pagina di arrivo dopo un clic, però non precisa che nel riferimento è presentata come punto di approdo di una campagna pubblicitaria e come pagina che deve offrire ulteriori informazioni e risorse."},{"idx":5,"text":"Descrivi la funzione dei protocolli TCP e IP.","open":true,"options":[],"answer":"I protocolli IP permettono di rintracciare geograficamente un determinato dispositivo connesso a internet mentre i protocolli TCP gestiscono l'affidabilità della trasmissione dei dati.","correct":"","score":2,"feedback":"La risposta è parzialmente corretta: spiega bene la funzione del TCP come garanzia di affidabilità della trasmissione, ma per l’IP si limita soprattutto alla localizzazione geografica e non chiarisce pienamente il ruolo di identificazione del dispositivo nella rete."},{"idx":6,"text":"Qual Ã¨ la differenza tra prodotto e bene in senso economico?","open":false,"options":["A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","B. Il bene Ã¨ sempre materiale, il prodotto Ã¨ sempre digitale","C. Il prodotto Ã¨ economico, il bene Ã¨ giuridico","D. Il bene Ã¨ sempre industriale, il prodotto Ã¨ sempre artigianale"],"answer":"A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","correct":"A. Il prodotto Ã¨ un risultato di unâ€™attivitÃ , il bene soddisfa un bisogno","score":"","feedback":""},{"idx":7,"text":"In cosa consiste la piramide rovesciata?","open":false,"options":["A. Presentare prima le informazioni essenziali e poi i dettagli","B. Scrivere prima i dettagli e poi il titolo","C. Inserire solo immagini","D. Utilizzare solo frasi lunghe"],"answer":"A. Presentare prima le informazioni essenziali e poi i dettagli","correct":"A. Presentare prima le informazioni essenziali e poi i dettagli","score":"","feedback":""},{"idx":8,"text":"Cosa indica lâ€™acronimo LAN?","open":false,"options":["A. Local Area Network","B. Long Access Network","C. Linked Application Node","D. Logical Area Node"],"answer":"A. Local Area Network","correct":"A. Local Area Network","score":"","feedback":""},{"idx":9,"text":"Qual Ã¨ lo scopo della validazione di un sito?","open":false,"options":["A. Verificare la conformitÃ  agli standard internazionali","B. Bloccare lâ€™accesso agli utenti","C. Aumentare la dimensione delle immagini","D. Ridurre i contenuti"],"answer":"A. Verificare la conformitÃ  agli standard internazionali","correct":"A. Verificare la conformitÃ  agli standard internazionali","score":"","feedback":""},{"idx":10,"text":"Che cosa sono i webinar?","open":false,"options":["A. Seminari online in diretta o registrati","B. Forum di discussione testuale","C. Documenti condivisi offline","D. Applicazioni per editing video"],"answer":"A. Seminari online in diretta o registrati","correct":"A. Seminari online in diretta o registrati","score":"","feedback":""},{"idx":11,"text":"Qual Ã¨ una funzione dei social rispetto al sito web?","open":false,"options":["A. Veicolare traffico verso il sito","B. Sostituire definitivamente il sito","C. Eliminare il marketing","D. Bloccare le campagne pubblicitarie"],"answer":"A. Veicolare traffico verso il sito","correct":"A. Veicolare traffico verso il sito","score":"","feedback":""},{"idx":12,"text":"Che cosâ€™Ã¨ il W3C?","open":false,"options":["A. Un consorzio che stabilisce gli standard del web","B. Un browser","C. Un provider Internet","D. Un sistema operativo"],"answer":"A. Un consorzio che stabilisce gli standard del web","correct":"A. Un consorzio che stabilisce gli standard del web","score":"","feedback":""},{"idx":13,"text":"Attraverso quali dispositivi avviene la fruizione di un ebook?","open":false,"options":["A. Dispositivi elettronici come computer, tablet e smartphone","B. Solo computer desktop","C. Solo lettori CD","D. Stampanti e scanner"],"answer":"A. Dispositivi elettronici come computer, tablet e smartphone","correct":"A. Dispositivi elettronici come computer, tablet e smartphone","score":"","feedback":""},{"idx":14,"text":"Che cosa identifica in modo univoco un dispositivo connesso a Internet?","open":false,"options":["A. Indirizzo IP","B. Password di accesso","C. Protocollo HTTP","D. Browser"],"answer":"A. Indirizzo IP","correct":"A. Indirizzo IP","score":"","feedback":""},{"idx":15,"text":"Quale problema puÃ² causare codice non valido?","open":false,"options":["A. Diversa visualizzazione tra browser","B. Spegnimento del computer","C. Perdita della connessione telefonica","D. Cancellazione automatica del sito"],"answer":"A. Diversa visualizzazione tra browser","correct":"A. Diversa visualizzazione tra browser","score":"","feedback":""}];
+    const totalPoints = 19;
+    const totalMax = 25;
+    const voto = 7.6;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>

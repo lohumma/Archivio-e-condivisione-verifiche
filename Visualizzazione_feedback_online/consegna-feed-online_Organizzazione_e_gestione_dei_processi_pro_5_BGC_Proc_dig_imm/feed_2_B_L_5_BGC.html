@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | 2 BERNARDESCHI LEONARDO</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --accent-2: #0ea5e9;
+      --border: #5a3f2f;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .page { max-width: 960px; margin: 0 auto; padding: 28px 20px 60px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+    .q-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+    .opt { margin: 4px 0; color: var(--text); }
+    .label { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    .nav { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    button:hover { border-color: #5a3f2f; }
+    .mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(2px); z-index: 5; }
+    .mask.hidden { display: none; }
+    .summary { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="title">Feedback test</div>
+      <div class="meta">Studente: 2 BERNARDESCHI LEONARDO - Classe: 5 BGC - Materia: Organizzazione_e_gestione_dei_processi_produttivi - Argomento: Processi_digitali_e_immateriali</div>
+      <div id="content"></div>
+      <div class="nav">
+        <button id="prev">? Precedente</button>
+        <button id="next">Successiva ?</button>
+      </div>
+    </div>
+  </div>
+  <div id="mask" class="mask"></div>
+  <script>
+    const studentLabel = "2 BERNARDESCHI LEONARDO";
+    const classeLabel = "5 BGC";
+    const materiaLabel = "Organizzazione_e_gestione_dei_processi_produttivi";
+    const topicLabel = "Processi_digitali_e_immateriali";
+    const questions = [{"idx":1,"text":"Descrivi il concetto di accessibilitÃ  dei siti web.","open":true,"options":[],"answer":"L'accessibilità è la capacità di un sito web di essere fruibile e percepibile a tutti allo stesso modo senza discriminazioni. Esistono delle istituzioni che controllano che i siti rispettino i requisiti stabiliti dalla legge.  Queste leggi valgono per i siti di enti pubblici. Per esempio non ci può essere un elemento che lampeggia più di 3 volte in un secondo. In Italia, questo ruolo è compiuto dall'Agid.","correct":"","score":2,"feedback":"La risposta è complessivamente corretta nei punti essenziali: definisce l'accessibilità come fruizione senza discriminazioni, richiama l'esistenza di norme dedicate e cita l'Agid. Restano però poco sviluppati i riferimenti alle barriere informatiche e alle principali categorie di utenti con disabilità considerate nel tema."},{"idx":2,"text":"Descrivi il ruolo del W3C.","open":true,"options":[],"answer":"Il W3C, ovvero il world wide web consortium, ha il compito di supervisionare i siti web e catalogarli come accessibili oppure no. È il W3C che decide quali sono le regole e controlla i siti e in seguito, li approverà oppure no.","correct":"","score":1,"feedback":"La risposta coglie solo in parte l'argomento. È corretto presentare il W3C come organismo di riferimento per il web, ma il suo ruolo non è approvare o bocciare i siti in quanto accessibili: il punto centrale è la definizione degli standard del web e la validazione del codice rispetto a tali standard."},{"idx":3,"text":"Descrivi la tecnica della piramide rovesciata.","open":true,"options":[],"answer":"La tecnica della piramide rovesciata consiste nello scrivere prima le informazioni di base, rispondendo alle domande delle 5W e dopodiché andare nel dettaglio. Prima va messa l'essenza del contenuto e poi si può specificare quello scritto sopra. Questa tecnica è dettata dallo studio dei comportamenti dell'utenza sul web rispetto a un tradizionale libro. Si è notato che sul web, si tende ad avere meno attenzione e concentrazione e quindi a lasciare prima il sito, se questo non soddisfa subito le nostre esigenze.","correct":"","score":3,"feedback":"La risposta è corretta e ben sviluppata. Spiega che la tecnica presenta prima le informazioni essenziali e poi i dettagli, richiama le cinque W e collega in modo pertinente questa struttura al comportamento di lettura tipico del web."},{"idx":4,"text":"Spiega il concetto di user experience.","open":true,"options":[],"answer":"L'user experience, tradotto Esperienza utente, è compiuta da chi naviga sul sito e deve avere delle caratteristiche ben precise, come essere semplice e facilitata da come è progettato il sito. Anche per questo ci sono delle regole da seguire, come quella dei 3 click. Di questa parte si occupa l'UX designer. ","correct":"","score":2,"feedback":"La risposta è parzialmente corretta. Riconosce che la user experience riguarda l'esperienza di chi usa il sito e ne richiama la semplicità d'uso, ma resta generica e aggiunge elementi non centrali. Manca soprattutto il riferimento alla funzionalità e alla naturalità di utilizzo delle pagine."},{"idx":5,"text":"Spiega perchÃ© i titoli e sottotitoli sono importanti nei testi web.","open":true,"options":[],"answer":"I titoli e i sottotitoli sono importanti per due aspetti. Il primo è quello della ricerca, se io quando programmo il sito prevedo dei titoli e dei sottotitoli, invece che un blocco unico di testo, il motore di ricerca darà più volte come risultato il mio sito rispetto a quelli con il blocco unico. Il secondo motivo si lega all'attenzione che l'utenza degna di un sito, se sono presenti titoli e sottotitoli, avrò subito delle informazioni di base e questo sazierà in parte la mia mente e così potrei decidere di andare aventi nella lettura del contenuto. In caso contrario, di un blocco unico di testo, la maggior parte dei visualizzatori del sito lo chiuderà immediamente.","correct":"","score":2,"feedback":"È pertinente l'idea che titoli e sottotitoli aiutino l'utente a orientarsi e a cogliere subito le informazioni principali;"},{"idx":6,"text":"In cosa consiste la piramide rovesciata?","open":false,"options":["A. Presentare prima le informazioni essenziali e poi i dettagli","B. Scrivere prima i dettagli e poi il titolo","C. Inserire solo immagini","D. Utilizzare solo frasi lunghe"],"answer":"A. Presentare prima le informazioni essenziali e poi i dettagli","correct":"A. Presentare prima le informazioni essenziali e poi i dettagli","score":"","feedback":""},{"idx":7,"text":"Che cosa sono i webinar?","open":false,"options":["A. Seminari online in diretta o registrati","B. Forum di discussione testuale","C. Documenti condivisi offline","D. Applicazioni per editing video"],"answer":"A. Seminari online in diretta o registrati","correct":"A. Seminari online in diretta o registrati","score":"","feedback":""},{"idx":8,"text":"Quale problema puÃ² causare codice non valido?","open":false,"options":["A. Diversa visualizzazione tra browser","B. Spegnimento del computer","C. Perdita della connessione telefonica","D. Cancellazione automatica del sito"],"answer":"D. Cancellazione automatica del sito","correct":"A. Diversa visualizzazione tra browser","score":"","feedback":""},{"idx":9,"text":"Qual Ã¨ una funzione dei social rispetto al sito web?","open":false,"options":["A. Veicolare traffico verso il sito","B. Sostituire definitivamente il sito","C. Eliminare il marketing","D. Bloccare le campagne pubblicitarie"],"answer":"A. Veicolare traffico verso il sito","correct":"A. Veicolare traffico verso il sito","score":"","feedback":""},{"idx":10,"text":"Cosa consente la manutenzione periodica di un sito?","open":false,"options":["A. Mantenere aggiornate informazioni e contenuti","B. Ridurre la connessione Internet","C. Eliminare gli utenti","D. Impedire la pubblicitÃ "],"answer":"A. Mantenere aggiornate informazioni e contenuti","correct":"A. Mantenere aggiornate informazioni e contenuti","score":"","feedback":""},{"idx":11,"text":"Quale funzione svolgono i motori di ricerca rispetto al sito?","open":false,"options":["A. Indicizzare e rendere trovabili i contenuti","B. Scrivere i contenuti","C. Creare la grafica","D. Gestire lâ€™hardware"],"answer":"A. Indicizzare e rendere trovabili i contenuti","correct":"A. Indicizzare e rendere trovabili i contenuti","score":"","feedback":""},{"idx":12,"text":"Che cosa si intende per content marketing?","open":false,"options":["A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","B. Vendita diretta online","C. Spam pubblicitario","D. Produzione industriale"],"answer":"A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","correct":"A. Creazione e condivisione di contenuti per attrarre e fidelizzare utenti","score":"","feedback":""},{"idx":13,"text":"Che cosa si intende per prodotto immateriale?","open":false,"options":["A. Un prodotto privo di forma fisica","B. Un prodotto composto da materiali sintetici","C. Un prodotto digitale memorizzato su supporto ottico","D. Un prodotto non destinato alla vendita"],"answer":"A. Un prodotto privo di forma fisica","correct":"A. Un prodotto privo di forma fisica","score":"","feedback":""},{"idx":14,"text":"Qual Ã¨ la funzione delle cinque W nella scrittura web?","open":false,"options":["A. Fornire subito le informazioni principali","B. Decorare il testo","C. Allungare lâ€™articolo","D. Ridurre il traffico"],"answer":"A. Fornire subito le informazioni principali","correct":"A. Fornire subito le informazioni principali","score":"","feedback":""},{"idx":15,"text":"Quale tecnica di scrittura Ã¨ consigliata per i contenuti web?","open":false,"options":["A. Piramide rovesciata","B. Scrittura narrativa lineare","C. Scrittura poetica","D. Scrittura dialogica"],"answer":"A. Piramide rovesciata","correct":"A. Piramide rovesciata","score":"","feedback":""}];
+    const totalPoints = 19;
+    const totalMax = 25;
+    const voto = 7.6;
+    let index = 0;
+    const content = document.getElementById("content");
+    const mask = document.getElementById("mask");
+
+    function render() {
+      if (index >= questions.length) {
+        content.innerHTML = `<div class="summary">
+          <div class="label">Punteggio ottenuto</div>
+          <div><strong>${totalPoints} / ${totalMax}</strong></div>
+          <div class="label" style="margin-top:8px;">Voto</div>
+          <div><strong>${voto} / 10</strong></div>
+        </div>`;
+        return;
+      }
+      const q = questions[index];
+      const opts = q.options && q.options.length ? q.options.map(o => '<div class="opt">' + o + '</div>').join("") : "";
+      const openBlock = q.open ? `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Punteggio</div>
+        <div>${q.score || "-"}</div>
+        <div class="label">Feedback</div>
+        <div>${q.feedback || "-"}</div>` : `
+        <div class="label">Risposta data</div>
+        <div>${q.answer || "-"}</div>
+        <div class="label">Risposta corretta</div>
+        <div>${q.correct || "-"}</div>`;
+      content.innerHTML = `
+        <div class="q-title">${q.idx}. ${q.text}</div>
+        ${opts}
+        ${openBlock}
+      `;
+    }
+    document.getElementById("prev").addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      render();
+    });
+    document.getElementById("next").addEventListener("click", () => {
+      index = Math.min(questions.length, index + 1);
+      render();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey || e.metaKey) mask.classList.add("hidden");
+    });
+    document.addEventListener("keyup", (e) => {
+      if (!e.ctrlKey && !e.metaKey) mask.classList.remove("hidden");
+    });
+    render();
+  </script>
+</body>
+</html>
